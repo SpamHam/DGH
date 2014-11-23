@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{FA81A02B-A0EC-4449-9AB8-EC263A80ECFE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL_API", "DAL_API\DAL_API.csproj", "{F8526800-B90A-45C4-9894-806BDBCC443C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FA81A02B-A0EC-4449-9AB8-EC263A80ECFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA81A02B-A0EC-4449-9AB8-EC263A80ECFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA81A02B-A0EC-4449-9AB8-EC263A80ECFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA81A02B-A0EC-4449-9AB8-EC263A80ECFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8526800-B90A-45C4-9894-806BDBCC443C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8526800-B90A-45C4-9894-806BDBCC443C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8526800-B90A-45C4-9894-806BDBCC443C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8526800-B90A-45C4-9894-806BDBCC443C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
