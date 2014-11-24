@@ -2,33 +2,71 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using DAL.DTOModels;
 
 
 namespace DAL.Repository.Impl
 {
-    internal class ProductRepository : GenericRepository<Product>
+    internal class ProductRepository : GenericRepository<ProductDTO>
     {
-        public override Product Get(DGHEntities db, int id)
+        public override ProductDTO Get(DGHEntities db, int id)
         {
-            return db.Products.FirstOrDefault(x => x.id == id);
+            var product = db.Products.FirstOrDefault(x => x.id == id);
+            if (product != null)
+                return new ProductDTO
+                {
+                    id = product.id,
+                    name = product.name,
+                    productNumber = product.productNumber,
+                    color = product.color,
+                    stock = product.stock,
+                    salesPrice = product.salesPrice
+                };
+            return null;
         }
 
-        public override IEnumerable<Product> GetAll(DGHEntities db)
+        public override IEnumerable<ProductDTO> GetAll(DGHEntities db)
         {
-            return db.Products.ToList();
+            return db.Products.Select(tempProduct => new ProductDTO()
+            {
+                id = tempProduct.id, 
+                name = tempProduct.name, 
+                productNumber = tempProduct.productNumber, 
+                color = tempProduct.color, 
+                stock = tempProduct.stock, 
+                salesPrice = tempProduct.salesPrice
+            }).ToList();
         }
 
-        public override void Add(DGHEntities db, Product type)
+        public override void Add(DGHEntities db, ProductDTO productDTO)
         {
-            db.Products.Add(type);
+            if (productDTO == null) throw new ArgumentNullException("productDTO");
+            var product = new Product
+            {
+                    id = productDTO.id,
+                    name = productDTO.name,
+                    productNumber = productDTO.productNumber,
+                    color = productDTO.color,
+                    stock = productDTO.stock,
+                    salesPrice = productDTO.salesPrice,
+                };
+            db.Products.Add(product);
             db.SaveChanges();
         }
 
-        public override void Update(DGHEntities db, Product type)
+        public override void Update(DGHEntities db, ProductDTO productDTO)
         {
-            db.Entry(type).State = EntityState.Modified;
+            if (productDTO == null) throw new ArgumentNullException("productDTO");
+            var product = new Product
+            {
+                id = productDTO.id,
+                name = productDTO.name,
+                productNumber = productDTO.productNumber,
+                color = productDTO.color,
+                stock = productDTO.stock,
+                salesPrice = productDTO.salesPrice,
+            };
+            db.Entry(product).State = EntityState.Modified;
             db.SaveChanges();
         }
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Repository.Impl
 {
-    internal abstract class GenericRepository<T> :IGenericRepository<T>
+    internal abstract class GenericRepository<T> :IGenericRepository<T> where T : GenericDTO
     {
         
         public T Get(int id)
