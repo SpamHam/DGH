@@ -18,6 +18,7 @@ namespace DAL
         public int productId { get; set; }
         public int amount { get; set; }
         public decimal lineTotal { get; set; }
+        public int id { get; set; }
     
         public virtual Order Order { get; set; }
         public virtual Product Product { get; set; }

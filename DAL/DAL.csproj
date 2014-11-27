@@ -73,6 +73,8 @@
       <DependentUpon>DGHModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="DTOModels\GenericDTO.cs" />
+    <Compile Include="DTOModels\OrderDTO.cs" />
+    <Compile Include="DTOModels\OrderLineDTO.cs" />
     <Compile Include="DTOModels\ProductDTO.cs" />
     <Compile Include="Facade.cs" />
     <Compile Include="Order.cs">
@@ -87,10 +89,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IGenericRepository.cs" />
     <Compile Include="Repository\Impl\GenericRepository.cs" />
+    <Compile Include="Repository\Impl\OrderLineRepository.cs" />
+    <Compile Include="Repository\Impl\OrderRepository.cs" />
     <Compile Include="Repository\Impl\ProductRepository.cs" />
-    <Compile Include="sysdiagram.cs">
-      <DependentUpon>DGHModel.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="DGHModel.edmx">

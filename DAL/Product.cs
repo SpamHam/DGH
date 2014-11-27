@@ -16,8 +16,8 @@ namespace DAL
     {
         public Product()
         {
-           this.OrderLines = new HashSet<OrderLine>();
-       }
+            this.OrderLines = new HashSet<OrderLine>();
+        }
     
         public int id { get; set; }
         public string name { get; set; }

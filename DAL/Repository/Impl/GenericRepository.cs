@@ -18,7 +18,7 @@ namespace DAL.Repository.Impl
             }
         }
 
-        public abstract T Get(DGHEntities db, int id);
+        public abstract T Get(DGHEntities db, int orderId);
         public IEnumerable<T> GetAll()
         {
             using (var db = new DGHEntities())
