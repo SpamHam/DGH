@@ -14,7 +14,7 @@
         <AssociationConnector Association="DGHModel.FK_Customer_Address" ManuallyRouted="false" />
         <AssociationConnector Association="DGHModel.FK_Customer_Address1" ManuallyRouted="false" />
         <AssociationConnector Association="DGHModel.FK_Order_Customer" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="DGHModel.OrderLine" Width="1.5" PointX="9.75" PointY="3.25" />
+        <EntityTypeShape EntityType="DGHModel.OrderLine" Width="1.5" PointX="9.5" PointY="1.625" />
         <AssociationConnector Association="DGHModel.FK_OrderLine_Order" />
         <AssociationConnector Association="DGHModel.FK_OrderLine_Products" />
         </Diagram>
