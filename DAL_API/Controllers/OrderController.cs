@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
 using System.Web.Http;
 using DAL;
 using DAL.DTOModels;
@@ -8,74 +10,96 @@ namespace DAL_API.Controllers
 {
     public class OrderController : ApiController
     {
-        internal class OrderRepository : GenericRepository<OrderDTO>
+       
+        private readonly Facade _facade;
+        public OrderController() { 
+            _facade = new Facade();
+        }
+
+        public IEnumerable<OrderDTO> GetAll()
         {
-            public override OrderDTO Get(DGHEntities db, int id)
-            {
-                var product = db.Products.FirstOrDefault(x => x.id == id);
-                if (product != null)
-                    return new ProductDTO
-                    {
-                        id = product.id,
-                        name = product.name,
-                        productNumber = product.productNumber,
-                        color = product.color,
-                        stock = product.stock,
-                        salesPrice = product.salesPrice
-                    };
-                return null;
-            }
+            return _facade.GetOrderRepository().GetAll();
+        }
 
-            public override IEnumerable<ProductDTO> GetAll(DGHEntities db)
+        /// <summary>
+        /// Will get a specific Order found by the Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public HttpResponseMessage Get(int id)
+        {
+            var product = _facade.GetOrderRepository().Get(id);
+            if (product != null)
             {
-                return db.Products.Select(tempProduct => new ProductDTO()
-                {
-                    id = tempProduct.id,
-                    name = tempProduct.name,
-                    productNumber = tempProduct.productNumber,
-                    color = tempProduct.color,
-                    stock = tempProduct.stock,
-                    salesPrice = tempProduct.salesPrice
-                }).ToList();
+                return Request.CreateResponse<OrderDTO>(HttpStatusCode.OK, product);
             }
-
-            public override void Add(DGHEntities db, ProductDTO productDTO)
+            var response = new HttpResponseMessage(HttpStatusCode.NotFound)
             {
-                if (productDTO == null) throw new ArgumentNullException("productDTO");
-                var product = new Product
+                Content = new StringContent("Product not found.")
+            };
+            throw new HttpResponseException(response);
+        }
+
+        /// <summary>
+        /// Creates a Order in the Database
+        /// </summary>
+        /// <param name="order"></param>
+        /// <returns></returns>
+        public HttpResponseMessage Post(OrderDTO order)
+        {
+            try
+            {
+                _facade.GetOrderRepository().Create(order);
+
+                var response = Request.CreateResponse<OrderDTO>(HttpStatusCode.Created, order);
+                var uri = Url.Link("DefaultApi", new {order.id });
+                response.Headers.Location = new Uri(uri);
+                return response;
+            }
+            catch (Exception e)
+            {
+                var response = new HttpResponseMessage(HttpStatusCode.Conflict)
                 {
-                    id = productDTO.id,
-                    name = productDTO.name,
-                    productNumber = productDTO.productNumber,
-                    color = productDTO.color,
-                    stock = productDTO.stock,
-                    salesPrice = productDTO.salesPrice,
+                    Content = new StringContent("cloud not add product to db")
                 };
-                db.Products.Add(product);
-                db.SaveChanges();
+                throw new HttpResponseException(response);
             }
-
-            public override void Update(DGHEntities db, ProductDTO productDTO)
+            }
+        /// <summary>
+        /// Updates a Order in Database
+        /// </summary>
+        /// <param name="order"></param>
+        /// <returns></returns>
+        public HttpResponseMessage Put(OrderDTO order)
+        {
+            try
             {
-                if (productDTO == null) throw new ArgumentNullException("productDTO");
-                var product = new Product
+                _facade.GetOrderRepository().Update(order);
+                var response = Request.CreateResponse<OrderDTO>(HttpStatusCode.OK, order);
+                var uri = Url.Link("DefaultApi", new {order.id });
+                response.Headers.Location = new Uri(uri);
+                return response;
+            }
+            catch (Exception) 
+            {
+                var response = new HttpResponseMessage(HttpStatusCode.Conflict)
                 {
-                    id = productDTO.id,
-                    name = productDTO.name,
-                    productNumber = productDTO.productNumber,
-                    color = productDTO.color,
-                    stock = productDTO.stock,
-                    salesPrice = productDTO.salesPrice,
+                    Content = new StringContent("No matching product")
                 };
-                db.Entry(product).State = EntityState.Modified;
-                db.SaveChanges();
+                throw new HttpResponseException(response);
             }
-
-            public override void Delete(DGHEntities db, int id)
-            {
-                db.Products.Remove(db.Products.FirstOrDefault(x => x.id == id));
-                db.SaveChanges();
-            }
+        }
+        /// <summary>
+        /// Delete a Order
+        /// </summary>
+        /// <param name="id"></param>
+        public HttpResponseMessage Delete(int id)
+        {
+           
+            _facade.GetOrderRepository().Delete(id);
+            var response = new HttpResponseMessage(HttpStatusCode.Accepted);
+            return response;
+           
         }
     }
 }
