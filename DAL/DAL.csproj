@@ -76,6 +76,8 @@
     <Compile Include="DTOModels\OrderDTO.cs" />
     <Compile Include="DTOModels\OrderLineDTO.cs" />
     <Compile Include="DTOModels\ProductDTO.cs" />
+    <Compile Include="Entities Converter\OrderConverter.cs" />
+    <Compile Include="Entities Converter\OrderLineConverter.cs" />
     <Compile Include="Facade.cs" />
     <Compile Include="Order.cs">
       <DependentUpon>DGHModel.tt</DependentUpon>

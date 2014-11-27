@@ -3,33 +3,34 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using DAL.DTOModels;
+using DAL.Entities_Converter;
 
 
 namespace DAL.Repository.Impl
 {
     internal class OrderRepository : GenericRepository<OrderDTO>
     {
-        public override OrderDTO Get(DGHEntities db, int orderId)
+        public override OrderDTO Get(DGHEntities db, int id)
         {
-            return db.Orders.Select(toOrderDTO).FirstOrDefault(x => x.id == orderId);
+            return db.Orders.Select(OrderConverter.toOrderDTO).FirstOrDefault(x => x.id == id);
         }
 
         public override IEnumerable<OrderDTO> GetAll(DGHEntities db)
         {
-            return db.Orders.ToList().Select(toOrderDTO).ToList();
+            return db.Orders.ToList().Select(OrderConverter.toOrderDTO).ToList();
         }
 
         public override void Add(DGHEntities db, OrderDTO orderDTO)
         {
             if (orderDTO == null) throw new ArgumentNullException("orderDTO");
-            db.Orders.Add(ToOrder(orderDTO));
+            db.Orders.Add(OrderConverter.ToOrder(orderDTO));
             db.SaveChanges();
         }
 
         public override void Update(DGHEntities db, OrderDTO orderDTO)
         {
             if (orderDTO == null) throw new ArgumentNullException("orderDTO");
-            db.Entry(ToOrder(orderDTO)).State = EntityState.Modified;
+            db.Entry(OrderConverter.ToOrder(orderDTO)).State = EntityState.Modified;
             db.SaveChanges();
         }
 
@@ -37,37 +38,6 @@ namespace DAL.Repository.Impl
         {
             db.Orders.Remove(db.Orders.FirstOrDefault(x => x.id == id));
             db.SaveChanges();
-        }
-
-        private Order ToOrder(OrderDTO orderDTO)
-        {
-            var order = new Order()
-            {
-                customerId = orderDTO.CustomerId,
-                id = orderDTO.id,
-                orderDate = orderDTO.OrderDate,
-                sumPurchase = orderDTO.SumPurchase,
-                shippedDate = orderDTO.shippedDate,
-                Shipping = (int)orderDTO.Shipping,
-                sumShipping = (int)orderDTO.sumShipping
-        };
-            return order;
-        }
-
-        private OrderDTO toOrderDTO(Order order)
-        {
-            var orderDTO = new OrderDTO()
-            {
-                id = order.id,
-                CustomerId = order.customerId,
-                OrderDate = order.orderDate,
-                SumPurchase = order.sumPurchase,
-            };
-            if (order.shippedDate == null) return orderDTO;
-            orderDTO.shippedDate = (DateTime)order.shippedDate;
-            orderDTO.Shipping = (int) order.Shipping;
-            orderDTO.sumShipping = (int) order.sumShipping;
-            return orderDTO;
         }
     }
 }

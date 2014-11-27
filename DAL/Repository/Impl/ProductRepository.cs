@@ -9,9 +9,9 @@ namespace DAL.Repository.Impl
 {
     internal class ProductRepository : GenericRepository<ProductDTO>
     {
-        public override ProductDTO Get(DGHEntities db, int orderId)
+        public override ProductDTO Get(DGHEntities db, int id)
         {
-            var product = db.Products.FirstOrDefault(x => x.id == orderId);
+            var product = db.Products.FirstOrDefault(x => x.id == id);
             if (product != null)
                 return new ProductDTO
                 {
