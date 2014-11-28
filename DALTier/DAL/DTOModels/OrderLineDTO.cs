@@ -1,7 +1,7 @@
 ﻿
 namespace DAL.DTOModels
 {
-    public class OrderLineDTO: GenericDTO
+    public class OrderLineDTO: IGenericDTO
     {
         public int OrderId { get; set; }
 

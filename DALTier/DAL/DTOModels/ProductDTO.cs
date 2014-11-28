@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DAL.DTOModels
 {
- public class ProductDTO: GenericDTO
+ public class ProductDTO: IGenericDTO
     {
         public int id { get; set; }
         public string name { get; set; }

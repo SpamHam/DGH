@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DAL.Repository.Impl
 {
-    internal abstract class GenericRepository<T> :IGenericRepository<T> where T : GenericDTO
+    internal abstract class GenericRepository<T> :IGenericRepository<T> where T : IGenericDTO
     {
         
         public T Get(int id)

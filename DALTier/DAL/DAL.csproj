@@ -72,7 +72,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DGHModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="DTOModels\GenericDTO.cs" />
+    <Compile Include="DTOModels\IGenericDTO.cs" />
     <Compile Include="DTOModels\OrderDTO.cs" />
     <Compile Include="DTOModels\OrderLineDTO.cs" />
     <Compile Include="DTOModels\ProductDTO.cs" />

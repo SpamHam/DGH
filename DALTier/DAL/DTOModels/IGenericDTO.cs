@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DAL.DTOModels
 {
-    public interface GenericDTO
+    public interface IGenericDTO
     {
         int id { get; set; }
     }
