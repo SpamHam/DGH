@@ -8,7 +8,7 @@ namespace BLL.Gateway
 {
     public class GenericGateway<Type> : IGenericGateway<Type> where Type : IGenericDTO
     {
-        private readonly Uri _uri = new Uri("http://localhost:2912/");
+        private readonly Uri _uri = new Uri("http://localhost:2851/");
 
         public IEnumerable<Type> GetAll(string path)
         {
