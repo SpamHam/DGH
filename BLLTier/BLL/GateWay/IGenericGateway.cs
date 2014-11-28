@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
-using BLL.BEModels;
 
 namespace BLL.Gateway
 {
@@ -12,12 +7,12 @@ namespace BLL.Gateway
     {
         IEnumerable<Type> GetAll(string path);
 
-        Type Get(int id, string path);
+        Type Get(string path);
 
         HttpResponseMessage Add(Type type, string path);
 
         HttpResponseMessage Update(Type type, string path);
 
-        HttpResponseMessage Delete(int id, string path);
+        HttpResponseMessage Delete(string path);
     }
 }

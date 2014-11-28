@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using BLL.BEModels;
+using BLL.DTOModels;
 
 namespace BLL.Gateway
 {
@@ -15,9 +15,9 @@ namespace BLL.Gateway
             return GetClient().GetAsync(path).Result.Content.ReadAsAsync<IEnumerable<Type>>().Result;
         }
 
-        public Type Get(int id, string path)
+        public Type Get(string path)
         {
-            return GetClient().GetAsync(path + "/" + id).Result.Content.ReadAsAsync<Type>().Result;
+            return GetClient().GetAsync(path).Result.Content.ReadAsAsync<Type>().Result;
         }
 
         public HttpResponseMessage Add(Type type, string path)
@@ -30,9 +30,9 @@ namespace BLL.Gateway
             return GetClient().PutAsJsonAsync(path, type).Result.EnsureSuccessStatusCode();
         }
 
-        public HttpResponseMessage Delete(int id, string path)
+        public HttpResponseMessage Delete(string path)
         {
-            return GetClient().DeleteAsync(path + "/" + id).Result.EnsureSuccessStatusCode();
+            return GetClient().DeleteAsync(path).Result.EnsureSuccessStatusCode();
         }
 
         protected HttpClient GetClient()

@@ -1,19 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BLL.BEModels;
+﻿using BLL.DTOModels;
 
 namespace BLL.Gateway
 {
-    internal class Facade
+    public class Facade
     {
-        private IGenericGateway<GenreDTO> GenreGateway;
+        private IGenericGateway<OrderDTO> _orderGateway;
+        private IGenericGateway<OrderLineDTO> _orderLineGateway;
 
-        public IGenericGateway<GenreDTO> GetGenreGateway()
+        public IGenericGateway<OrderDTO> GetOrderGateway()
         {
-            return GenreGateway != null ? GenreGateway : GenreGateway = new GenericGateway<GenreDTO>();
+            return _orderGateway != null ? _orderGateway : _orderGateway = new GenericGateway<OrderDTO>();
+        }
+        public IGenericGateway<OrderLineDTO> GetOrderLineGateway()
+        {
+            return _orderLineGateway != null ? _orderLineGateway : _orderLineGateway = new GenericGateway<OrderLineDTO>();
         }
     }
 }

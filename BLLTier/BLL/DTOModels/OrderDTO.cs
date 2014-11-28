@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace DAL.DTOModels
+namespace BLL.DTOModels
 {
-    public class OrderDTO: GenericDTO
+    public class OrderDTO: IGenericDTO
     {
         public int id { get; set; }
 

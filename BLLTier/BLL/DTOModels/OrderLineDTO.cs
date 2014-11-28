@@ -1,7 +1,6 @@
-﻿
-namespace DAL.DTOModels
+﻿namespace BLL.DTOModels
 {
-    public class OrderLineDTO: GenericDTO
+    public class OrderLineDTO: IGenericDTO
     {
         public int OrderId { get; set; }
 
