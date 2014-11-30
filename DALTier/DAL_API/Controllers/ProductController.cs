@@ -8,6 +8,7 @@ using System.Web.Http;
 
 namespace DAL_API.Controllers
 {
+    [RoutePrefix("product")]
     public class ProductController : ApiController
     {
         private readonly Facade _facade;
@@ -15,6 +16,8 @@ namespace DAL_API.Controllers
             _facade = new Facade();
         }
 
+        [HttpGet]
+        [Route("")]
         public IEnumerable<ProductDTO> GetAll()
         {
             return _facade.GetProductRepository().GetAll();
@@ -25,6 +28,8 @@ namespace DAL_API.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+        [HttpGet]
+        [Route("{id:int}", Name = "GetProductById")]
         public HttpResponseMessage Get(int id)
         {
             var product = _facade.GetProductRepository().Get(id);
@@ -44,6 +49,8 @@ namespace DAL_API.Controllers
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
+        [HttpPost]
+        [Route("")]
         public HttpResponseMessage Post(ProductDTO product)
         {
             try
@@ -51,11 +58,11 @@ namespace DAL_API.Controllers
                 _facade.GetProductRepository().Create(product);
 
                 var response = Request.CreateResponse<ProductDTO>(HttpStatusCode.Created, product);
-                var uri = Url.Link("DefaultApi", new {product.id });
+                var uri = Url.Link("GetProductById", new { product.id });
                 response.Headers.Location = new Uri(uri);
                 return response;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 var response = new HttpResponseMessage(HttpStatusCode.Conflict)
                 {
@@ -69,13 +76,15 @@ namespace DAL_API.Controllers
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
+        [HttpPut]
+        [Route("")]
         public HttpResponseMessage Put(ProductDTO product)
         {
             try
             {
                 _facade.GetProductRepository().Update(product);
                 var response = Request.CreateResponse<ProductDTO>(HttpStatusCode.OK, product);
-                var uri = Url.Link("DefaultApi", new {product.id });
+                var uri = Url.Link("GetProductById", new { product.id });
                 response.Headers.Location = new Uri(uri);
                 return response;
             }
@@ -92,6 +101,8 @@ namespace DAL_API.Controllers
         /// Delete a Genre
         /// </summary>
         /// <param name="id"></param>
+        [HttpDelete]
+        [Route("{id:int}")]
         public HttpResponseMessage Delete(int id)
         {
            

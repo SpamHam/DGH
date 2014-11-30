@@ -6,6 +6,7 @@ namespace BLL.Gateway
     {
         private IGenericGateway<OrderDTO> _orderGateway;
         private IGenericGateway<OrderLineDTO> _orderLineGateway;
+        private IGenericGateway<ProductDTO> _productGateway;
 
         public IGenericGateway<OrderDTO> GetOrderGateway()
         {
@@ -14,6 +15,10 @@ namespace BLL.Gateway
         public IGenericGateway<OrderLineDTO> GetOrderLineGateway()
         {
             return _orderLineGateway != null ? _orderLineGateway : _orderLineGateway = new GenericGateway<OrderLineDTO>();
+        }
+        public IGenericGateway<ProductDTO> GetProductGateway()
+        {
+            return _productGateway != null ? _productGateway : _productGateway = new GenericGateway<ProductDTO>();
         }
     }
 }
