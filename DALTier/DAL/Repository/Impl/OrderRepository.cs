@@ -36,6 +36,7 @@ namespace DAL.Repository.Impl
 
         public override void Delete(DGHEntities db, int id)
         {
+            db.OrderLines.RemoveRange(db.OrderLines.AsEnumerable().Where(x => x.orderId == id));
             db.Orders.Remove(db.Orders.FirstOrDefault(x => x.id == id));
             db.SaveChanges();
         }

@@ -13,9 +13,9 @@ namespace BLLGateway
 
         T Get(string path);
 
-        HttpResponseMessage Add(Type type, string path);
+        HttpResponseMessage Add(T type, string path);
 
-        HttpResponseMessage Update(Type type, string path);
+        HttpResponseMessage Update(T type, string path);
 
         HttpResponseMessage Delete(string path);
     }

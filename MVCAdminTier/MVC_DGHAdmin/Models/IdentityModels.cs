@@ -29,5 +29,7 @@ namespace MVC_DGHAdmin.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<BLLGateway.DTOModels.OrderDTO> OrderDTOes { get; set; }
     }
 }
