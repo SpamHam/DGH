@@ -51,6 +51,9 @@
     <Compile Include="Address.cs">
       <DependentUpon>DGHModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Category.cs">
+      <DependentUpon>DGHModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="City.cs">
       <DependentUpon>DGHModel.tt</DependentUpon>
     </Compile>
@@ -72,10 +75,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DGHModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="DTOModels\CategoryDTO.cs" />
     <Compile Include="DTOModels\IGenericDTO.cs" />
     <Compile Include="DTOModels\OrderDTO.cs" />
     <Compile Include="DTOModels\OrderLineDTO.cs" />
     <Compile Include="DTOModels\ProductDTO.cs" />
+    <Compile Include="Entities Converter\CategoryConverter.cs" />
     <Compile Include="Entities Converter\OrderConverter.cs" />
     <Compile Include="Entities Converter\OrderLineConverter.cs" />
     <Compile Include="Entities Converter\ProductConverter.cs" />
@@ -91,6 +96,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IGenericRepository.cs" />
+    <Compile Include="Repository\Impl\CategoryRepository.cs" />
     <Compile Include="Repository\Impl\GenericRepository.cs" />
     <Compile Include="Repository\Impl\OrderLineRepository.cs" />
     <Compile Include="Repository\Impl\OrderRepository.cs" />
