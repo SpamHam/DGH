@@ -2,8 +2,6 @@
 using BLL.Gateway;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
@@ -13,6 +11,7 @@ namespace BLL_API.Controllers
     public class ProductController : ApiController
     {
          private readonly Facade _facade;
+        private readonly String _url = "product";
         
         public ProductController() 
         { 
@@ -26,7 +25,7 @@ namespace BLL_API.Controllers
         [Route("")]
         public IEnumerable<ProductDTO> GetAll()
         {
-            return _facade.GetProductGateway().GetAll("product");
+            return _facade.GetProductGateway().GetAll(_url);
         }
 
 
@@ -34,28 +33,28 @@ namespace BLL_API.Controllers
         [Route("{id:int}")]
         public ProductDTO Get(int id)
         {
-            return _facade.GetProductGateway().Get("product", id);
+            return _facade.GetProductGateway().Get(_url, id);
         }
 
         [HttpPost]
         [Route("")]
         public HttpResponseMessage Post(ProductDTO product)
-        {    
-            return _facade.GetProductGateway().Add(product, "product");
+        {
+            return _facade.GetProductGateway().Add(product, _url);
         }
 
         [HttpPut]
         [Route("")]
         public HttpResponseMessage Put(ProductDTO product)
         {
-            return _facade.GetProductGateway().Update(product, "product");
+            return _facade.GetProductGateway().Update(product, _url);
         }
 
         [HttpDelete]
         [Route("{id:int}")]
         public HttpResponseMessage Delete(int id)
         {
-         return _facade.GetProductGateway().Delete("product", id);          
+            return _facade.GetProductGateway().Delete(_url, id);          
         }
     }
 }

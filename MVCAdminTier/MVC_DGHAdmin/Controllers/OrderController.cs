@@ -18,7 +18,7 @@ namespace MVC_DGHAdmin.Controllers
         public ActionResult Details(int? id)
         {
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            var orderDTO = _orderGateway.Get("order/" + id);
+            var orderDTO = _orderGateway.Get("order", (int)id);
             if (orderDTO != null) return View(orderDTO);
             return HttpNotFound();
         }
@@ -40,7 +40,7 @@ namespace MVC_DGHAdmin.Controllers
         public ActionResult Edit(int? id)
         {
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            var orderDTO = _orderGateway.Get("order/" + id);
+            var orderDTO = _orderGateway.Get("order", (int)id);
             if (orderDTO != null) return View(orderDTO);
             return HttpNotFound();
         }
@@ -50,14 +50,14 @@ namespace MVC_DGHAdmin.Controllers
         public ActionResult Edit([Bind(Include = "id,CustomerId,OrderDate,shippedDate,SumPurchase,Shipping,sumShipping")] OrderDTO orderDTO)
         {
             if (!ModelState.IsValid) return View(orderDTO);
-            _orderGateway.Update(orderDTO, "order/" + orderDTO.id);
+            _orderGateway.Update(orderDTO, "order");
             return RedirectToAction("Index");
         }
 
         public ActionResult Delete(int? id)
         {
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            var orderDTO = _orderGateway.Get("order/" + id);
+            var orderDTO = _orderGateway.Get("order", (int)id);
             if (orderDTO != null) return View(orderDTO);
             return HttpNotFound();
         }
@@ -66,7 +66,7 @@ namespace MVC_DGHAdmin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            _orderGateway.Delete("order/" + id);
+            _orderGateway.Delete("order", (int)id);
             return RedirectToAction("Index");
         }
     }
