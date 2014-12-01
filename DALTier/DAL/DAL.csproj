@@ -51,6 +51,9 @@
     <Compile Include="Address.cs">
       <DependentUpon>DGHModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Category.cs">
+      <DependentUpon>DGHModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="City.cs">
       <DependentUpon>DGHModel.tt</DependentUpon>
     </Compile>

@@ -9,13 +9,15 @@
         <EntityTypeShape EntityType="DGHModel.City" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
         <EntityTypeShape EntityType="DGHModel.Customer" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="DGHModel.Order" Width="1.5" PointX="7.5" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DGHModel.Product" Width="1.5" PointX="7.5" PointY="5.25" IsExpanded="true" />
         <AssociationConnector Association="DGHModel.FK_Address_City" ManuallyRouted="false" />
         <AssociationConnector Association="DGHModel.FK_Customer_Address" ManuallyRouted="false" />
         <AssociationConnector Association="DGHModel.FK_Customer_Address1" ManuallyRouted="false" />
         <AssociationConnector Association="DGHModel.FK_Order_Customer" ManuallyRouted="false" />
         <EntityTypeShape EntityType="DGHModel.OrderLine" Width="1.5" PointX="9.5" PointY="1.625" />
         <AssociationConnector Association="DGHModel.FK_OrderLine_Order" />
+        <EntityTypeShape EntityType="DGHModel.Category" Width="1.5" PointX="0.75" PointY="5.625" />
+        <EntityTypeShape EntityType="DGHModel.Product" Width="1.5" PointX="3" PointY="5" />
+        <AssociationConnector Association="DGHModel.FK_Products_Category" />
         <AssociationConnector Association="DGHModel.FK_OrderLine_Products" />
         </Diagram>
     </edmx:Diagrams>

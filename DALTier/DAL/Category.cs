@@ -12,23 +12,16 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Product
+    public partial class Category
     {
-        public Product()
+        public Category()
         {
-            this.OrderLines = new HashSet<OrderLine>();
+            this.Products = new HashSet<Product>();
         }
     
         public int id { get; set; }
-        public string name { get; set; }
-        public string productNumber { get; set; }
-        public string color { get; set; }
-        public int stock { get; set; }
-        public decimal salesPrice { get; set; }
-        public int categoryId { get; set; }
-        public Nullable<int> imageId { get; set; }
+        public string categoryName { get; set; }
     
-        public virtual Category Category { get; set; }
-        public virtual ICollection<OrderLine> OrderLines { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

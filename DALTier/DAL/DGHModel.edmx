@@ -14,6 +14,13 @@
           <Property Name="streetNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="zipCode" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="categoryName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="City">
           <Key>
             <PropertyRef Name="zipCode" />
@@ -65,6 +72,8 @@
           <Property Name="color" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="stock" Type="int" Nullable="false" />
           <Property Name="salesPrice" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="categoryId" Type="int" Nullable="false" />
+          <Property Name="imageId" Type="int" />
         </EntityType>
         <Association Name="FK_Address_City">
           <End Role="City" Type="Self.City" Multiplicity="1" />
@@ -138,8 +147,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Products_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="categoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="DGHModelStoreContainer">
           <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
@@ -168,6 +190,10 @@
           <AssociationSet Name="FK_OrderLine_Products" Association="Self.FK_OrderLine_Products">
             <End Role="Products" EntitySet="Products" />
             <End Role="OrderLine" EntitySet="OrderLine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Category" Association="Self.FK_Products_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Products" EntitySet="Products" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -223,18 +249,6 @@
           <NavigationProperty Name="Customer" Relationship="Self.FK_Order_Customer" FromRole="Order" ToRole="Customer" />
           <NavigationProperty Name="OrderLines" Relationship="DGHModel.FK_OrderLine_Order" FromRole="Order" ToRole="OrderLine" />
         </EntityType>
-        <EntityType Name="Product">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="productNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="stock" Type="Int32" Nullable="false" />
-          <Property Name="salesPrice" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <NavigationProperty Name="OrderLines" Relationship="DGHModel.FK_OrderLine_Products" FromRole="Product" ToRole="OrderLine" />
-        </EntityType>
         <Association Name="FK_Address_City">
           <End Role="City" Type="Self.City" Multiplicity="1" />
           <End Role="Address" Type="Self.Address" Multiplicity="*" />
@@ -288,7 +302,6 @@
           <EntitySet Name="Cities" EntityType="Self.City" />
           <EntitySet Name="Customers" EntityType="Self.Customer" />
           <EntitySet Name="Orders" EntityType="Self.Order" />
-          <EntitySet Name="Products" EntityType="Self.Product" />
           <AssociationSet Name="FK_Address_City" Association="Self.FK_Address_City">
             <End Role="City" EntitySet="Cities" />
             <End Role="Address" EntitySet="Addresses" />
@@ -309,6 +322,12 @@
           <AssociationSet Name="FK_OrderLine_Order" Association="DGHModel.FK_OrderLine_Order">
             <End Role="Order" EntitySet="Orders" />
             <End Role="OrderLine" EntitySet="OrderLines" />
+          </AssociationSet>
+          <EntitySet Name="Categories" EntityType="DGHModel.Category" />
+          <EntitySet Name="Products" EntityType="DGHModel.Product" />
+          <AssociationSet Name="FK_Products_Category" Association="DGHModel.FK_Products_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Product" EntitySet="Products" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderLine_Products" Association="DGHModel.FK_OrderLine_Products">
             <End Role="Product" EntitySet="Products" />
@@ -336,6 +355,41 @@
             </Principal>
             <Dependent Role="OrderLine">
               <PropertyRef Name="orderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="categoryName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Products" Relationship="DGHModel.FK_Products_Category" FromRole="Category" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="productNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="color" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="stock" Type="Int32" Nullable="false" />
+          <Property Name="salesPrice" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="categoryId" Type="Int32" Nullable="false" />
+          <Property Name="imageId" Type="Int32" />
+          <NavigationProperty Name="Category" Relationship="DGHModel.FK_Products_Category" FromRole="Product" ToRole="Category" />
+          <NavigationProperty Name="OrderLines" Relationship="DGHModel.FK_OrderLine_Products" FromRole="Product" ToRole="OrderLine" />
+        </EntityType>
+        <Association Name="FK_Products_Category">
+          <End Type="DGHModel.Category" Role="Category" Multiplicity="1" />
+          <End Type="DGHModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="categoryId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -401,18 +455,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Products">
-            <EntityTypeMapping TypeName="DGHModel.Product">
-              <MappingFragment StoreEntitySet="Products">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="productNumber" ColumnName="productNumber" />
-                <ScalarProperty Name="color" ColumnName="color" />
-                <ScalarProperty Name="stock" ColumnName="stock" />
-                <ScalarProperty Name="salesPrice" ColumnName="salesPrice" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="OrderLines">
             <EntityTypeMapping TypeName="DGHModel.OrderLine">
               <MappingFragment StoreEntitySet="OrderLine">
@@ -420,6 +462,28 @@
                 <ScalarProperty Name="amount" ColumnName="amount" />
                 <ScalarProperty Name="productId" ColumnName="productId" />
                 <ScalarProperty Name="orderId" ColumnName="orderId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="DGHModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="categoryName" ColumnName="categoryName" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="DGHModel.Product">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="imageId" ColumnName="imageId" />
+                <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+                <ScalarProperty Name="salesPrice" ColumnName="salesPrice" />
+                <ScalarProperty Name="stock" ColumnName="stock" />
+                <ScalarProperty Name="color" ColumnName="color" />
+                <ScalarProperty Name="productNumber" ColumnName="productNumber" />
+                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
