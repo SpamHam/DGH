@@ -15,9 +15,9 @@ namespace BLL.Gateway
             return GetClient().GetAsync(path).Result.Content.ReadAsAsync<IEnumerable<Type>>().Result;
         }
 
-        public Type Get(string path)
+        public Type Get(string path,int id)
         {
-            return GetClient().GetAsync(path).Result.Content.ReadAsAsync<Type>().Result;
+            return GetClient().GetAsync(path + "/" + id).Result.Content.ReadAsAsync<Type>().Result;
         }
 
         public HttpResponseMessage Add(Type type, string path)
@@ -30,9 +30,9 @@ namespace BLL.Gateway
             return GetClient().PutAsJsonAsync(path, type).Result.EnsureSuccessStatusCode();
         }
 
-        public HttpResponseMessage Delete(string path)
+        public HttpResponseMessage Delete(string path, int id)
         {
-            return GetClient().DeleteAsync(path).Result.EnsureSuccessStatusCode();
+            return GetClient().DeleteAsync(path + "/" + id).Result.EnsureSuccessStatusCode();
         }
 
         protected HttpClient GetClient()
