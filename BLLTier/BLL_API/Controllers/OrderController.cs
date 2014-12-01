@@ -30,7 +30,7 @@ namespace BLL_API.Controllers
         [Route("{id:int}")]
         public OrderDTO Get(int id)
         {
-            return _facade.GetOrderGateway().Get("order/" + id);
+            return _facade.GetOrderGateway().Get("order", id);
         }
 
         [HttpPost]
@@ -51,7 +51,7 @@ namespace BLL_API.Controllers
         [Route("{id:int}")]
         public HttpResponseMessage Delete(int id)
         {
-         return _facade.GetOrderGateway().Delete("order/" + id);          
+         return _facade.GetOrderGateway().Delete("order", id);          
         }
     }
 }
