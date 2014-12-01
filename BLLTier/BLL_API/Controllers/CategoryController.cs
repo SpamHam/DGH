@@ -30,7 +30,8 @@ namespace BLL_API.Controllers
         [Route("{id:int}")]
         public CategoryDTO Get(int id)
         {
-            return _facade.GetCategoryGateway().Get("category/" + id);
+            return _facade.GetCategoryGateway().Get("category", id);
+
         }
 
         [HttpPost]
@@ -44,14 +45,14 @@ namespace BLL_API.Controllers
         [Route("")]
         public HttpResponseMessage Put(CategoryDTO category)
         {
-            return _facade.GetCategoryGateway().Update(category, "order");
+            return _facade.GetCategoryGateway().Update(category, "category");
         }
 
         [HttpDelete]
         [Route("{id:int}")]
         public HttpResponseMessage Delete(int id)
         {
-            return _facade.GetCategoryGateway().Delete("category/" + id);
+            return _facade.GetCategoryGateway().Delete("category", id);
         }
     }
 }
