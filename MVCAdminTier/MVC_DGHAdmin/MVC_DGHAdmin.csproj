@@ -233,11 +233,11 @@
     <Content Include="Views\Products\Details.cshtml" />
     <Content Include="Views\Products\Edit.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
-    <Content Include="Views\OrderDTO\Create.cshtml" />
-    <Content Include="Views\OrderDTO\Delete.cshtml" />
-    <Content Include="Views\OrderDTO\Details.cshtml" />
-    <Content Include="Views\OrderDTO\Edit.cshtml" />
-    <Content Include="Views\OrderDTO\Index.cshtml" />
+    <Content Include="Views\Order\Create.cshtml" />
+    <Content Include="Views\Order\Delete.cshtml" />
+    <Content Include="Views\Order\Details.cshtml" />
+    <Content Include="Views\Order\Edit.cshtml" />
+    <Content Include="Views\Order\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,66 @@
+﻿@model BLLGateway.DTOModels.OrderDTO
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>OrderDTO</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.shippedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.shippedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SumPurchase)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SumPurchase)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Shipping)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Shipping)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sumShipping)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sumShipping)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
