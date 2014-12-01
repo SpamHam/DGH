@@ -200,70 +200,25 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DGHModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="DGHEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Addresses" EntityType="DGHModel.Address" />
-          <EntitySet Name="Categories" EntityType="DGHModel.Category" />
-          <EntitySet Name="Cities" EntityType="DGHModel.City" />
-          <EntitySet Name="Customers" EntityType="DGHModel.Customer" />
-          <EntitySet Name="Orders" EntityType="DGHModel.Order" />
-          <EntitySet Name="OrderLines" EntityType="DGHModel.OrderLine" />
-          <EntitySet Name="Products" EntityType="DGHModel.Product" />
-          <AssociationSet Name="FK_Address_City" Association="DGHModel.FK_Address_City">
-            <End Role="City" EntitySet="Cities" />
-            <End Role="Address" EntitySet="Addresses" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Customer_Address" Association="DGHModel.FK_Customer_Address">
-            <End Role="Address" EntitySet="Addresses" />
-            <End Role="Customer" EntitySet="Customers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Customer_Address1" Association="DGHModel.FK_Customer_Address1">
-            <End Role="Address" EntitySet="Addresses" />
-            <End Role="Customer" EntitySet="Customers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Products_Category" Association="DGHModel.FK_Products_Category">
-            <End Role="Category" EntitySet="Categories" />
-            <End Role="Product" EntitySet="Products" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Order_Customer" Association="DGHModel.FK_Order_Customer">
-            <End Role="Customer" EntitySet="Customers" />
-            <End Role="Order" EntitySet="Orders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderLine_Order" Association="DGHModel.FK_OrderLine_Order">
-            <End Role="Order" EntitySet="Orders" />
-            <End Role="OrderLine" EntitySet="OrderLines" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderLine_Products" Association="DGHModel.FK_OrderLine_Products">
-            <End Role="Product" EntitySet="Products" />
-            <End Role="OrderLine" EntitySet="OrderLines" />
-          </AssociationSet>
-        </EntityContainer>
         <EntityType Name="Address">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="streetName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="streetNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="zipCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="City" Relationship="DGHModel.FK_Address_City" FromRole="Address" ToRole="City" />
-          <NavigationProperty Name="Customers" Relationship="DGHModel.FK_Customer_Address" FromRole="Address" ToRole="Customer" />
-          <NavigationProperty Name="Customers1" Relationship="DGHModel.FK_Customer_Address1" FromRole="Address" ToRole="Customer" />
-        </EntityType>
-        <EntityType Name="Category">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="categoryName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Products" Relationship="DGHModel.FK_Products_Category" FromRole="Category" ToRole="Product" />
+          <Property Name="streetName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="streetNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="zipCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="City" Relationship="Self.FK_Address_City" FromRole="Address" ToRole="City" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_Customer_Address" FromRole="Address" ToRole="Customer" />
+          <NavigationProperty Name="Customers1" Relationship="Self.FK_Customer_Address1" FromRole="Address" ToRole="Customer" />
         </EntityType>
         <EntityType Name="City">
           <Key>
             <PropertyRef Name="zipCode" />
           </Key>
-          <Property Name="zipCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="City1" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Addresses" Relationship="DGHModel.FK_Address_City" FromRole="City" ToRole="Address" />
+          <Property Name="zipCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="City1" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Addresses" Relationship="Self.FK_Address_City" FromRole="City" ToRole="Address" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -273,12 +228,12 @@
           <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="deliveryAddressId" Type="Int32" />
           <Property Name="invoiceAddressId" Type="Int32" Nullable="false" />
-          <Property Name="email" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="firstName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="lastName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Address" Relationship="DGHModel.FK_Customer_Address" FromRole="Customer" ToRole="Address" />
-          <NavigationProperty Name="Address1" Relationship="DGHModel.FK_Customer_Address1" FromRole="Customer" ToRole="Address" />
-          <NavigationProperty Name="Orders" Relationship="DGHModel.FK_Order_Customer" FromRole="Customer" ToRole="Order" />
+          <Property Name="email" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="firstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="lastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Address" Relationship="Self.FK_Customer_Address" FromRole="Customer" ToRole="Address" />
+          <NavigationProperty Name="Address1" Relationship="Self.FK_Customer_Address1" FromRole="Customer" ToRole="Address" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Order_Customer" FromRole="Customer" ToRole="Order" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -288,12 +243,97 @@
           <Property Name="customerId" Type="Int32" Nullable="false" />
           <Property Name="orderDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="shippedDate" Type="DateTime" Precision="0" />
-          <Property Name="sumPurchase" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Shipping" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="sumShipping" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <NavigationProperty Name="Customer" Relationship="DGHModel.FK_Order_Customer" FromRole="Order" ToRole="Customer" />
+          <Property Name="sumPurchase" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Shipping" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="sumShipping" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Order_Customer" FromRole="Order" ToRole="Customer" />
           <NavigationProperty Name="OrderLines" Relationship="DGHModel.FK_OrderLine_Order" FromRole="Order" ToRole="OrderLine" />
         </EntityType>
+        <Association Name="FK_Address_City">
+          <End Role="City" Type="Self.City" Multiplicity="1" />
+          <End Role="Address" Type="Self.Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="zipCode" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="zipCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_Address">
+          <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="deliveryAddressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_Address1">
+          <End Role="Address" Type="Self.Address" Multiplicity="1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="invoiceAddressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="customerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DGHEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Addresses" EntityType="Self.Address" />
+          <EntitySet Name="Cities" EntityType="Self.City" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="Orders" EntityType="Self.Order" />
+          <AssociationSet Name="FK_Address_City" Association="Self.FK_Address_City">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="Address" EntitySet="Addresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_Address" Association="Self.FK_Customer_Address">
+            <End Role="Address" EntitySet="Addresses" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_Address1" Association="Self.FK_Customer_Address1">
+            <End Role="Address" EntitySet="Addresses" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Customer" Association="Self.FK_Order_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <EntitySet Name="OrderLines" EntityType="DGHModel.OrderLine" />
+          <AssociationSet Name="FK_OrderLine_Order" Association="DGHModel.FK_OrderLine_Order">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="OrderLine" EntitySet="OrderLines" />
+          </AssociationSet>
+          <EntitySet Name="Categories" EntityType="DGHModel.Category" />
+          <EntitySet Name="Products" EntityType="DGHModel.Product" />
+          <AssociationSet Name="FK_Products_Category" Association="DGHModel.FK_Products_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderLine_Products" Association="DGHModel.FK_OrderLine_Products">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="OrderLine" EntitySet="OrderLines" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="OrderLine">
           <Key>
             <PropertyRef Name="id" />
@@ -305,6 +345,26 @@
           <Property Name="lineTotal" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
           <NavigationProperty Name="Order" Relationship="DGHModel.FK_OrderLine_Order" FromRole="OrderLine" ToRole="Order" />
           <NavigationProperty Name="Product" Relationship="DGHModel.FK_OrderLine_Products" FromRole="OrderLine" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK_OrderLine_Order">
+          <End Type="DGHModel.Order" Role="Order" Multiplicity="1" />
+          <End Type="DGHModel.OrderLine" Role="OrderLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrderLine">
+              <PropertyRef Name="orderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="categoryName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Products" Relationship="DGHModel.FK_Products_Category" FromRole="Category" ToRole="Product" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -321,42 +381,6 @@
           <NavigationProperty Name="Category" Relationship="DGHModel.FK_Products_Category" FromRole="Product" ToRole="Category" />
           <NavigationProperty Name="OrderLines" Relationship="DGHModel.FK_OrderLine_Products" FromRole="Product" ToRole="OrderLine" />
         </EntityType>
-        <Association Name="FK_Address_City">
-          <End Type="DGHModel.City" Role="City" Multiplicity="1" />
-          <End Type="DGHModel.Address" Role="Address" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="City">
-              <PropertyRef Name="zipCode" />
-            </Principal>
-            <Dependent Role="Address">
-              <PropertyRef Name="zipCode" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Customer_Address">
-          <End Type="DGHModel.Address" Role="Address" Multiplicity="0..1" />
-          <End Type="DGHModel.Customer" Role="Customer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Address">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Customer">
-              <PropertyRef Name="deliveryAddressId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Customer_Address1">
-          <End Type="DGHModel.Address" Role="Address" Multiplicity="1" />
-          <End Type="DGHModel.Customer" Role="Customer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Address">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Customer">
-              <PropertyRef Name="invoiceAddressId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Products_Category">
           <End Type="DGHModel.Category" Role="Category" Multiplicity="1" />
           <End Type="DGHModel.Product" Role="Product" Multiplicity="*" />
@@ -366,30 +390,6 @@
             </Principal>
             <Dependent Role="Product">
               <PropertyRef Name="categoryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Order_Customer">
-          <End Type="DGHModel.Customer" Role="Customer" Multiplicity="1" />
-          <End Type="DGHModel.Order" Role="Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="customerId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OrderLine_Order">
-          <End Type="DGHModel.Order" Role="Order" Multiplicity="1" />
-          <End Type="DGHModel.OrderLine" Role="OrderLine" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Order">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="OrderLine">
-              <PropertyRef Name="orderId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -414,52 +414,44 @@
           <EntitySetMapping Name="Addresses">
             <EntityTypeMapping TypeName="DGHModel.Address">
               <MappingFragment StoreEntitySet="Address">
-                <ScalarProperty Name="zipCode" ColumnName="zipCode" />
-                <ScalarProperty Name="streetNumber" ColumnName="streetNumber" />
+                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="streetName" ColumnName="streetName" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Categories">
-            <EntityTypeMapping TypeName="DGHModel.Category">
-              <MappingFragment StoreEntitySet="Category">
-                <ScalarProperty Name="categoryName" ColumnName="categoryName" />
-                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="streetNumber" ColumnName="streetNumber" />
+                <ScalarProperty Name="zipCode" ColumnName="zipCode" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Cities">
             <EntityTypeMapping TypeName="DGHModel.City">
               <MappingFragment StoreEntitySet="City">
-                <ScalarProperty Name="City1" ColumnName="City" />
                 <ScalarProperty Name="zipCode" ColumnName="zipCode" />
+                <ScalarProperty Name="City1" ColumnName="City" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="DGHModel.Customer">
               <MappingFragment StoreEntitySet="Customer">
-                <ScalarProperty Name="lastName" ColumnName="lastName" />
-                <ScalarProperty Name="firstName" ColumnName="firstName" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="invoiceAddressId" ColumnName="invoiceAddressId" />
-                <ScalarProperty Name="deliveryAddressId" ColumnName="deliveryAddressId" />
-                <ScalarProperty Name="phone" ColumnName="phone" />
                 <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="deliveryAddressId" ColumnName="deliveryAddressId" />
+                <ScalarProperty Name="invoiceAddressId" ColumnName="invoiceAddressId" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="DGHModel.Order">
               <MappingFragment StoreEntitySet="Order">
-                <ScalarProperty Name="sumShipping" ColumnName="sumShipping" />
-                <ScalarProperty Name="Shipping" ColumnName="Shipping" />
-                <ScalarProperty Name="sumPurchase" ColumnName="sumPurchase" />
-                <ScalarProperty Name="shippedDate" ColumnName="shippedDate" />
-                <ScalarProperty Name="orderDate" ColumnName="orderDate" />
-                <ScalarProperty Name="customerId" ColumnName="customerId" />
                 <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="customerId" ColumnName="customerId" />
+                <ScalarProperty Name="orderDate" ColumnName="orderDate" />
+                <ScalarProperty Name="shippedDate" ColumnName="shippedDate" />
+                <ScalarProperty Name="sumPurchase" ColumnName="sumPurchase" />
+                <ScalarProperty Name="Shipping" ColumnName="Shipping" />
+                <ScalarProperty Name="sumShipping" ColumnName="sumShipping" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -470,6 +462,14 @@
                 <ScalarProperty Name="amount" ColumnName="amount" />
                 <ScalarProperty Name="productId" ColumnName="productId" />
                 <ScalarProperty Name="orderId" ColumnName="orderId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="DGHModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="categoryName" ColumnName="categoryName" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
