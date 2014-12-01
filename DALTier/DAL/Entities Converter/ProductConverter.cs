@@ -19,7 +19,9 @@ namespace DAL.Entities_Converter
                 productNumber = DTO.productNumber,
                 color = DTO.color,
                 stock = DTO.stock,
-                salesPrice = DTO.salesPrice
+                salesPrice = DTO.salesPrice,
+                categoryId = DTO.categoryId,
+                imageId = DTO.imageId
             };
             return product;
         }
@@ -32,7 +34,10 @@ namespace DAL.Entities_Converter
                 productNumber = Entity.productNumber,
                 color = Entity.color,
                 stock = Entity.stock,
-                salesPrice = Entity.salesPrice
+                salesPrice = Entity.salesPrice,
+                categoryId = Entity.categoryId,
+                imageId = Entity.imageId
+
             };
             return productDTO;
         }
