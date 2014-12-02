@@ -6,9 +6,9 @@ namespace MVC_DGHAdmin.Models
 {
     public class OrderModel
     {
-        public OrderDTO order { get; set; }
-        public OrderLineDTO orderLine { get; set; }
-        public ProductDTO product { get; set; }
-        public CustomerDTO customer { get; set; }
+        public IEnumerable<OrderDTO> order { get; set; }
+        public IEnumerable<OrderLineDTO> orderLine { get; set; }
+        public IEnumerable<ProductDTO> product { get; set; }
+        public IEnumerable<CustomerDTO> customer { get; set; }
     }
 }

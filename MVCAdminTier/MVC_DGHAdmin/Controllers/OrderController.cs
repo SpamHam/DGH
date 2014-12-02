@@ -22,12 +22,14 @@ namespace MVC_DGHAdmin.Controllers
 
         public ActionResult Index()
         {
-            return View(
-                _orderGateway.GetAll("order"), 
-                _orderLineGateway.GetAll("orderline"), 
-                _productGateway.GetAll("product"), 
-                _customerGateway.GetAll("customer")
-                );
+            return View(new OrderModel
+            (
+                order = _orderGateway.GetAll("order"),
+                orderline = _orderLineGateway.GetAll("orderline"),
+                Product = _productGateway.GetAll("product"),
+                customer = _customerGateway.GetAll("customer")
+            )
+        );
         }
 
         public ActionResult Details(int? id)
