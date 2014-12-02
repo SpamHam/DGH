@@ -22,17 +22,39 @@ namespace BLL.Gateway
 
         public HttpResponseMessage Add(Type type, string path)
         {
-            return GetClient().PostAsJsonAsync(path, type).Result.EnsureSuccessStatusCode();
+            try
+            {
+                return GetClient().PostAsJsonAsync(path, type).Result.EnsureSuccessStatusCode();
+            }
+            catch (HttpRequestException e)
+            {
+                throw new Exception("", e);
+            }
         }
 
         public HttpResponseMessage Update(Type type, string path)
         {
+            try { 
             return GetClient().PutAsJsonAsync(path, type).Result.EnsureSuccessStatusCode();
+            }
+            catch (HttpRequestException e)
+            {
+                throw new Exception("", e);
+                
+            }
         }
+
 
         public HttpResponseMessage Delete(string path, int id)
         {
+            try {
             return GetClient().DeleteAsync(path + "/" + id).Result.EnsureSuccessStatusCode();
+            }
+            catch (HttpRequestException e)
+            {
+                throw new Exception("", e);
+
+            }
         }
 
         protected HttpClient GetClient()

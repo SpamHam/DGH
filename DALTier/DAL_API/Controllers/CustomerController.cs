@@ -112,7 +112,6 @@ namespace DAL_API.Controllers
             _facade.GetCustomerRepository().Delete(id);
             var response = new HttpResponseMessage(HttpStatusCode.Accepted);
             return response;
-
         }
     }
 }
