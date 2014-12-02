@@ -66,7 +66,7 @@ namespace DAL_API.Controllers
             {
                 var response = new HttpResponseMessage(HttpStatusCode.Conflict)
                 {
-                    Content = new StringContent("cloud not add product to db")
+                    Content = new StringContent("Could not add product to the database")
                 };
                 throw new HttpResponseException(response);
             }
