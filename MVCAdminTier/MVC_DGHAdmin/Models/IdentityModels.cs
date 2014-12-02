@@ -34,6 +34,6 @@ namespace MVC_DGHAdmin.Models
 
         public System.Data.Entity.DbSet<BLLGateway.DTOModels.OrderLineDTO> OrderLineDTOes { get; set; }
 
-        public System.Data.Entity.DbSet<BLLGateway.DTOModels.ProductDTO> ProductDTOes { get; set; }
+        public System.Data.Entity.DbSet<BLLGateway.DTOModels.CategoryDTO> CategoryDTOes { get; set; }
     }
 }
