@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using BLLGateway;
@@ -7,21 +6,21 @@ using BLLGateway.DTOModels;
 
 namespace MVC_DGHAdmin.Controllers
 {
-    public class OrderController : Controller
+    public class OrderLineController : Controller
     {
-        private readonly IGenericGateway<OrderDTO> _orderGateway = new Facade().GetOrderGateway();
-        private readonly String _url = "order";
+        private readonly IGenericGateway<OrderLineDTO> _orderLineGateway = new Facade().GetOrderLineGateway();
+        private readonly String _url = "orderline";
 
         public ActionResult Index()
         {
-            return View(_orderGateway.GetAll(_url).ToList());
+            return View(_orderLineGateway.GetAll(_url));
         }
 
         public ActionResult Details(int? id)
         {
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            var orderDTO = _orderGateway.Get(_url, (int)id);
-            if (orderDTO != null) return View(orderDTO);
+            var orderLineDTO = _orderLineGateway.Get(_url, (int) id);
+            if (orderLineDTO != null) return View(orderLineDTO);
             return HttpNotFound();
         }
 
@@ -29,38 +28,38 @@ namespace MVC_DGHAdmin.Controllers
         {
             return View();
         }
-
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,CustomerId,OrderDate,shippedDate,SumPurchase,Shipping,sumShipping")] OrderDTO orderDTO)
+        public ActionResult Create([Bind(Include = "id,OrderId,ProductId,Amount,LineTotal")] OrderLineDTO orderLineDTO)
         {
-            if (!ModelState.IsValid) return View(orderDTO);
-            _orderGateway.Add(orderDTO,_url);
+            if (!ModelState.IsValid) return View(orderLineDTO);
+            _orderLineGateway.Add(orderLineDTO, _url);
             return RedirectToAction("Index");
         }
 
         public ActionResult Edit(int? id)
         {
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            var orderDTO = _orderGateway.Get(_url, (int)id);
-            if (orderDTO != null) return View(orderDTO);
+            var orderLineDTO = _orderLineGateway.Get(_url, (int) id);
+            if (orderLineDTO != null) return View(orderLineDTO);
             return HttpNotFound();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,CustomerId,OrderDate,shippedDate,SumPurchase,Shipping,sumShipping")] OrderDTO orderDTO)
+        public ActionResult Edit([Bind(Include = "id,OrderId,ProductId,Amount,LineTotal")] OrderLineDTO orderLineDTO)
         {
-            if (!ModelState.IsValid) return View(orderDTO);
-            _orderGateway.Update(orderDTO, _url);
+            if (!ModelState.IsValid) return View(orderLineDTO);
+            _orderLineGateway.Update(orderLineDTO, _url);
             return RedirectToAction("Index");
         }
 
         public ActionResult Delete(int? id)
         {
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            var orderDTO = _orderGateway.Get(_url, (int)id);
-            if (orderDTO != null) return View(orderDTO);
+            var orderLineDTO = _orderLineGateway.Get(_url, (int) id);
+            if (orderLineDTO != null) return View(orderLineDTO);
             return HttpNotFound();
         }
 
@@ -68,7 +67,7 @@ namespace MVC_DGHAdmin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            _orderGateway.Delete(_url, (int)id);
+            _orderLineGateway.Delete(_url, id);
             return RedirectToAction("Index");
         }
     }
