@@ -10,6 +10,7 @@ namespace DAL
         private IGenericRepository<OrderDTO> _orderRepository;
         private IGenericRepository<OrderLineDTO> _orderLineRepository;
         private IGenericRepository<CategoryDTO> _categoryRepository;
+        private IGenericRepository<CustomerDTO> _customerRepository;
 
         public Facade()
         {
@@ -28,9 +29,13 @@ namespace DAL
         {
             return _orderLineRepository != null ? _orderLineRepository : _orderLineRepository = new OrderLineRepository();
         }
-        public IGenericRepository<CategoryDTO> GetCategoryRepositroy()
+        public IGenericRepository<CategoryDTO> GetCategoryRepository()
         {
             return _categoryRepository != null ? _categoryRepository : _categoryRepository = new CategoryRepository();
+        }
+        public IGenericRepository<CustomerDTO> GetCustomerRepository()
+        {
+            return _customerRepository != null ? _customerRepository : _customerRepository = new CustomerRepository();
         }
     }
 }
