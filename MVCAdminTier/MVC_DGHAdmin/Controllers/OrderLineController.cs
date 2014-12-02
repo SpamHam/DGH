@@ -58,16 +58,7 @@ namespace MVC_DGHAdmin.Controllers
         public ActionResult Delete(int? id)
         {
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            var orderLineDTO = _orderLineGateway.Get(_url, (int) id);
-            if (orderLineDTO != null) return View(orderLineDTO);
-            return HttpNotFound();
-        }
-
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            _orderLineGateway.Delete(_url, id);
+            _orderLineGateway.Delete(_url, (int)id);
             return RedirectToAction("Index");
         }
     }

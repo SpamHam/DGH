@@ -26,7 +26,7 @@ namespace DAL_API.Controllers
 
 
         [HttpGet]
-        [Route("{id:int}")]
+        [Route("{id:int}", Name = "GetOrderLineId")]
         public HttpResponseMessage Get(int id)
         {
             var orderLine = _facade.GetOrderLineRepository().Get(id);
@@ -50,7 +50,7 @@ namespace DAL_API.Controllers
                 _facade.GetOrderLineRepository().Create(orderLine);
 
                 var response = Request.CreateResponse<OrderLineDTO>(HttpStatusCode.Created, orderLine);
-                var uri = Url.Link("DefaultApi", new {orderLine.id });
+                var uri = Url.Link("GetOrderLineId", new { orderLine.id });
                 response.Headers.Location = new Uri(uri);
                 return response;
             }
@@ -72,7 +72,7 @@ namespace DAL_API.Controllers
             {
                 _facade.GetOrderLineRepository().Update(orderLine);
                 var response = Request.CreateResponse<OrderLineDTO>(HttpStatusCode.OK, orderLine);
-                var uri = Url.Link("DefaultApi", new {orderLine.id });
+                var uri = Url.Link("GetOrderLineId", new { orderLine.id });
                 response.Headers.Location = new Uri(uri);
                 return response;
             }
