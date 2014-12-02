@@ -8,6 +8,7 @@ namespace DAL
         {
             var orderLine = new OrderLine()
             {
+                id = orderLineDTO.id,
                 orderId = orderLineDTO.OrderId,
                 productId = orderLineDTO.ProductId,
                 lineTotal = orderLineDTO.LineTotal,
@@ -20,6 +21,7 @@ namespace DAL
         {
             var orderLineDTO = new OrderLineDTO()
             {
+                id = orderLine.id,
                 OrderId = orderLine.orderId,
                 ProductId = orderLine.productId,
                 LineTotal = orderLine.lineTotal,
