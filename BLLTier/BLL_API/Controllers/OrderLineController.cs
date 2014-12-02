@@ -11,7 +11,7 @@ namespace BLL_API.Controllers
     {
 
         private readonly Facade _facade;
-
+        private readonly string _url = "orderline";
         public OrderLineController()
         {
             _facade = new Facade();
@@ -21,7 +21,7 @@ namespace BLL_API.Controllers
         [Route("")]
         public IEnumerable<OrderLineDTO> GetAll()
         {
-            return _facade.GetOrderLineGateway().GetAll("orderline");
+            return _facade.GetOrderLineGateway().GetAll(_url);
         }
 
 
@@ -29,28 +29,28 @@ namespace BLL_API.Controllers
         [Route("{id:int}")]
         public OrderLineDTO Get(int id)
         {
-            return _facade.GetOrderLineGateway().Get("orderline", id);
+            return _facade.GetOrderLineGateway().Get(_url, id);
         }
 
         [HttpPost]
         [Route("")]
         public HttpResponseMessage Post(OrderLineDTO orderLine)
         {
-            return _facade.GetOrderLineGateway().Add(orderLine, "orderline");
+            return _facade.GetOrderLineGateway().Add(orderLine, _url);
         }
 
         [HttpPut]
         [Route("")]
         public HttpResponseMessage Put(OrderLineDTO orderLine)
         {
-            return _facade.GetOrderLineGateway().Update(orderLine, "orderline");
+            return _facade.GetOrderLineGateway().Update(orderLine, _url);
         }
 
         [HttpDelete]
         [Route("{id:int}")]
         public HttpResponseMessage Delete(int id)
         {
-            return _facade.GetOrderLineGateway().Delete("orderline", id);
+            return _facade.GetOrderLineGateway().Delete(_url, id);
         }
     }
 }
