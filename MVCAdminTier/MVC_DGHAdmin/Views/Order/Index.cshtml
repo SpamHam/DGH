@@ -27,7 +27,7 @@
             @Html.DisplayNameFor(model => model.order.OrderDate)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.order.shippedDate)
+            @Html.DisplayNameFor(model => model.order.GetEnumerator().Current.shippedDate)
         </th>
         <th></th>
     </tr>
@@ -35,27 +35,27 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.customer.firstName + " " + item.customer.lastName)
+            @Html.DisplayFor(modelItem => item.customer.GetEnumerator().Current.firstName + " " + item.customer.GetEnumerator().Current.lastName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.order.SumPurchase)
+            @Html.DisplayFor(modelItem => item.order.GetEnumerator().Current.SumPurchase)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.order.Shipping)
+            @Html.DisplayFor(modelItem => item.order.GetEnumerator().Current.Shipping)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.order.sumShipping)
+            @Html.DisplayFor(modelItem => item.order.GetEnumerator().Current.sumShipping)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.order.OrderDate)
+            @Html.DisplayFor(modelItem => item.order.GetEnumerator().Current.OrderDate)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.order.shippedDate)
+            @Html.DisplayFor(modelItem => item.order.GetEnumerator().Current.shippedDate)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.order.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.order.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.order.id })
+            @Html.ActionLink("Edit", "Edit", new { id=item.order.GetEnumerator().Current.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.order.GetEnumerator().Current.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.order.GetEnumerator().Current.id })
         </td>
     </tr>
 }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DAL.Product>
+﻿@model IEnumerable<BLLGateway.DTOModels.ProductDTO>
 
 @{
     ViewBag.Title = "Index";
@@ -26,6 +26,12 @@
         <th>
             @Html.DisplayNameFor(model => model.salesPrice)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.categoryId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.imageId)
+        </th>
         <th></th>
     </tr>
 
@@ -45,6 +51,12 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.salesPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.categoryId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.imageId)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.id }) |

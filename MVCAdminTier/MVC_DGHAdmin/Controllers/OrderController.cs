@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -20,13 +22,12 @@ namespace MVC_DGHAdmin.Controllers
 
         public ActionResult Index()
         {
-            return View(new OrderModel
-            {
-                order = _orderGateway.GetAll("order"),
-                orderLine = _orderLineGateway.GetAll("orderline"),
-                product = _productGateway.GetAll("product"),
-                customer = _customerGateway.GetAll("customer")
-            });
+            return View(
+                _orderGateway.GetAll("order"), 
+                _orderLineGateway.GetAll("orderline"), 
+                _productGateway.GetAll("product"), 
+                _customerGateway.GetAll("customer")
+                );
         }
 
         public ActionResult Details(int? id)

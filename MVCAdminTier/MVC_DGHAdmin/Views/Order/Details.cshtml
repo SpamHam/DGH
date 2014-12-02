@@ -15,51 +15,51 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.customer.firstName + " " + model.customer.lastName)
+            @Html.DisplayFor(model => model.customer.GetEnumerator().Current.firstName + " " + model.customer.GetEnumerator().Current.lastName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.order.SumPurchase)
+            @Html.DisplayNameFor(model => model.order.GetEnumerator().Current.SumPurchase)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.order.SumPurchase)
+            @Html.DisplayFor(model => model.order.GetEnumerator().Current.SumPurchase)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.order.Shipping)
+            @Html.DisplayNameFor(model => model.order.GetEnumerator().Current.Shipping)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.order.Shipping)
+            @Html.DisplayFor(model => model.order.GetEnumerator().Current.Shipping)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.order.sumShipping)
+            @Html.DisplayNameFor(model => model.order.GetEnumerator().Current.sumShipping)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.order.sumShipping)
+            @Html.DisplayFor(model => model.order.GetEnumerator().Current.sumShipping)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.order.OrderDate)
+            @Html.DisplayNameFor(model => model.order.GetEnumerator().Current.OrderDate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.order.OrderDate)
+            @Html.DisplayFor(model => model.order.GetEnumerator().Current.OrderDate)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.order.shippedDate)
+            @Html.DisplayNameFor(model => model.order.GetEnumerator().Current.shippedDate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.order.shippedDate)
+            @Html.DisplayFor(model => model.order.GetEnumerator().Current.shippedDate)
         </dd>
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.order.id }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.order.GetEnumerator().Current.id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
