@@ -4,17 +4,29 @@ using System.Net;
 using System.Web.Mvc;
 using BLLGateway;
 using BLLGateway.DTOModels;
+using MVC_DGHAdmin.Models;
+using WebGrease.Css.Extensions;
 
 namespace MVC_DGHAdmin.Controllers
 {
     public class OrderController : Controller
     {
         private readonly IGenericGateway<OrderDTO> _orderGateway = new Facade().GetOrderGateway();
+        private readonly IGenericGateway<OrderLineDTO> _orderLineGateway = new Facade().GetOrderLineGateway();
+        private readonly IGenericGateway<ProductDTO> _productGateway = new Facade().GetProductGateway();
+        private readonly IGenericGateway<CustomerDTO> _customerGateway = new Facade().GetCustomerGateway();
+
         private readonly String _url = "order";
 
         public ActionResult Index()
         {
-            return View(_orderGateway.GetAll(_url).ToList());
+            return View(new OrderModel
+            {
+                order = _orderGateway.GetAll("order"),
+                orderLine = _orderLineGateway.GetAll("orderline"),
+                product = _productGateway.GetAll("product"),
+                customer = _customerGateway.GetAll("customer")
+            });
         }
 
         public ActionResult Details(int? id)

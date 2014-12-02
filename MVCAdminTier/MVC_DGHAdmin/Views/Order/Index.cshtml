@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BLLGateway.DTOModels.OrderDTO>
+﻿@model IEnumerable<MVC_DGHAdmin.Models.OrderModel>
 
 @{
     ViewBag.Title = "Index";
@@ -12,22 +12,22 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.CustomerId)
+            @Html.Display("Name")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.OrderDate)
+            @Html.Display("Items Price")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.shippedDate)
+            @Html.Display("Shipping Price")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.SumPurchase)
+            @Html.Display("Total Price")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Shipping)
+            @Html.DisplayNameFor(model => model.order.OrderDate)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.sumShipping)
+            @Html.DisplayNameFor(model => model.order.shippedDate)
         </th>
         <th></th>
     </tr>
@@ -35,27 +35,27 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.CustomerId)
+            @Html.DisplayFor(modelItem => item.customer.firstName + " " + item.customer.lastName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.OrderDate)
+            @Html.DisplayFor(modelItem => item.order.SumPurchase)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.shippedDate)
+            @Html.DisplayFor(modelItem => item.order.Shipping)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.SumPurchase)
+            @Html.DisplayFor(modelItem => item.order.sumShipping)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Shipping)
+            @Html.DisplayFor(modelItem => item.order.OrderDate)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.sumShipping)
+            @Html.DisplayFor(modelItem => item.order.shippedDate)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+            @Html.ActionLink("Edit", "Edit", new { id=item.order.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.order.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.order.id })
         </td>
     </tr>
 }

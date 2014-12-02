@@ -170,6 +170,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\OrderModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -240,7 +241,6 @@
     <Content Include="Views\Order\Edit.cshtml" />
     <Content Include="Views\Order\Index.cshtml" />
     <Content Include="Views\OrderLine\Create.cshtml" />
-    <Content Include="Views\OrderLine\Delete.cshtml" />
     <Content Include="Views\OrderLine\Details.cshtml" />
     <Content Include="Views\OrderLine\Edit.cshtml" />
     <Content Include="Views\OrderLine\Index.cshtml" />
