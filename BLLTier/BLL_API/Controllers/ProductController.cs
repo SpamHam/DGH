@@ -23,7 +23,7 @@ namespace BLL_API.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("")]
-        public IEnumerable<CustomerDTO> GetAll()
+        public IEnumerable<ProductDTO> GetAll()
         {
             return _facade.GetProductGateway().GetAll(_url);
         }
