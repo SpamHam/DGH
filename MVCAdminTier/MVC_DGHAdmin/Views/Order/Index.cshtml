@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MVC_DGHAdmin.Models.OrderModel>
+﻿@model MVC_DGHAdmin.Models.OrderModel
 
 @{
     ViewBag.Title = "Index";
@@ -12,50 +12,55 @@
 <table class="table">
     <tr>
         <th>
-            @Html.Display("Name")
+            @Html.DisplayName("Name")
         </th>
         <th>
-            @Html.Display("Items Price")
+            @Html.DisplayName("Items Price")
         </th>
         <th>
-            @Html.Display("Shipping Price")
+            @Html.DisplayName("Shipping Price")
         </th>
         <th>
-            @Html.Display("Total Price")
+            @Html.DisplayName("Total Price")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.order.OrderDate)
+            @Html.DisplayName("Order Date")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.order.GetEnumerator().Current.shippedDate)
+            @Html.DisplayName("Shipped Date")
         </th>
-        <th></th>
+        <th>
+        </th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model.order) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.customer.GetEnumerator().Current.firstName + " " + item.customer.GetEnumerator().Current.lastName)
+            @foreach (var customerId in Model.customer.Where(customerId => item.CustomerId == customerId.id))
+            {
+                <text>@customerId.firstName</text>
+                Html.DisplayText(customerId.firstName + " " + customerId.lastName);
+            }
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.order.GetEnumerator().Current.SumPurchase)
+            @Html.DisplayFor(modelItem => item.SumPurchase)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.order.GetEnumerator().Current.Shipping)
+            @Html.DisplayFor(modelItem => item.Shipping)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.order.GetEnumerator().Current.sumShipping)
+            @Html.DisplayFor(modelItem => item.sumShipping)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.order.GetEnumerator().Current.OrderDate)
+            @Html.DisplayFor(modelItem => item.OrderDate)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.order.GetEnumerator().Current.shippedDate)
+            @Html.DisplayFor(modelItem => item.shippedDate)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.order.GetEnumerator().Current.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.order.GetEnumerator().Current.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.order.GetEnumerator().Current.id })
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
         </td>
     </tr>
 }

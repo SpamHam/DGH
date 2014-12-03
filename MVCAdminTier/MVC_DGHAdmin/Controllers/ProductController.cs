@@ -8,17 +8,23 @@ using System.Web;
 using System.Web.Mvc;
 using BLLGateway.DTOModels;
 using MVC_DGHAdmin.Models;
+using BLLGateway;
 
 namespace MVC_DGHAdmin.Controllers
 {
     public class ProductController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly IGenericGateway<ProductDTO> _productGateway = new Facade().GetProductGateway();
+        private readonly IGenericGateway<CategoryDTO> _categoryGateway = new Facade().GetCategoryGateway();
+        private readonly String _url = "product";
 
         // GET: Product
         public ActionResult Index()
         {
-            return View(db.ProductDTOes.ToList());
+            ProductViewModels pvModel = new ProductViewModels();
+            pvModel.products = _productGateway.GetAll(_url).ToList();
+            pvModel.categories = _categoryGateway.GetAll("category").ToList();
+            return View(pvModel);
         }
 
         // GET: Product/Details/5
@@ -28,7 +34,7 @@ namespace MVC_DGHAdmin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ProductDTO productDTO = db.ProductDTOes.Find(id);
+            ProductDTO productDTO = _productGateway.Get(_url, (int)id);
             if (productDTO == null)
             {
                 return HttpNotFound();
@@ -47,16 +53,13 @@ namespace MVC_DGHAdmin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,name,productNumber,color,stock,salesPrice,categoryId,imageId")] ProductDTO productDTO)
+        public ActionResult Create([Bind(Include = "id,name,productNumber,color,stock,salesPrice,categoryId,imageUrl,active")] ProductDTO productDTO)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) return View(productDTO);
             {
-                db.ProductDTOes.Add(productDTO);
-                db.SaveChanges();
+                _productGateway.Add(productDTO, _url);
                 return RedirectToAction("Index");
             }
-
-            return View(productDTO);
         }
 
         // GET: Product/Edit/5
@@ -66,7 +69,7 @@ namespace MVC_DGHAdmin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ProductDTO productDTO = db.ProductDTOes.Find(id);
+            ProductDTO productDTO = _productGateway.Get(_url, (int)id);
             if (productDTO == null)
             {
                 return HttpNotFound();
@@ -79,15 +82,13 @@ namespace MVC_DGHAdmin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,name,productNumber,color,stock,salesPrice,categoryId,imageId")] ProductDTO productDTO)
+        public ActionResult Edit([Bind(Include = "id,name,productNumber,color,stock,salesPrice,categoryId,imageUrl,active")] ProductDTO productDTO)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) return View(productDTO);
             {
-                db.Entry(productDTO).State = EntityState.Modified;
-                db.SaveChanges();
+                _productGateway.Update(productDTO, _url);
                 return RedirectToAction("Index");
             }
-            return View(productDTO);
         }
 
         // GET: Product/Delete/5
@@ -97,7 +98,7 @@ namespace MVC_DGHAdmin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ProductDTO productDTO = db.ProductDTOes.Find(id);
+            ProductDTO productDTO = _productGateway.Get(_url, (int)id);
             if (productDTO == null)
             {
                 return HttpNotFound();
@@ -110,19 +111,9 @@ namespace MVC_DGHAdmin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            ProductDTO productDTO = db.ProductDTOes.Find(id);
-            db.ProductDTOes.Remove(productDTO);
-            db.SaveChanges();
+            ProductDTO productDTO = _productGateway.Get(_url, (int)id);
+            _productGateway.Delete(_url, id);
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }
