@@ -24,10 +24,10 @@ namespace MVC_DGHAdmin.Controllers
         {
             return View(new OrderModel
             (
-                order = _orderGateway.GetAll("order"),
-                orderline = _orderLineGateway.GetAll("orderline"),
-                Product = _productGateway.GetAll("product"),
-                customer = _customerGateway.GetAll("customer")
+               // order = _orderGateway.GetAll("order"),
+               // orderline = _orderLineGateway.GetAll("orderline"),
+               // Product = _productGateway.GetAll("product"),
+               // customer = _customerGateway.GetAll("customer")
             )
         );
         }
