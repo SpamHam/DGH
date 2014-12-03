@@ -6,7 +6,8 @@ using System.Net;
 using System.Web.Mvc;
 using BLLGateway;
 using BLLGateway.DTOModels;
-using MVC_DGHAdmin.Models;
+using DAL;
+using MVC_DGHAdmin.Models.Orders;
 using WebGrease.Css.Extensions;
 
 namespace MVC_DGHAdmin.Controllers
@@ -22,14 +23,49 @@ namespace MVC_DGHAdmin.Controllers
 
         public ActionResult Index()
         {
-            return View(new OrderModel
-            (
-                order = _orderGateway.GetAll("order"),
-                orderline = _orderLineGateway.GetAll("orderline"),
-                Product = _productGateway.GetAll("product"),
-                customer = _customerGateway.GetAll("customer")
-            )
-        );
+            var orderDTO = _orderGateway.GetAll("order");
+            var orderLineDTO = _orderLineGateway.GetAll("orderline");
+
+            var model = new List<OModel>();
+            var OrderLineModel = new List<OrderLineModel>();
+            for (var oCount = 0; oCount <= orderDTO.Count(); oCount++)
+            {
+                {
+                    model.Add(new OModel
+                    {
+                        Order = new OrderModel()
+                        {
+                            id = orderDTO.ElementAt(oCount).id,
+                            CustomerName =
+                                _customerGateway.Get("customer", orderDTO.ElementAt(oCount).CustomerId)
+                                    .firstName + " " +
+                                _customerGateway.Get("customer", orderDTO.ElementAt(oCount).CustomerId)
+                                    .lastName,
+                            SumPurchase = orderDTO.ElementAt(oCount).SumPurchase,
+                            Shipping = orderDTO.ElementAt(oCount).Shipping,
+                            sumShipping = orderDTO.ElementAt(oCount).sumShipping,
+                            OrderDate = orderDTO.ElementAt(oCount).OrderDate,
+                            shippedDate = orderDTO.ElementAt(oCount).shippedDate
+                        }
+                    });
+                    OrderLineModel = new List<OrderLineModel>();
+                    for (var olCount = 0; olCount <= orderLineDTO.Count(); olCount++)
+                        if (orderLineDTO.ElementAt(olCount).OrderId == orderDTO.ElementAt(oCount).id)
+                            OrderLineModel.Add(new OrderLineModel()
+                            {
+                                id = orderLineDTO.ElementAt(olCount).id,
+                                Amount = orderLineDTO.ElementAt(olCount).Amount,
+                                LineTotal = orderLineDTO.ElementAt(olCount).LineTotal,
+                                ProductName =
+                                    _productGateway.Get("product", orderLineDTO.ElementAt(olCount).ProductId).name,
+                                ProductPicture =
+                                    _productGateway.Get("product", orderLineDTO.ElementAt(olCount).ProductId).imageUrl,
+                                ProductPrice =
+                                    _productGateway.Get("product", orderLineDTO.ElementAt(olCount).ProductId).salesPrice,
+                            });
+                }
+            }
+                return View(model);
         }
 
         public ActionResult Details(int? id)
