@@ -26,7 +26,8 @@ namespace DAL
         public int stock { get; set; }
         public decimal salesPrice { get; set; }
         public int categoryId { get; set; }
-        public Nullable<int> imageId { get; set; }
+        public string imageUrl { get; set; }
+        public bool active { get; set; }
     
         public virtual Category Category { get; set; }
         public virtual ICollection<OrderLine> OrderLines { get; set; }
