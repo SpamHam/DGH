@@ -20,6 +20,8 @@ namespace MVC_DGHAdmin.Controllers
         // GET: Product
         public ActionResult Index()
         {
+            ProductViewModels pvModel = new ProductViewModels();
+            pvModel
             return View(_productGateway.GetAll(_url).ToList());
         }
 
