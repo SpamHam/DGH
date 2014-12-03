@@ -16,11 +16,13 @@ namespace MVC_DGHAdmin.Controllers
     public class CategoryController : Controller
     {
         private readonly IGenericGateway<CategoryDTO> _categoryGateway = new Facade().GetCategoryGateway();
-        private readonly String _url = "category";
+        private readonly IGenericGateway<ProductDTO> _productGateway = new Facade().GetProductGateway();
+        private readonly String _categoryUrl = "category";
+        private readonly String _productUrl = "product";
         // GET: Category
         public ActionResult Index()
         {
-            return View(_categoryGateway.GetAll(_url).ToList());
+            return View(_categoryGateway.GetAll(_categoryUrl).ToList());
         }
 
         // GET: Category/Details/5
@@ -30,12 +32,14 @@ namespace MVC_DGHAdmin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CategoryDTO categoryDTO = _categoryGateway.Get(_url,(int)id);
-            if (categoryDTO == null)
+            CategoryViewModels model = new CategoryViewModels();
+            model.Product = _productGateway.GetAll(_productUrl).ToList();
+            model.SelectedCategory = _categoryGateway.Get(_categoryUrl, (int)id);
+            if (model == null)
             {
                 return HttpNotFound();
             }
-            return View(categoryDTO);
+            return View(model);
         }
 
         // GET: Category/Create
@@ -53,7 +57,7 @@ namespace MVC_DGHAdmin.Controllers
         {
             if (!ModelState.IsValid) return View(categoryDTO);
             {
-                _categoryGateway.Add(categoryDTO, _url);
+                _categoryGateway.Add(categoryDTO, _categoryUrl);
                  return RedirectToAction("Index");
             }
 
@@ -67,7 +71,7 @@ namespace MVC_DGHAdmin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CategoryDTO categoryDTO = _categoryGateway.Get(_url, (int)id);
+            CategoryDTO categoryDTO = _categoryGateway.Get(_categoryUrl, (int)id);
             if (categoryDTO == null)
             {
                 return HttpNotFound();
@@ -84,7 +88,7 @@ namespace MVC_DGHAdmin.Controllers
         {
             if (!ModelState.IsValid) return View(categoryDTO);
             {
-                _categoryGateway.Update(categoryDTO,_url);
+                _categoryGateway.Update(categoryDTO, _categoryUrl);
                 return RedirectToAction("Index");
             }
             
@@ -97,7 +101,7 @@ namespace MVC_DGHAdmin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CategoryDTO categoryDTO = _categoryGateway.Get(_url, (int)id);
+            CategoryDTO categoryDTO = _categoryGateway.Get(_categoryUrl, (int)id);
             if (categoryDTO == null)
             {
                 return HttpNotFound();
@@ -110,11 +114,25 @@ namespace MVC_DGHAdmin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            CategoryDTO categoryDTO = _categoryGateway.Get(_url, (int)id);
-            _categoryGateway.Delete(_url, id);
-            return RedirectToAction("Index");
-        }
 
+            CategoryDTO categoryDTO = _categoryGateway.Get(_categoryUrl, (int)id);
+            var product = _productGateway.GetAll(_productUrl).ToList();
+            List<object> productCat = new List<object>();   
+            foreach (var n in product)
+            {
+                if (categoryDTO.id == n.categoryId)
+                {
+                    productCat.Add(n);
+                    
+                }
+            }
+            if(productCat.Count() == 0){
+                _categoryGateway.Delete(_categoryUrl, id);
+                return RedirectToAction("Index");
+            }
+
+            return View(_categoryGateway.Get(_categoryUrl, id));
+        }
        
     }
 }
