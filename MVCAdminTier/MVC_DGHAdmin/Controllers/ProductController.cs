@@ -20,16 +20,24 @@ namespace MVC_DGHAdmin.Controllers
         // GET: Product
         public ActionResult Index()
         {
+            ProductViewModels pvModel = new ProductViewModels();
+            pvModel
             return View(_productGateway.GetAll(_url).ToList());
         }
 
         // GET: Product/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            var productDTO = _productGateway.Get(_url, (int)id);
-            if (productDTO != null) return View(productDTO);
-            return HttpNotFound();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ProductDTO productDTO = _productGateway.Get(_url, (int)id);
+            if (productDTO == null)
+            {
+                return HttpNotFound();
+            }
+            return View(productDTO);
         }
 
         // GET: Product/Create
@@ -43,20 +51,28 @@ namespace MVC_DGHAdmin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,name,productNumber,color,stock,salesPrice,categoryId,imageId")] ProductDTO productDTO)
+        public ActionResult Create([Bind(Include = "id,name,productNumber,color,stock,salesPrice,categoryId,imageUrl,active")] ProductDTO productDTO)
         {
             if (!ModelState.IsValid) return View(productDTO);
-            _productGateway.Add(productDTO, _url);
-            return RedirectToAction("Index");
+            {
+                _productGateway.Add(productDTO, _url);
+                return RedirectToAction("Index");
+            }
         }
 
         // GET: Product/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            var productDTO = _productGateway.Get(_url, (int)id);
-            if (productDTO != null) return View(productDTO);
-            return HttpNotFound();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ProductDTO productDTO = _productGateway.Get(_url, (int)id);
+            if (productDTO == null)
+            {
+                return HttpNotFound();
+            }
+            return View(productDTO);
         }
 
         // POST: Product/Edit/5
@@ -64,20 +80,28 @@ namespace MVC_DGHAdmin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,name,productNumber,color,stock,salesPrice,categoryId,imageId")] ProductDTO productDTO)
+        public ActionResult Edit([Bind(Include = "id,name,productNumber,color,stock,salesPrice,categoryId,imageUrl,active")] ProductDTO productDTO)
         {
             if (!ModelState.IsValid) return View(productDTO);
-            _productGateway.Update(productDTO, _url);
-            return RedirectToAction("Index");
+            {
+                _productGateway.Update(productDTO, _url);
+                return RedirectToAction("Index");
+            }
         }
 
         // GET: Product/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            var productDTO = _productGateway.Get(_url, (int)id);
-            if (productDTO != null) return View(productDTO);
-            return HttpNotFound();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ProductDTO productDTO = _productGateway.Get(_url, (int)id);
+            if (productDTO == null)
+            {
+                return HttpNotFound();
+            }
+            return View(productDTO);
         }
 
         // POST: Product/Delete/5
@@ -85,7 +109,8 @@ namespace MVC_DGHAdmin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            _productGateway.Delete(_url, (int)id);
+            ProductDTO productDTO = _productGateway.Get(_url, (int)id);
+            _productGateway.Delete(_url, id);
             return RedirectToAction("Index");
         }
     }

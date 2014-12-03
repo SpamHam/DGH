@@ -21,7 +21,8 @@ namespace DAL.Entities_Converter
                 stock = DTO.stock,
                 salesPrice = DTO.salesPrice,
                 categoryId = DTO.categoryId,
-                imageId = DTO.imageId
+                imageUrl = DTO.imageUrl,
+                active = DTO.active
             };
             return product;
         }
@@ -36,7 +37,8 @@ namespace DAL.Entities_Converter
                 stock = Entity.stock,
                 salesPrice = Entity.salesPrice,
                 categoryId = Entity.categoryId,
-                imageId = Entity.imageId
+                imageUrl = Entity.imageUrl,
+                active = Entity.active
 
             };
             return productDTO;
