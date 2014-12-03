@@ -73,7 +73,8 @@
           <Property Name="stock" Type="int" Nullable="false" />
           <Property Name="salesPrice" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="categoryId" Type="int" Nullable="false" />
-          <Property Name="imageId" Type="int" />
+          <Property Name="imageUrl" Type="nvarchar(max)" />
+          <Property Name="active" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="FK_Address_City">
           <End Role="City" Type="Self.City" Multiplicity="1" />
@@ -377,7 +378,8 @@
           <Property Name="stock" Type="Int32" Nullable="false" />
           <Property Name="salesPrice" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
           <Property Name="categoryId" Type="Int32" Nullable="false" />
-          <Property Name="imageId" Type="Int32" />
+          <Property Name="imageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Category" Relationship="DGHModel.FK_Products_Category" FromRole="Product" ToRole="Category" />
           <NavigationProperty Name="OrderLines" Relationship="DGHModel.FK_OrderLine_Products" FromRole="Product" ToRole="OrderLine" />
         </EntityType>
@@ -477,7 +479,8 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="DGHModel.Product">
               <MappingFragment StoreEntitySet="Products">
-                <ScalarProperty Name="imageId" ColumnName="imageId" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="imageUrl" ColumnName="imageUrl" />
                 <ScalarProperty Name="categoryId" ColumnName="categoryId" />
                 <ScalarProperty Name="salesPrice" ColumnName="salesPrice" />
                 <ScalarProperty Name="stock" ColumnName="stock" />
