@@ -9,14 +9,16 @@ namespace BLL.Logic
 {
     class CurrencyConverter
     {
-        private decimal EuroInDKK;
-        string path = "http://www.nationalbanken.dk/_vti_bin/DN/DataService.svc/CurrencyRatesXML?lang=da";
+        private static string path = "http://www.nationalbanken.dk/_vti_bin/DN/DataService.svc/CurrencyRatesXML?lang=da";
 
-        public decimal EuroToDKK(){
-            
+        public static decimal FromDKToEuro(decimal theValue)
+        {
+
             XmlDocument theDocument = new XmlDocument();
             theDocument.Load(path);
-            XmlNode node = theDocument.SelectSingleNode("//currency[@code='EUR']");  
-        return EuroInDKK = Convert.ToDecimal(node.Attributes["rate"].Value) / 100;}
-    }       
+            XmlNode node = theDocument.SelectSingleNode("//currency[@code='EUR']");
+            decimal EuroInDKK = Convert.ToDecimal(node.Attributes["rate"].Value) / 100;
+            return (decimal.Round((theValue / EuroInDKK), 2));
+        }
     }
+}
