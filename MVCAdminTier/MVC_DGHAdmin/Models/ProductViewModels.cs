@@ -8,7 +8,9 @@ namespace MVC_DGHAdmin.Models
 {
     public class ProductViewModels
     {
-        IEnumerable<CategoryDTO> categories { get; set; }
-        IEnumerable<ProductDTO> products { get; set; }
+       public IEnumerable<CategoryDTO> categories { get; set; }
+       public IEnumerable<ProductDTO> products { get; set; }
+       public ProductDTO product { get; set; }
+       public CategoryDTO category { get; set; }
     }
 }

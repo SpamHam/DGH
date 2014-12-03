@@ -15,14 +15,16 @@ namespace MVC_DGHAdmin.Controllers
     public class ProductController : Controller
     {
         private readonly IGenericGateway<ProductDTO> _productGateway = new Facade().GetProductGateway();
+        private readonly IGenericGateway<CategoryDTO> _categoryGateway = new Facade().GetCategoryGateway();
         private readonly String _url = "product";
 
         // GET: Product
         public ActionResult Index()
         {
             ProductViewModels pvModel = new ProductViewModels();
-            pvModel
-            return View(_productGateway.GetAll(_url).ToList());
+            pvModel.products = _productGateway.GetAll(_url).ToList();
+            pvModel.categories = _categoryGateway.GetAll("category").ToList();
+            return View(pvModel);
         }
 
         // GET: Product/Details/5
