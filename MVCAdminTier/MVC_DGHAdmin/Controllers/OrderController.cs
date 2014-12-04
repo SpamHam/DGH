@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using BLLGateway;
 using BLLGateway.DTOModels;
-using MVC_DGHAdmin.Models;
-using WebGrease.Css.Extensions;
 
 namespace MVC_DGHAdmin.Controllers
 {
@@ -22,14 +17,7 @@ namespace MVC_DGHAdmin.Controllers
 
         public ActionResult Index()
         {
-            return View(new OrderModel
-            (
-               // order = _orderGateway.GetAll("order"),
-               // orderline = _orderLineGateway.GetAll("orderline"),
-               // Product = _productGateway.GetAll("product"),
-               // customer = _customerGateway.GetAll("customer")
-            )
-        );
+            return View();
         }
 
         public ActionResult Details(int? id)

@@ -12,7 +12,12 @@ namespace BLLGateway
 
         public IEnumerable<T> GetAll(string path)
         {
+            try { 
             return GetClient().GetAsync(path).Result.Content.ReadAsAsync<IEnumerable<T>>().Result;
+                }
+            catch(HttpRequestException e){
+                return null;
+            }
         }
 
         public T Get(string path, int id)

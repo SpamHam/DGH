@@ -7,7 +7,7 @@ namespace DAL
     public class Facade
     {
         private IGenericRepository<ProductDTO> _productRepository;
-        private IGenericRepository<OrderDTO> _orderRepository;
+        private IOrderRepository _orderRepository;
         private IGenericRepository<OrderLineDTO> _orderLineRepository;
         private IGenericRepository<CategoryDTO> _categoryRepository;
         private IGenericRepository<CustomerDTO> _customerRepository;
@@ -22,7 +22,7 @@ namespace DAL
         {
             return _productRepository != null ? _productRepository : _productRepository = new ProductRepository();
         }
-        public IGenericRepository<OrderDTO> GetOrderRepository()
+        public IOrderRepository GetOrderRepository()
         {
             return _orderRepository != null ? _orderRepository : _orderRepository = new OrderRepository();
         }

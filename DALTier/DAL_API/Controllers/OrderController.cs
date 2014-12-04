@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
+using System.Security.Cryptography.X509Certificates;
 using System.Web.Http;
 using DAL;
 using DAL.DTOModels;
@@ -47,7 +48,7 @@ namespace DAL_API.Controllers
         {
             try
             {
-                _facade.GetOrderRepository().Create(order);
+                _facade.GetOrderRepository().Add(order);
 
                 var response = Request.CreateResponse<OrderDTO>(HttpStatusCode.Created, order);
                 var uri = Url.Link("GetOrderId", new { order.id });
@@ -96,5 +97,12 @@ namespace DAL_API.Controllers
             return response;
            
         }
+
+        [HttpGet]
+        [Route("view")]
+        public IEnumerable<OrderModelDTO> getAllModels()
+        {
+            return _facade.GetOrderRepository().GetViewModel();
+        } 
     }
 }
