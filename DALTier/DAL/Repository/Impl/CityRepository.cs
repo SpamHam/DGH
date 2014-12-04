@@ -31,7 +31,7 @@ namespace DAL.Repository.Impl
 
         public override void Delete(DGHEntities db, int id)
         {
-            //db.Cities.Remove(db.Cities.FirstOrDefault(x => x.id == id));
+            db.Cities.Remove(db.Cities.FirstOrDefault(x => x.id == id));
             db.SaveChanges();
         }
 

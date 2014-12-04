@@ -13,6 +13,7 @@ namespace DAL.Entities_Converter
         {
             var city = new City()
             {
+                id = DTO.id,
                 zipCode = DTO.zipCode,
                 City1 = DTO.City
             };
@@ -23,6 +24,7 @@ namespace DAL.Entities_Converter
         {
             var cityDTO = new CityDTO()
             {
+                id = Entity.id,
                 zipCode = Entity.zipCode,
                 City = Entity.City1
             };
