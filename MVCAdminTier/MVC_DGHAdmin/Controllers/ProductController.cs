@@ -45,11 +45,8 @@ namespace MVC_DGHAdmin.Controllers
         // GET: Product/Create
         public ActionResult Create()
         {
-            ProductViewModels pvModel = new ProductViewModels();
-            pvModel.products = _productGateway.GetAll(_url).ToList();
-            //pvModel.categories = _categoryGateway.GetAll("category").ToList();
-            pvModel.dropCategories = new SelectList(_categoryGateway.GetAll("category").ToList(), "id", "categoryName");
-            return View(pvModel);
+            ViewBag.dropCategories = new SelectList(_categoryGateway.GetAll("category").ToList(), "id", "categoryName");
+            return View();
         }
 
         // POST: Product/Create
@@ -78,6 +75,7 @@ namespace MVC_DGHAdmin.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.dropCategories = new SelectList(_categoryGateway.GetAll("category").ToList(), "id", "categoryName");
             return View(productDTO);
         }
 
