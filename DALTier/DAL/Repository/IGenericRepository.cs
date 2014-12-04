@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DAL.DTOModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Repository
 {
-  public interface IGenericRepository<T>
+  public interface IGenericRepository<T> where T : IGenericDTO
     {
         T Get(int id);
 
