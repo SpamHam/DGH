@@ -59,8 +59,9 @@ namespace DAL.Repository.Impl
         {
             using (var db = new DGHEntities())
             {
-                return db.Orders.Select(order => ToOrderView(order, db)).ToList();
-                
+                IEnumerable<OrderModelDTO> orderModel = db.Orders.Select(order => ToOrderView(order, db)).ToList();
+                return orderModel;
+
             }
         }
         public OrderModelDTO ToOrderView(Order order, DGHEntities db)
