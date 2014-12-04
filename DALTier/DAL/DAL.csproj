@@ -104,6 +104,7 @@
     <Compile Include="Repository\Impl\OrderLineRepository.cs" />
     <Compile Include="Repository\Impl\OrderRepository.cs" />
     <Compile Include="Repository\Impl\ProductRepository.cs" />
+    <Compile Include="Repository\IOrderRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="DGHModel.edmx">

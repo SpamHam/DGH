@@ -3,42 +3,81 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using DAL.DTOModels;
-using DAL.Entities_Converter;
 
 
 namespace DAL.Repository.Impl
 {
-    internal class OrderRepository : GenericRepository<OrderDTO>
+    internal class OrderRepository : IOrderRepository
     {
-        public override OrderDTO Get(DGHEntities db, int id)
+        public OrderDTO Get(int id)
         {
-            return db.Orders.Select(OrderConverter.toOrderDTO).FirstOrDefault(x => x.id == id);
+            using (var db = new DGHEntities())
+            {
+                return db.Orders.Select(OrderConverter.toOrderDTO).FirstOrDefault(x => x.id == id);
+            }
         }
 
-        public override IEnumerable<OrderDTO> GetAll(DGHEntities db)
+        public IEnumerable<OrderDTO> GetAll()
         {
-            return db.Orders.Select(OrderConverter.toOrderDTO).ToList();
+            using (var db = new DGHEntities())
+            {
+                return db.Orders.Select(OrderConverter.toOrderDTO).ToList();
+            }
         }
 
-        public override void Add(DGHEntities db, OrderDTO orderDTO)
+        public void Add(OrderDTO orderDTO)
         {
-            if (orderDTO == null) throw new ArgumentNullException("orderDTO");
-            db.Orders.Add(OrderConverter.ToOrder(orderDTO));
-            db.SaveChanges();
+            using (var db = new DGHEntities())
+            {
+                if (orderDTO == null) throw new ArgumentNullException("orderDTO");
+                db.Orders.Add(OrderConverter.ToOrder(orderDTO));
+                db.SaveChanges();
+            }
         }
 
-        public override void Update(DGHEntities db, OrderDTO orderDTO)
+        public void Update(OrderDTO orderDTO)
         {
-            if (orderDTO == null) throw new ArgumentNullException("orderDTO");
-            db.Entry(OrderConverter.ToOrder(orderDTO)).State = EntityState.Modified;
-            db.SaveChanges();
+            using (var db = new DGHEntities())
+            {
+                if (orderDTO == null) throw new ArgumentNullException("orderDTO");
+                db.Entry(OrderConverter.ToOrder(orderDTO)).State = EntityState.Modified;
+                db.SaveChanges();
+            }
         }
 
-        public override void Delete(DGHEntities db, int id)
+        public void Delete(int id)
         {
-            db.OrderLines.RemoveRange(db.OrderLines.AsEnumerable().Where(x => x.orderId == id));
-            db.Orders.Remove(db.Orders.FirstOrDefault(x => x.id == id));
-            db.SaveChanges();
+            using (var db = new DGHEntities())
+            {
+                db.OrderLines.RemoveRange(db.OrderLines.AsEnumerable().Where(x => x.orderId == id));
+                db.Orders.Remove(db.Orders.FirstOrDefault(x => x.id == id));
+                db.SaveChanges();
+            }
+        }
+
+        public IEnumerable<OrderModelDTO> GetViewModel()
+        {
+            using (var db = new DGHEntities())
+            {
+                return db.Orders.Select(order => ToOrderView(order, db)).ToList();
+                
+            }
+        }
+        public OrderModelDTO ToOrderView(Order order, DGHEntities db)
+        {
+            var orderModelDto = new OrderModelDTO()
+            {
+                OrderLine = db.OrderLines.Where(i => i.orderId == order.id).Select(OrderLineConverter.ToOrderlineView).ToList(),
+                CustomerName = order.Customer.firstName + " " + order.Customer.lastName,
+                id = order.id,
+                OrderDate = order.orderDate,
+                SumPurchase = order.sumPurchase,
+                Shipping = order.Shipping,
+                sumShipping = order.sumShipping
+            };
+            if (order.shippedDate != null)
+                orderModelDto.shippedDate = (DateTime)order.shippedDate;
+            return orderModelDto;
         }
     }
 }

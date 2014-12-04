@@ -11,12 +11,12 @@ namespace DAL.Repository.Impl
     {
         public override OrderLineDTO Get(DGHEntities db, int id)
         {
-            return db.OrderLines.Select(OrderLineConverter.toOrderLineDTO).FirstOrDefault(x => x.id == id);
+            return db.OrderLines.Select(OrderLineConverter.ToOrderLineDTO).FirstOrDefault(x => x.id == id);
         }
 
         public override IEnumerable<OrderLineDTO> GetAll(DGHEntities db)
         {
-            return db.OrderLines.ToList().Select(OrderLineConverter.toOrderLineDTO).ToList();
+            return db.OrderLines.ToList().Select(OrderLineConverter.ToOrderLineDTO).ToList();
         }
 
         public override void Add(DGHEntities db, OrderLineDTO orderLineDTO)

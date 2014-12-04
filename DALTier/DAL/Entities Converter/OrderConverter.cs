@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Linq;
 using DAL.DTOModels;
 
-namespace DAL.Entities_Converter
+namespace DAL
 {
-    class OrderConverter
+    public class OrderConverter
     {
            public static Order ToOrder(OrderDTO orderDTO)
         {
@@ -28,12 +29,29 @@ namespace DAL.Entities_Converter
                 CustomerId = order.customerId,
                 OrderDate = order.orderDate,
                 SumPurchase = order.sumPurchase,
+                Shipping = order.Shipping,
+                sumShipping = order.sumShipping,
             };
             if (order.shippedDate == null) return orderDTO;
             orderDTO.shippedDate = (DateTime)order.shippedDate;
-            orderDTO.Shipping = (int) order.Shipping;
-            orderDTO.sumShipping = (int) order.sumShipping;
             return orderDTO;
+        }
+
+        public static OrderModelDTO ToOrderView(Order order, DGHEntities db)
+        {
+            var orderModelDto = new OrderModelDTO()
+            {
+                OrderLine = db.OrderLines.Where(i => i.orderId == order.id).Select(OrderLineConverter.ToOrderlineView).ToList(),
+                CustomerName = order.Customer.firstName + " " + order.Customer.lastName,
+                id = order.id,
+                OrderDate = order.orderDate,
+                SumPurchase = order.sumPurchase,
+                Shipping = order.Shipping,
+                sumShipping = order.sumShipping
+            };
+            if (order.shippedDate != null)
+                orderModelDto.shippedDate = (DateTime)order.shippedDate;
+            return orderModelDto;
         }
     }
 }
