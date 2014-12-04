@@ -23,7 +23,7 @@ namespace DAL
         public int id { get; set; }
         public string streetName { get; set; }
         public string streetNumber { get; set; }
-        public string zipCode { get; set; }
+        public int cityId { get; set; }
     
         public virtual City City { get; set; }
         public virtual ICollection<Customer> Customers { get; set; }

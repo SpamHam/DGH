@@ -9,7 +9,7 @@ using System.Data.Entity;
 
 namespace DAL.Repository.Impl
 {
-    internal class CityRepository : IGenericRepository<CityDTO>
+    internal class CityRepository : GenericRepository<CityDTO>
     {
         
         public override CityDTO Get(DGHEntities db, int id)
@@ -22,13 +22,6 @@ namespace DAL.Repository.Impl
             return db.Cities.Select(CityConverter.toCityDTO).ToList();
         }
 
-        public override void Create(DGHEntities db, CityDTO cityDTO)
-        {
-            if (cityDTO == null) throw new ArgumentNullException("cityDTO");
-            db.Cities.Add(CityConverter.toCity(cityDTO));
-            db.SaveChanges();
-        }
-
         public override void Update(DGHEntities db, CityDTO cityDTO)
         {
             if (cityDTO == null) throw new ArgumentNullException("cityDTO");
@@ -39,6 +32,13 @@ namespace DAL.Repository.Impl
         public override void Delete(DGHEntities db, int id)
         {
             //db.Cities.Remove(db.Cities.FirstOrDefault(x => x.id == id));
+            db.SaveChanges();
+        }
+
+        public override void Add(DGHEntities db, CityDTO cityDTO)
+        {
+            if (cityDTO == null) throw new ArgumentNullException("cityDTO");
+            db.Cities.Add(CityConverter.toCity(cityDTO));
             db.SaveChanges();
         }
     }

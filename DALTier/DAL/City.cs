@@ -21,6 +21,7 @@ namespace DAL
     
         public string zipCode { get; set; }
         public string City1 { get; set; }
+        public int id { get; set; }
     
         public virtual ICollection<Address> Addresses { get; set; }
     }
