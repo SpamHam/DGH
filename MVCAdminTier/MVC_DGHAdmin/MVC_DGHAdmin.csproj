@@ -172,8 +172,6 @@
     <Compile Include="Models\CategoryViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Orders\OModel.cs" />
-    <Compile Include="Models\Orders\OrderLineModel.cs" />
     <Compile Include="Models\Orders\OrderModel.cs" />
     <Compile Include="Models\ProductViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

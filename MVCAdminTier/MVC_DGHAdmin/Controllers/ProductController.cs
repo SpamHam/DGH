@@ -45,7 +45,11 @@ namespace MVC_DGHAdmin.Controllers
         // GET: Product/Create
         public ActionResult Create()
         {
-            return View();
+            ProductViewModels pvModel = new ProductViewModels();
+            pvModel.products = _productGateway.GetAll(_url).ToList();
+            //pvModel.categories = _categoryGateway.GetAll("category").ToList();
+            pvModel.dropCategories = new SelectList(_categoryGateway.GetAll("category").ToList(), "id", "categoryName");
+            return View(pvModel);
         }
 
         // POST: Product/Create
