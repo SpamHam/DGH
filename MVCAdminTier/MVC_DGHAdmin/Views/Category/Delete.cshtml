@@ -1,4 +1,4 @@
-﻿@model BLLGateway.DTOModels.CategoryDTO
+﻿@model MVC_DGHAdmin.Models.CategoryViewModels
 
 @{
     ViewBag.Title = "Delete";
@@ -12,11 +12,11 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.categoryName)
+            @Html.DisplayNameFor(model => model.SelectedCategory.categoryName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.categoryName)
+            @Html.DisplayFor(model => model.SelectedCategory.categoryName)
         </dd>
 
     </dl>
