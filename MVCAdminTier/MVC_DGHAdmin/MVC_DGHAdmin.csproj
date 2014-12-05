@@ -172,9 +172,6 @@
     <Compile Include="Models\CategoryViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Orders\OModel.cs" />
-    <Compile Include="Models\Orders\OrderLineModel.cs" />
-    <Compile Include="Models\Orders\OrderModel.cs" />
     <Compile Include="Models\ProductViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -256,9 +253,11 @@
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Category\DeleteConfirmed.cshtml" />
     <Content Include="Views\Category\DeleteNotConfirmed.cshtml" />
+    <Content Include="Views\Shared\_product.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\Orders\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

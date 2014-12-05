@@ -27,8 +27,8 @@ namespace DAL
         public string firstName { get; set; }
         public string lastName { get; set; }
     
+        public virtual ICollection<Order> Orders { get; set; }
         public virtual Address Address { get; set; }
         public virtual Address Address1 { get; set; }
-        public virtual ICollection<Order> Orders { get; set; }
     }
 }

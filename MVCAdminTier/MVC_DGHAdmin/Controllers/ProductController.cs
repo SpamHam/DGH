@@ -45,6 +45,7 @@ namespace MVC_DGHAdmin.Controllers
         // GET: Product/Create
         public ActionResult Create()
         {
+            ViewBag.dropCategories = new SelectList(_categoryGateway.GetAll("category").ToList(), "id", "categoryName");
             return View();
         }
 
@@ -74,6 +75,7 @@ namespace MVC_DGHAdmin.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.dropCategories = new SelectList(_categoryGateway.GetAll("category").ToList(), "id", "categoryName");
             return View(productDTO);
         }
 

@@ -2,7 +2,7 @@
 
 namespace DAL
 {
-    class OrderLineConverter
+    public class OrderLineConverter
     {
         public static OrderLine ToOrderLine(OrderLineDTO orderLineDTO)
         {
@@ -17,7 +17,7 @@ namespace DAL
             return orderLine;
         }
 
-        public static OrderLineDTO toOrderLineDTO(OrderLine orderLine)
+        public static OrderLineDTO ToOrderLineDTO(OrderLine orderLine)
         {
             var orderLineDTO = new OrderLineDTO()
             {
@@ -28,6 +28,19 @@ namespace DAL
                 Amount = orderLine.amount,
             };
             return orderLineDTO;
+        }
+
+        public static OrderLineModelDTO ToOrderlineView(OrderLine orderline)
+        {
+            return new OrderLineModelDTO()
+            {
+                id = orderline.id,
+                ProductName = orderline.Product.name,
+                ProductPicture = orderline.Product.imageUrl,
+                ProductPrice = orderline.Product.salesPrice,
+                Amount = orderline.amount,
+                LineTotal = orderline.lineTotal,
+            };
         }
     }
 }

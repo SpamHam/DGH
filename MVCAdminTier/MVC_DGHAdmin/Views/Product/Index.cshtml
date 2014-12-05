@@ -39,6 +39,7 @@
     </tr>
 
 @foreach (var item in Model.products) {
+  
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.name)
@@ -55,11 +56,13 @@
         <td>
             @Html.DisplayFor(modelItem => item.salesPrice)
         </td>
-@foreach (var itemC in Model.categories) {
+        @foreach (var itemC in Model.categories) {
+            if (itemC.id == item.categoryId) { 
         <td>
             @Html.DisplayFor(modelItem => itemC.categoryName)
         </td>
-}
+        }
+      }
         <td>
             @Html.DisplayFor(modelItem => item.imageUrl)
         </td>
