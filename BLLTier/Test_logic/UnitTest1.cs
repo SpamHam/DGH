@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace TestBLL_API
+namespace Test_logic
 {
     [TestClass]
     public class UnitTest1
