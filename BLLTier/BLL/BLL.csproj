@@ -51,6 +51,7 @@
     <Compile Include="GateWay\GenericGateway.cs" />
     <Compile Include="GateWay\IGenericGateway.cs" />
     <Compile Include="Logic\CurrencyConverter.cs" />
+    <Compile Include="Logic\ProductSorter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

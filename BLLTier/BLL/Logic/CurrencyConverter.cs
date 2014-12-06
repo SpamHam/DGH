@@ -13,7 +13,6 @@ namespace BLL.Logic
 
         public static decimal FromDKToEuro(decimal theValue)
         {
-
             XmlDocument theDocument = new XmlDocument();
             theDocument.Load(path);
             XmlNode node = theDocument.SelectSingleNode("//currency[@code='EUR']");
