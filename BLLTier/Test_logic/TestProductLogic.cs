@@ -23,6 +23,9 @@ namespace Test_logic
         {
             Console.WriteLine("TearDown Called");
         }
+        /// <summary>
+        /// hej
+        /// </summary>
         [Test]
         public void getActiveProductTest()
         {
