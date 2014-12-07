@@ -55,7 +55,6 @@
     <Compile Include="GateWay\IGenericGateway.cs" />
     <Compile Include="Logic\CurrencyConverter.cs" />
     <Compile Include="Logic\ProductSorter.cs" />
-    <Compile Include="Logic\TestProductLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,5 @@
 ﻿using BLL.DTOModels;
+using BLL.Logic;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -6,10 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BLL.Logic
+namespace Test_logic
 {
     [TestFixture]
-   public class TestProductLogic
+    class TestProductLogic
     {
         [SetUp]
         public void SetUp()
