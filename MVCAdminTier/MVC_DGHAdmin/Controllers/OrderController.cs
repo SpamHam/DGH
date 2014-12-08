@@ -3,6 +3,7 @@ using System.Net;
 using System.Web.Mvc;
 using BLLGateway;
 using BLLGateway.DTOModels;
+using BLLGateway.Gateway;
 
 namespace MVC_DGHAdmin.Controllers
 {

@@ -52,8 +52,10 @@
     <Compile Include="DTOModels\OrderLineDTO.cs" />
     <Compile Include="DTOModels\ProductDTO.cs" />
     <Compile Include="GateWay\Facade.cs" />
-    <Compile Include="GateWay\GenericGateway.cs" />
+    <Compile Include="GateWay\Gateways\GenericGateway.cs" />
     <Compile Include="GateWay\IGenericGateway.cs" />
+    <Compile Include="GateWay\Gateways\OrderGateway.cs" />
+    <Compile Include="GateWay\IOrderGateway.cs" />
     <Compile Include="Logic\CurrencyConverter.cs" />
     <Compile Include="Logic\ProductSorter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -64,6 +66,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
