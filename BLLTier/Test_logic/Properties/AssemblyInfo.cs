@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("TestBLL_API")]
+[assembly: AssemblyTitle("Test_logic")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("TestBLL_API")]
+[assembly: AssemblyProduct("Test_logic")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("97e67b6a-8e68-4e72-85a5-c5cacb6c21cd")]
+[assembly: Guid("57e18e1a-3f85-45ef-9909-748d9405c377")]
 
 // Version information for an assembly consists of the following four values:
 //

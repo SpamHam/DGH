@@ -37,11 +37,11 @@ namespace DAL
             return orderDTO;
         }
 
-        public static OrderModelDTO ToOrderView(Order order, DGHEntities db)
+        public static OrderModelDTO ToOrderView(Order order)
         {
             var orderModelDto = new OrderModelDTO()
             {
-                OrderLine = db.OrderLines.Where(i => i.orderId == order.id).Select(OrderLineConverter.ToOrderlineView).ToList(),
+                OrderLine = order.OrderLines.Select(OrderLineConverter.ToOrderlineView).ToList(),
                 CustomerName = order.Customer.firstName + " " + order.Customer.lastName,
                 id = order.id,
                 OrderDate = order.orderDate,

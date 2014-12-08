@@ -59,26 +59,8 @@ namespace DAL.Repository.Impl
         {
             using (var db = new DGHEntities())
             {
-                IEnumerable<OrderModelDTO> orderModel = db.Orders.Select(order => ToOrderView(order, db)).ToList();
-                return orderModel;
-
+               return db.Orders.Include("Customer").Include("OrderLines").Include("OrderLines.Product").ToList().Select(OrderConverter.ToOrderView);
             }
-        }
-        public OrderModelDTO ToOrderView(Order order, DGHEntities db)
-        {
-            var orderModelDto = new OrderModelDTO()
-            {
-                OrderLine = db.OrderLines.Where(i => i.orderId == order.id).Select(OrderLineConverter.ToOrderlineView).ToList(),
-                CustomerName = order.Customer.firstName + " " + order.Customer.lastName,
-                id = order.id,
-                OrderDate = order.orderDate,
-                SumPurchase = order.sumPurchase,
-                Shipping = order.Shipping,
-                sumShipping = order.sumShipping
-            };
-            if (order.shippedDate != null)
-                orderModelDto.shippedDate = (DateTime)order.shippedDate;
-            return orderModelDto;
         }
     }
 }
