@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using BLL.DTOModels;
+using BLL.Gateway;
 
-namespace BLL.Gateway
+namespace BLL.GateWay.Gateways
 {
     public class GenericGateway<Type> : IGenericGateway<Type> where Type : IGenericDTO
     {
