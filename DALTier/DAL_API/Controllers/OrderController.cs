@@ -48,7 +48,7 @@ namespace DAL_API.Controllers
         {
             try
             {
-                _facade.GetOrderRepository().Add(order);
+                _facade.GetOrderRepository().Create(order);
 
                 var response = Request.CreateResponse<OrderDTO>(HttpStatusCode.Created, order);
                 var uri = Url.Link("GetOrderId", new { order.id });

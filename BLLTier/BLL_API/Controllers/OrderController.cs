@@ -57,7 +57,7 @@ namespace BLL_API.Controllers
 
         [HttpGet]
         [Route("view")]
-        public IEnumerable<OrderModelDTO> getAllModels()
+        public IEnumerable<OrderModelDTO> GetAllModels()
         {
             return _facade.GetOrderGateway().GetAllModels(_url + "/view");
         } 
