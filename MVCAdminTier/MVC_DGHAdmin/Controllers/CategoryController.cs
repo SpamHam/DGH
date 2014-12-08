@@ -27,7 +27,7 @@ namespace MVC_DGHAdmin.Controllers
         {
             return View(_categoryGateway.GetAll(_categoryUrl).ToList());
         }
-
+        [Authorize(Roles="Admin")]
         // GET: Category/Details/5
         public ActionResult Details(int? id)
         {
