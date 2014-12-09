@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Net.Http;
 
-namespace BLLGateway
+namespace BLLGateway.Gateway
 {
    public interface IGenericGateway<T>
     {

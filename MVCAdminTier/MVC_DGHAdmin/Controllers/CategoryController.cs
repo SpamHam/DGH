@@ -7,8 +7,10 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using BLLGateway.DTOModels;
+using BLLGateway.Gateway;
 using MVC_DGHAdmin.Models;
 using BLLGateway;
+//using System.Web.Services.WebService;
 
 
 namespace MVC_DGHAdmin.Controllers
@@ -19,15 +21,18 @@ namespace MVC_DGHAdmin.Controllers
         private readonly IGenericGateway<ProductDTO> _productGateway = new Facade().GetProductGateway();
         private readonly String _categoryUrl = "category";
         private readonly String _productUrl = "product";
+        
+        
         // GET: Category
         public ActionResult Index()
         {
             return View(_categoryGateway.GetAll(_categoryUrl).ToList());
         }
-
+        [Authorize(Roles="Admin")]
         // GET: Category/Details/5
         public ActionResult Details(int? id)
         {
+            
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -97,41 +102,60 @@ namespace MVC_DGHAdmin.Controllers
         // GET: Category/Delete/5
         public ActionResult Delete(int? id)
         {
+            CategoryViewModels model = new CategoryViewModels();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CategoryDTO categoryDTO = _categoryGateway.Get(_categoryUrl, (int)id);
-            if (categoryDTO == null)
+            model.SelectedCategory = _categoryGateway.Get(_categoryUrl, (int)id);
+
+            if (model.SelectedCategory == null)
             {
                 return HttpNotFound();
             }
-            return View(categoryDTO);
+            return View(model);
         }
 
         // POST: Category/Delete/5
-        [HttpPost, ActionName("Delete")]
+
+        [HttpPost, ActionName("Delete"), System.Web.Services.WebMethod(EnableSession = true)]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            
+            CategoryViewModels model = new CategoryViewModels();
+            
 
-            CategoryDTO categoryDTO = _categoryGateway.Get(_categoryUrl, (int)id);
-            var product = _productGateway.GetAll(_productUrl).ToList();
-            List<object> productCat = new List<object>();   
-            foreach (var n in product)
+            model.SelectedCategory = _categoryGateway.Get(_categoryUrl, (int)id);
+            model.Product = _productGateway.GetAll(_productUrl).ToList();
+            int count =0;  
+            foreach (var n in model.Product)
             {
-                if (categoryDTO.id == n.categoryId)
+                if (model.SelectedCategory.id == n.categoryId)
                 {
-                    productCat.Add(n);
+                    count++;
                     
                 }
             }
-            if(productCat.Count() == 0){
+            Session["hej"] = id;
+            if(count == 0){
                 _categoryGateway.Delete(_categoryUrl, id);
                 return RedirectToAction("Index");
             }
 
-            return View(_categoryGateway.Get(_categoryUrl, id));
+            return RedirectToAction("DeleteNotConfirmed");//View(model);
+        }
+        
+        [System.Web.Services.WebMethod(EnableSession=true)]
+        public ActionResult DeleteNotConfirmed()
+        {
+            CategoryViewModels model= new CategoryViewModels();
+
+            int id = (int)Session["hej"];
+
+            model.SelectedCategory = _categoryGateway.Get(_categoryUrl, (int)id);
+            
+            return View(model);
         }
        
     }

@@ -1,28 +1,25 @@
 ﻿using BLLGateway.DTOModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using BLLGateway.Gateway.Gateways;
 
-namespace BLLGateway
+namespace BLLGateway.Gateway
 {
     public class Facade
     {
         private IGenericGateway<ProductDTO> _productGateway;
-        private IGenericGateway<OrderDTO> _orderGateway;
+        private IOrderGateway _orderGateway;
         private IGenericGateway<OrderLineDTO> _orderLineGateway;
         private IGenericGateway<CategoryDTO> _categoryGateway;
         private IGenericGateway<CustomerDTO> _customerGateway;
+        private IGenericGateway<AddressDTO> _addressGateway;
 
         public IGenericGateway<ProductDTO> GetProductGateway()
         {
             return _productGateway != null ? _productGateway : _productGateway = new GenericGateway<ProductDTO>();
         }
 
-        public IGenericGateway<OrderDTO> GetOrderGateway()
+        public IOrderGateway GetOrderGateway()
         {
-            return _orderGateway != null ? _orderGateway : _orderGateway = new GenericGateway<OrderDTO>();
+            return _orderGateway != null ? _orderGateway : _orderGateway = new OrderGateway();
         }
 
         public IGenericGateway<OrderLineDTO> GetOrderLineGateway()
@@ -36,6 +33,11 @@ namespace BLLGateway
         public IGenericGateway<CustomerDTO> GetCustomerGateway()
         {
             return _customerGateway != null ? _customerGateway : _customerGateway = new GenericGateway<CustomerDTO>();
+        }
+
+        public IGenericGateway<AddressDTO> GetAddressGateway()
+        {
+            return _addressGateway != null ? _addressGateway : _addressGateway = new GenericGateway<AddressDTO>();
         } 
     }
 }

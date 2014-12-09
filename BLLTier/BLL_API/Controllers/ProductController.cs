@@ -1,5 +1,6 @@
 ﻿using BLL.DTOModels;
 using BLL.Gateway;
+using BLL.Logic;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -25,7 +26,15 @@ namespace BLL_API.Controllers
         [Route("")]
         public IEnumerable<ProductDTO> GetAll()
         {
-            return _facade.GetProductGateway().GetAll(_url);
+           
+          return _facade.GetProductGateway().GetAll(_url);
+        }
+
+        [HttpGet]
+        [Route("active")]
+        public IEnumerable<ProductDTO> GetActives()
+        {
+            return ProductSorter.getActiveProducts(_facade.GetProductGateway().GetAll(_url));
         }
 
 

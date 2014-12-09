@@ -1,8 +1,9 @@
-﻿@model IEnumerable<BLLGateway.DTOModels.CategoryDTO>
+﻿@model MVC_DGHAdmin.Models.CategoryViewModels
 @{
     ViewBag.Title = "DeleteNotConfirmed";
 }
 
-<h2>DeleteNotConfirmed</h2>
-@Html.DisplayFor(model => model.)
+<h2>Delete Not Confirmed</h2>
+<p>This category <b> @Html.DisplayFor(model => model.SelectedCategory.categoryName)</b> still has some product(s), which is belonging to it</p>
+<p>@Html.ActionLink("Back to List", "Index")</p>
 

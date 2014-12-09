@@ -21,7 +21,7 @@ namespace MVC_DGHAdmin.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("DGH", throwIfV1Schema: false)
         {
         }
 
@@ -37,5 +37,9 @@ namespace MVC_DGHAdmin.Models
         public System.Data.Entity.DbSet<BLLGateway.DTOModels.CategoryDTO> CategoryDTOes { get; set; }
 
         public System.Data.Entity.DbSet<BLLGateway.DTOModels.ProductDTO> ProductDTOes { get; set; }
+
+        public System.Data.Entity.DbSet<BLLGateway.DTOModels.CustomerDTO> CustomerDTOes { get; set; }
+
+        public System.Data.Entity.DbSet<BLLGateway.DTOModels.AddressDTO> AddressDTOes { get; set; }
     }
 }

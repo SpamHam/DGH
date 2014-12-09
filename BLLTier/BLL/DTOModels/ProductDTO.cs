@@ -9,7 +9,8 @@
         public int stock { get; set; }
         public decimal salesPrice { get; set; }
         public int categoryId { get; set;}
-        public int? imageId { get; set; }
+        public string imageUrl { get; set; }
+        public bool active { get; set; }
 
     }
 }

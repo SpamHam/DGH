@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using BLLGateway.DTOModels;
+using BLLGateway.Gateway;
 using MVC_DGHAdmin.Models;
 using BLLGateway;
 
@@ -114,7 +115,8 @@ namespace MVC_DGHAdmin.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             ProductDTO productDTO = _productGateway.Get(_url, (int)id);
-            _productGateway.Delete(_url, id);
+            productDTO.active = false;
+            _productGateway.Update(productDTO,_url);
             return RedirectToAction("Index");
         }
     }

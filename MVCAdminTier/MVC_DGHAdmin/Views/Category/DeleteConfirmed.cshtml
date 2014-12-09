@@ -1,0 +1,9 @@
+﻿@model MVC_DGHAdmin.Models.CategoryViewModels
+@{
+    ViewBag.Title = "DeleteConfirmed";
+}
+
+<h2>DeleteNotConfirmed</h2>
+<p>Denne kategori <b>@Html.DisplayFor(model => model.SelectedCategory.categoryName)</b> har stadig nogle produkter, der hører under sig</p>
+<p>@Html.ActionLink("Back to List", "Index")</p>
+

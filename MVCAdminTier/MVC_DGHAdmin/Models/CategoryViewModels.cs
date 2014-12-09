@@ -13,5 +13,7 @@ namespace MVC_DGHAdmin.Models
 
         public List<ProductDTO> Product { get; set; }
         public ProductDTO SelectedProduct { get; set; }
+
+        public int count { get; set; }
     }
 }

@@ -42,15 +42,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTOModels\AddressDTO.cs" />
     <Compile Include="DTOModels\CategoryDTO.cs" />
     <Compile Include="DTOModels\CustomerDTO.cs" />
     <Compile Include="DTOModels\IGenericDTO.cs" />
     <Compile Include="DTOModels\OrderDTO.cs" />
     <Compile Include="DTOModels\OrderLineDTO.cs" />
     <Compile Include="DTOModels\ProductDTO.cs" />
-    <Compile Include="Facade.cs" />
-    <Compile Include="GenericGateway.cs" />
-    <Compile Include="IGenericGateway.cs" />
+    <Compile Include="Gateway\Facade.cs" />
+    <Compile Include="Gateway\Gateways\GenericGateway.cs" />
+    <Compile Include="Gateway\Gateways\OrderGateway.cs" />
+    <Compile Include="Gateway\IGenericGateway.cs" />
+    <Compile Include="Gateway\IOrderGateway.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
