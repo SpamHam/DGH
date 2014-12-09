@@ -1,68 +1,115 @@
-﻿@model MVC_DGHAdmin.Models.OrderModel
+﻿@model IEnumerable<BLLGateway.DTOModels.OrderModelDTO>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Orders";
 }
 
-<h2>Index</h2>
+<h2>Orders</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
+<thead>
     <tr>
         <th>
-            @Html.DisplayName("Name")
+            @Html.DisplayNameFor(model => model.CustomerName)
         </th>
         <th>
-            @Html.DisplayName("Items Price")
+            @Html.DisplayNameFor(model => model.Shipping)
         </th>
         <th>
-            @Html.DisplayName("Shipping Price")
+            @Html.DisplayNameFor(model => model.sumShipping)
         </th>
         <th>
-            @Html.DisplayName("Total Price")
+            @Html.DisplayNameFor(model => model.OrderDate)
         </th>
         <th>
-            @Html.DisplayName("Order Date")
+            @Html.DisplayNameFor(model => model.shippedDate)
         </th>
         <th>
-            @Html.DisplayName("Shipped Date")
+            @Html.DisplayNameFor(model => model.SumPurchase)
         </th>
         <th>
         </th>
     </tr>
-
-@foreach (var item in Model.order) {
-    <tr>
-        <td>
-            @foreach (var customerId in Model.customer.Where(customerId => item.CustomerId == customerId.id))
-            {
-                <text>@customerId.firstName</text>
-                Html.DisplayText(customerId.firstName + " " + customerId.lastName);
+</thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Shipping)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.sumShipping)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.shippedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SumPurchase)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                </td>
+            </tr>
+        <table class="table">
+        <thead>
+            <tr>
+                <th>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OrderLine.FirstOrDefault().ProductName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OrderLine.FirstOrDefault().ProductPrice)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OrderLine.FirstOrDefault().Amount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OrderLine.FirstOrDefault().LineTotal)
+                </th>
+                <th>
+                </th>
+            </tr>
+        </thead>
+            <tbody>
+                @foreach (var lineItem in item.OrderLine)
+                {
+                    <tr>
+                        <th>
+                        </th>
+                        <td>
+                            @Html.DisplayFor(modelItem => lineItem.ProductName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => lineItem.ProductPrice)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => lineItem.Amount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => lineItem.LineTotal)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = lineItem.id }) |
+                            @Html.ActionLink("Details", "Details", new { id = lineItem.id }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = lineItem.id })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
             }
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SumPurchase)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Shipping)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.sumShipping)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OrderDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.shippedDate)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
-        </td>
-    </tr>
-}
-
+        </tbody>
 </table>
