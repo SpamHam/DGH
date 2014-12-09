@@ -14,6 +14,7 @@ namespace BLLGateway
         private IGenericGateway<OrderLineDTO> _orderLineGateway;
         private IGenericGateway<CategoryDTO> _categoryGateway;
         private IGenericGateway<CustomerDTO> _customerGateway;
+        private IGenericGateway<AddressDTO> _addressGateway;
 
         public IGenericGateway<ProductDTO> GetProductGateway()
         {
@@ -36,6 +37,11 @@ namespace BLLGateway
         public IGenericGateway<CustomerDTO> GetCustomerGateway()
         {
             return _customerGateway != null ? _customerGateway : _customerGateway = new GenericGateway<CustomerDTO>();
+        }
+
+        public IGenericGateway<AddressDTO> GetAddressGateway()
+        {
+            return _addressGateway != null ? _addressGateway : _addressGateway = new GenericGateway<AddressDTO>();
         } 
     }
 }

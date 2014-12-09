@@ -1,4 +1,4 @@
-﻿@model BLLGateway.DTOModels.CustomerDTO
+﻿@model MVC_DGHAdmin.Models.CustomerViewModel
 
 @{
     ViewBag.Title = "Delete";
@@ -12,51 +12,51 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.phone)
+            @Html.DisplayNameFor(model => model.SelectedCustomer.phone)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.phone)
+            @Html.DisplayFor(model => model.SelectedCustomer.phone)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.deliveryAddressId)
+            @Html.DisplayNameFor(model => model.SelectedCustomer.deliveryAddressId)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.deliveryAddressId)
+            @Html.DisplayFor(model => model.SelectedCustomer.deliveryAddressId)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.invoiceAddressId)
+            @Html.DisplayNameFor(model => model.SelectedCustomer.invoiceAddressId)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.invoiceAddressId)
+            @Html.DisplayFor(model => model.SelectedCustomer.invoiceAddressId)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.email)
+            @Html.DisplayNameFor(model => model.SelectedCustomer.email)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.email)
+            @Html.DisplayFor(model => model.SelectedCustomer.email)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.firstName)
+            @Html.DisplayNameFor(model => model.SelectedCustomer.firstName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.firstName)
+            @Html.DisplayFor(model => model.SelectedCustomer.firstName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.lastName)
+            @Html.DisplayNameFor(model => model.SelectedCustomer.lastName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.lastName)
+            @Html.DisplayFor(model => model.SelectedCustomer.lastName)
         </dd>
 
     </dl>

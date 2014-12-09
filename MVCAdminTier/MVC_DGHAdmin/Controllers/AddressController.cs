@@ -12,113 +12,107 @@ using BLLGateway;
 
 namespace MVC_DGHAdmin.Controllers
 {
-    public class CustomerController : Controller
+    public class AddressController : Controller
     {
+        private readonly IGenericGateway<AddressDTO> _addressGateway = new Facade().GetAddressGateway();
+        private readonly String _url = "address";
 
-        private readonly IGenericGateway<CustomerDTO> _customerGateway = new Facade().GetCustomerGateway();
-        private readonly String _url = "customer";
-        // GET: Customer
+        // GET: Address
         public ActionResult Index()
         {
-            return View(_customerGateway.GetAll(_url).ToList());
+            return View(_addressGateway.GetAll(_url).ToList());
         }
 
-        // GET: Customer/Details/5
+        // GET: Address/Details/5
         public ActionResult Details(int? id)
         {
-            CustomerViewModel model = new CustomerViewModel();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            model.SelectedCustomer = _customerGateway.Get(_url, (int)id);
-            
-            if (model.SelectedCustomer== null)
+            AddressDTO addressDTO = _addressGateway.Get(_url, (int)id);
+            if (addressDTO == null)
             {
                 return HttpNotFound();
             }
-            return View(model);
+            return View(addressDTO);
         }
 
-        // GET: Customer/Create
+        // GET: Address/Create
         public ActionResult Create()
         {
-            return RedirectToAction("Create", "Address");
+            return View();
         }
 
-        // POST: Customer/Create
+        // POST: Address/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,phone,deliveryAddressId,invoiceAddressId,email,firstName,lastName")] CustomerDTO customerDTO)
+        public ActionResult Create([Bind(Include = "id,streetName,streetNumber,cityId")] AddressDTO addressDTO)
         {
-            if (!ModelState.IsValid) return View(customerDTO);
+            if (ModelState.IsValid)
             {
-                _customerGateway.Add(customerDTO, _url);
-                
+                _addressGateway.Add(addressDTO , _url);
                 return RedirectToAction("Index");
             }
 
-            
+            return View(addressDTO);
         }
 
-        // GET: Customer/Edit/5
+        // GET: Address/Edit/5
         public ActionResult Edit(int? id)
         {
-            CustomerViewModel model = new CustomerViewModel();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            model.SelectedCustomer = _customerGateway.Get(_url, (int)id);
-            if (model.SelectedCustomer == null)
+            AddressDTO addressDTO = _addressGateway.Get(_url, (int)id);
+            if (addressDTO == null)
             {
                 return HttpNotFound();
             }
-            return View(model);
+            return View(addressDTO);
         }
 
-        // POST: Customer/Edit/5
+        // POST: Address/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,phone,deliveryAddressId,invoiceAddressId,email,firstName,lastName")] CustomerDTO customerDTO)
+        public ActionResult Edit([Bind(Include = "id,streetName,streetNumber,cityId")] AddressDTO addressDTO)
         {
-            if (!ModelState.IsValid) return View(customerDTO);
+            if (ModelState.IsValid)
             {
-                _customerGateway.Update(customerDTO, _url);
-                
+                _addressGateway.Update(addressDTO, _url);
                 return RedirectToAction("Index");
             }
-            
+            return View(addressDTO);
         }
 
-        // GET: Customer/Delete/5
+        // GET: Address/Delete/5
         public ActionResult Delete(int? id)
         {
-            CustomerViewModel model = new CustomerViewModel();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            model.SelectedCustomer = _customerGateway.Get(_url, (int)id);
-            if (model.SelectedCustomer == null)
+            AddressDTO addressDTO = _addressGateway.Get(_url, (int)id);
+            if (addressDTO == null)
             {
                 return HttpNotFound();
             }
-            return View(model);
+            return View(addressDTO);
         }
 
-        // POST: Customer/Delete/5
+        // POST: Address/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-
-            _customerGateway.Delete(_url, id);
-           
+            AddressDTO addressDTO = _addressGateway.Get(_url, (int) id);
+            _addressGateway.Delete(_url , id);
+            
             return RedirectToAction("Index");
         }
 
