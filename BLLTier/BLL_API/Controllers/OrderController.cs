@@ -54,5 +54,12 @@ namespace BLL_API.Controllers
         {
             return _facade.GetOrderGateway().Delete(_url, id);          
         }
+
+        [HttpGet]
+        [Route("view")]
+        public IEnumerable<OrderModelDTO> GetAllModels()
+        {
+            return _facade.GetOrderGateway().GetAllModels(_url + "/view");
+        } 
     }
 }

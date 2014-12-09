@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using BLLGateway.DTOModels;
+using BLLGateway.Gateway;
 using MVC_DGHAdmin.Models;
 using BLLGateway;
 //using System.Web.Services.WebService;

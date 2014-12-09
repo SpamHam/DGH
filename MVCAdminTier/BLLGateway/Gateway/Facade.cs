@@ -1,16 +1,12 @@
 ﻿using BLLGateway.DTOModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using BLLGateway.Gateway.Gateways;
 
-namespace BLLGateway
+namespace BLLGateway.Gateway
 {
     public class Facade
     {
         private IGenericGateway<ProductDTO> _productGateway;
-        private IGenericGateway<OrderDTO> _orderGateway;
+        private IOrderGateway _orderGateway;
         private IGenericGateway<OrderLineDTO> _orderLineGateway;
         private IGenericGateway<CategoryDTO> _categoryGateway;
         private IGenericGateway<CustomerDTO> _customerGateway;
@@ -21,9 +17,9 @@ namespace BLLGateway
             return _productGateway != null ? _productGateway : _productGateway = new GenericGateway<ProductDTO>();
         }
 
-        public IGenericGateway<OrderDTO> GetOrderGateway()
+        public IOrderGateway GetOrderGateway()
         {
-            return _orderGateway != null ? _orderGateway : _orderGateway = new GenericGateway<OrderDTO>();
+            return _orderGateway != null ? _orderGateway : _orderGateway = new OrderGateway();
         }
 
         public IGenericGateway<OrderLineDTO> GetOrderLineGateway()

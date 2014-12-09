@@ -1,10 +1,10 @@
-﻿using BLLGateway.DTOModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using BLLGateway.DTOModels;
 
-namespace BLLGateway
+namespace BLLGateway.Gateway.Gateways
 {
     public class GenericGateway<T> : IGenericGateway<T> where T : IGenericDTO
     {
@@ -12,12 +12,8 @@ namespace BLLGateway
 
         public IEnumerable<T> GetAll(string path)
         {
-            try { 
+
             return GetClient().GetAsync(path).Result.Content.ReadAsAsync<IEnumerable<T>>().Result;
-                }
-            catch(HttpRequestException e){
-                return null;
-            }
         }
 
         public T Get(string path, int id)

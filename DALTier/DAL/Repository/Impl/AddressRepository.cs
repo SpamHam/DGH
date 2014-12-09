@@ -1,37 +1,45 @@
 ﻿using DAL.DTOModels;
+using DAL.Entities_Converter;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DAL.Repository.Impl
 {
-   internal class AddressRepository : IGenericRepository<AddressDTO>
+   internal class AddressRepository : GenericRepository<AddressDTO>
     {
-        public AddressDTO Get(int id)
+
+        public override AddressDTO Get(DGHEntities db, int id)
         {
-            throw new NotImplementedException();
+          return db.Addresses.Select(AddressConverter.ToAddressDTO).FirstOrDefault(x => x.id == id);
         }
 
-        public IEnumerable<AddressDTO> GetAll()
+        public override IEnumerable<AddressDTO> GetAll(DGHEntities db)
         {
-            throw new NotImplementedException();
+            return db.Addresses.Select(AddressConverter.ToAddressDTO).ToList();
         }
 
-        public void Create(AddressDTO type)
+        public override void Add(DGHEntities db, AddressDTO type)
         {
-            throw new NotImplementedException();
+            if (type == null) throw new ArgumentNullException("addressDTO");
+            db.Addresses.Add(AddressConverter.ToAddress(type));
+            db.SaveChanges();
         }
 
-        public void Update(AddressDTO type)
+        public override void Update(DGHEntities db, AddressDTO type)
         {
-            throw new NotImplementedException();
+            if (type == null) throw new ArgumentNullException("addressDTO");
+            db.Entry(AddressConverter.ToAddress(type)).State = EntityState.Modified;
+            db.SaveChanges();
         }
 
-        public void Delete(int id)
+        public override void Delete(DGHEntities db, int id)
         {
-            throw new NotImplementedException();
+            db.Categories.Remove(db.Categories.FirstOrDefault(x => x.id == id));
+            db.SaveChanges();
         }
     }
 }

@@ -7,52 +7,37 @@ using DAL.DTOModels;
 
 namespace DAL.Repository.Impl
 {
-    internal class OrderRepository : IOrderRepository
+    internal class OrderRepository :GenericRepository<OrderDTO>, IOrderRepository
     {
-        public OrderDTO Get(int id)
+        public override OrderDTO Get(DGHEntities db, int id)
         {
-            using (var db = new DGHEntities())
-            {
-                return db.Orders.Select(OrderConverter.toOrderDTO).FirstOrDefault(x => x.id == id);
-            }
+           return db.Orders.Select(OrderConverter.toOrderDTO).FirstOrDefault(x => x.id == id);
         }
 
-        public IEnumerable<OrderDTO> GetAll()
+        public override IEnumerable<OrderDTO> GetAll(DGHEntities db)
         {
-            using (var db = new DGHEntities())
-            {
-                return db.Orders.Select(OrderConverter.toOrderDTO).ToList();
-            }
+            return db.Orders.Select(OrderConverter.toOrderDTO).ToList();
         }
 
-        public void Add(OrderDTO orderDTO)
+        public override void Add(DGHEntities db, OrderDTO orderDTO)
         {
-            using (var db = new DGHEntities())
-            {
                 if (orderDTO == null) throw new ArgumentNullException("orderDTO");
                 db.Orders.Add(OrderConverter.ToOrder(orderDTO));
                 db.SaveChanges();
-            }
         }
 
-        public void Update(OrderDTO orderDTO)
+        public override void Update(DGHEntities db, OrderDTO orderDTO)
         {
-            using (var db = new DGHEntities())
-            {
                 if (orderDTO == null) throw new ArgumentNullException("orderDTO");
                 db.Entry(OrderConverter.ToOrder(orderDTO)).State = EntityState.Modified;
                 db.SaveChanges();
-            }
         }
 
-        public void Delete(int id)
+        public override void Delete(DGHEntities db, int id)
         {
-            using (var db = new DGHEntities())
-            {
                 db.OrderLines.RemoveRange(db.OrderLines.AsEnumerable().Where(x => x.orderId == id));
                 db.Orders.Remove(db.Orders.FirstOrDefault(x => x.id == id));
                 db.SaveChanges();
-            }
         }
 
         public IEnumerable<OrderModelDTO> GetViewModel()
