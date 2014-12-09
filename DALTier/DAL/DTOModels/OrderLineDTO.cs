@@ -1,4 +1,6 @@
 ﻿
+using System.ComponentModel.DataAnnotations;
+
 namespace DAL.DTOModels
 {
     //CRUD functionallity.
@@ -18,16 +20,28 @@ namespace DAL.DTOModels
     //For presentation view.
     public class OrderLineModelDTO
     {
-        public int id { get; set; }
+        [Display(Name = "Identification")]
+        public int Id { get; set; }
 
+        [Display(Name = "Product Identification")]
+        public int ProductId { get; set; }
+
+        [Display(Name = "Order Identification")]
+        public int OrderId { get; set; }
+
+        [Display(Name = "Product name")]
         public string ProductName { get; set; }
 
+        [Display(Name = "Product picture")]
         public string ProductPicture { get; set; }
 
+        [Display(Name = "Product price")]
         public decimal ProductPrice { get; set; }
 
+        [Display(Name = "Amount")]
         public int Amount { get; set; }
 
+        [Display(Name = "Total price")]
         public decimal LineTotal { get; set; }
     }
 }

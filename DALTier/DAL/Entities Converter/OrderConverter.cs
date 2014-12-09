@@ -43,14 +43,15 @@ namespace DAL
             {
                 OrderLine = order.OrderLines.Select(OrderLineConverter.ToOrderlineView).ToList(),
                 CustomerName = order.Customer.firstName + " " + order.Customer.lastName,
-                id = order.id,
+                CustomerId = order.Customer.id,
+                Id = order.id,
                 OrderDate = order.orderDate,
                 SumPurchase = order.sumPurchase,
                 Shipping = order.Shipping,
-                sumShipping = order.sumShipping
+                SumShipping = order.sumShipping
             };
             if (order.shippedDate != null)
-                orderModelDto.shippedDate = (DateTime)order.shippedDate;
+                orderModelDto.ShippedDate = (DateTime)order.shippedDate;
             return orderModelDto;
         }
     }

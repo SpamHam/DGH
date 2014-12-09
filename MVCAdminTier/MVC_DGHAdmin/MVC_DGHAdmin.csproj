@@ -243,7 +243,6 @@
     <Content Include="Views\OrderLine\Create.cshtml" />
     <Content Include="Views\OrderLine\Details.cshtml" />
     <Content Include="Views\OrderLine\Edit.cshtml" />
-    <Content Include="Views\OrderLine\Index.cshtml" />
     <Content Include="Views\Category\Create.cshtml" />
     <Content Include="Views\Category\Delete.cshtml" />
     <Content Include="Views\Category\Details.cshtml" />
