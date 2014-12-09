@@ -20,10 +20,9 @@ namespace MVC_DGHAdmin.Controllers
         private readonly String _url = "product";
 
         // GET: Product
-        [Authorize(Roles = "Admin")]
+       [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
-            var a = User.Identity.AuthenticationType;
             ProductViewModels pvModel = new ProductViewModels();
             pvModel.products = _productGateway.GetAll(_url).ToList();
             pvModel.categories = _categoryGateway.GetAll("category").ToList();
