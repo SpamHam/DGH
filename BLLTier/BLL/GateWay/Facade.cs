@@ -5,16 +5,16 @@ namespace BLL.Gateway
 {
     public class Facade
     {
-        private IGenericGateway<OrderDTO> _orderGateway;
+        private IOrderGateway _orderGateway;
         private IGenericGateway<OrderLineDTO> _orderLineGateway;
         private IGenericGateway<ProductDTO> _productGateway;
         private IGenericGateway<CategoryDTO> _categoryGateway;
         private IGenericGateway<CustomerDTO> _customerGateway;
         private IGenericGateway<AddressDTO> _addressGateway;
         private IGenericGateway<CityDTO> _cityGateway;
-        public IGenericGateway<OrderDTO> GetOrderGateway()
+        public IOrderGateway GetOrderGateway()
         {
-            return _orderGateway != null ? _orderGateway : _orderGateway = new GenericGateway<OrderDTO>();
+            return _orderGateway != null ? _orderGateway : _orderGateway = new OrderGateway();
         }
 
         public IGenericGateway<CityDTO> GetCityGateway()
