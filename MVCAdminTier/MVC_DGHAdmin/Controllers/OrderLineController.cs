@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Net;
 using System.Web.Mvc;
-using BLLGateway;
 using BLLGateway.DTOModels;
 using BLLGateway.Gateway;
 
@@ -11,11 +10,6 @@ namespace MVC_DGHAdmin.Controllers
     {
         private readonly IGenericGateway<OrderLineDTO> _orderLineGateway = new Facade().GetOrderLineGateway();
         private readonly String _url = "orderline";
-
-        public ActionResult Index()
-        {
-            return View(_orderLineGateway.GetAll(_url));
-        }
 
         public ActionResult Details(int? id)
         {
@@ -36,7 +30,7 @@ namespace MVC_DGHAdmin.Controllers
         {
             if (!ModelState.IsValid) return View(orderLineDTO);
             _orderLineGateway.Add(orderLineDTO, _url);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "OrderController");
         }
 
         public ActionResult Edit(int? id)
@@ -53,14 +47,14 @@ namespace MVC_DGHAdmin.Controllers
         {
             if (!ModelState.IsValid) return View(orderLineDTO);
             _orderLineGateway.Update(orderLineDTO, _url);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "OrderController");
         }
 
         public ActionResult Delete(int? id)
         {
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             _orderLineGateway.Delete(_url, (int)id);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "OrderController");
         }
     }
 }
