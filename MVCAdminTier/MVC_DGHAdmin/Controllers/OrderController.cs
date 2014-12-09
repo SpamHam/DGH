@@ -9,16 +9,13 @@ namespace MVC_DGHAdmin.Controllers
 {
     public class OrderController : Controller
     {
-        private readonly IGenericGateway<OrderDTO> _orderGateway = new Facade().GetOrderGateway();
-        private readonly IGenericGateway<OrderLineDTO> _orderLineGateway = new Facade().GetOrderLineGateway();
-        private readonly IGenericGateway<ProductDTO> _productGateway = new Facade().GetProductGateway();
-        private readonly IGenericGateway<CustomerDTO> _customerGateway = new Facade().GetCustomerGateway();
+        private readonly IOrderGateway _orderGateway = new Facade().GetOrderGateway();
 
         private readonly String _url = "order";
 
         public ActionResult Index()
         {
-            return View();
+            return View(_orderGateway.GetAllModels(_url + "/view"));
         }
 
         public ActionResult Details(int? id)
