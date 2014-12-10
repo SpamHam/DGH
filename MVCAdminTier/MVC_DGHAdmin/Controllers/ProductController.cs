@@ -33,7 +33,7 @@ namespace MVC_DGHAdmin.Controllers
         public ActionResult ClientIndex()
         {
             ProductViewModels pvModel = new ProductViewModels();
-            pvModel.products = _productGateway.GetAll(_url).ToList();
+            pvModel.products = _productGateway.GetAll(_url + "/active").ToList();
             pvModel.categories = _categoryGateway.GetAll("category").ToList();
             return View(pvModel);
         }
