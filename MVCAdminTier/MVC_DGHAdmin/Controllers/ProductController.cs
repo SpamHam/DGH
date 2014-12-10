@@ -41,9 +41,6 @@ namespace MVC_DGHAdmin.Controllers
         // GET: Product/Details/5
         public ActionResult Details(int? id)
         {
-            if (User.IsInRole("Admin")) {
-                return View("AdminDetails");
-            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -52,6 +49,10 @@ namespace MVC_DGHAdmin.Controllers
             if (productDTO == null)
             {
                 return HttpNotFound();
+            }
+            if (User.IsInRole("Admin"))
+            {
+                return View("AdminDetails", productDTO);
             }
             return View(productDTO);
         }

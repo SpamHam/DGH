@@ -1,0 +1,49 @@
+﻿@model IEnumerable<MVC_DGHAdmin.Models.ShoppingCartItem>
+
+@{
+    ViewBag.Title = "Shopping Cart";
+    decimal totalPrice = 0;
+    int totalQuantity = 0;
+}
+
+<h2>Shopping Cart</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.productName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnitPrice)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.productName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitPrice)
+            </td>
+        </tr>
+        totalPrice += item.UnitPrice * item.Quantity;
+        totalQuantity += item.Quantity;
+    }
+
+    <tr>
+        <td><b>Total:</b></td>
+        <td>@totalQuantity</td>
+        <td>@totalPrice.ToString("F2")</td>
+    </tr>
+
+</table>
+@Html.ActionLink("Proceed to checkout", "", "", null, new { style = "font-family:verdana; font-size:150%; " })
