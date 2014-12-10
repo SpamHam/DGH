@@ -7,10 +7,12 @@ namespace BLLGateway.Gateway
     {
         private IGenericGateway<ProductDTO> _productGateway;
         private IOrderGateway _orderGateway;
+        private ICityGateway _cityGateway;
         private IGenericGateway<OrderLineDTO> _orderLineGateway;
         private IGenericGateway<CategoryDTO> _categoryGateway;
         private IGenericGateway<CustomerDTO> _customerGateway;
         private IGenericGateway<AddressDTO> _addressGateway;
+       // private IGenericGateway<CityDTO> _cityGateway;
 
         public IGenericGateway<ProductDTO> GetProductGateway()
         {
@@ -38,6 +40,10 @@ namespace BLLGateway.Gateway
         public IGenericGateway<AddressDTO> GetAddressGateway()
         {
             return _addressGateway != null ? _addressGateway : _addressGateway = new GenericGateway<AddressDTO>();
+        }
+        public ICityGateway GetCityGateway()
+        {
+            return _cityGateway != null ? _cityGateway : _cityGateway = new CityGateway();
         } 
     }
 }

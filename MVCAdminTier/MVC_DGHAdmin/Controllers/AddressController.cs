@@ -10,18 +10,21 @@ using BLLGateway.DTOModels;
 using MVC_DGHAdmin.Models;
 using BLLGateway;
 using BLLGateway.Gateway;
+using MVC_DGHAdmin.Models.Orders;
 
 namespace MVC_DGHAdmin.Controllers
 {
     public class AddressController : Controller
     {
         private readonly IGenericGateway<AddressDTO> _addressGateway = new Facade().GetAddressGateway();
-        private readonly String _url = "address";
+        private readonly ICityGateway _cityGateway = new Facade().GetCityGateway();
+        private readonly String _addressUrl = "address";
+        private readonly String _cityUrl = "city";
 
         // GET: Address
         public ActionResult Index()
         {
-            return View(_addressGateway.GetAll(_url).ToList());
+            return View(_addressGateway.GetAll(_addressUrl).ToList());
         }
 
         // GET: Address/Details/5
@@ -31,7 +34,7 @@ namespace MVC_DGHAdmin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AddressDTO addressDTO = _addressGateway.Get(_url, (int)id);
+            AddressDTO addressDTO = _addressGateway.Get(_addressUrl, (int)id);
             if (addressDTO == null)
             {
                 return HttpNotFound();
@@ -42,7 +45,15 @@ namespace MVC_DGHAdmin.Controllers
         // GET: Address/Create
         public ActionResult Create()
         {
-            return View();
+            string b = (string)Session["zipcode"];
+            AddressViewModel model = new AddressViewModel();
+            model.SelectedCity = new CityDTO() { zipCode = "6700" }; //"6700"; //(string)Session["zipcode"];
+            var city = _cityGateway.getCityByZipcode(_cityUrl + "/getCityByZipcode", "6700");
+            model.SelectedCity.City = city.City;
+            model.SelectedCity.id = city.id;
+            
+            
+            return RedirectToAction("Create", "Customer", model);
         }
 
         // POST: Address/Create
@@ -54,7 +65,7 @@ namespace MVC_DGHAdmin.Controllers
         {
             if (ModelState.IsValid)
             {
-                _addressGateway.Add(addressDTO , _url);
+                _addressGateway.Add(addressDTO , _addressUrl);
                 return RedirectToAction("Index");
             }
 
@@ -68,7 +79,7 @@ namespace MVC_DGHAdmin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AddressDTO addressDTO = _addressGateway.Get(_url, (int)id);
+            AddressDTO addressDTO = _addressGateway.Get(_addressUrl, (int)id);
             if (addressDTO == null)
             {
                 return HttpNotFound();
@@ -85,7 +96,7 @@ namespace MVC_DGHAdmin.Controllers
         {
             if (ModelState.IsValid)
             {
-                _addressGateway.Update(addressDTO, _url);
+                _addressGateway.Update(addressDTO, _addressUrl);
                 return RedirectToAction("Index");
             }
             return View(addressDTO);
@@ -98,7 +109,7 @@ namespace MVC_DGHAdmin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AddressDTO addressDTO = _addressGateway.Get(_url, (int)id);
+            AddressDTO addressDTO = _addressGateway.Get(_addressUrl, (int)id);
             if (addressDTO == null)
             {
                 return HttpNotFound();
@@ -111,8 +122,8 @@ namespace MVC_DGHAdmin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            AddressDTO addressDTO = _addressGateway.Get(_url, (int) id);
-            _addressGateway.Delete(_url , id);
+            AddressDTO addressDTO = _addressGateway.Get(_addressUrl, (int) id);
+            _addressGateway.Delete(_addressUrl , id);
             
             return RedirectToAction("Index");
         }

@@ -101,6 +101,7 @@
       <DependentUpon>DGHModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\ICityRepository.cs" />
     <Compile Include="Repository\IGenericRepository.cs" />
     <Compile Include="Repository\Impl\AddressRepository.cs" />
     <Compile Include="Repository\Impl\CategoryRepository.cs" />

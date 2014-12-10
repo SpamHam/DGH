@@ -44,7 +44,7 @@ namespace MVC_DGHAdmin.Controllers
         // GET: Customer/Create
         public ActionResult Create()
         {
-            return RedirectToAction("Create", "Address");
+            return RedirectToAction("SelectCity", "City");
         }
 
         // POST: Customer/Create
