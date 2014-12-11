@@ -10,6 +10,7 @@ using BLLGateway.DTOModels;
 using BLLGateway.Gateway;
 using MVC_DGHAdmin.Models;
 using BLLGateway;
+using System.Web.Security;
 
 namespace MVC_DGHAdmin.Controllers
 {
@@ -32,7 +33,7 @@ namespace MVC_DGHAdmin.Controllers
         public ActionResult ClientIndex()
         {
             ProductViewModels pvModel = new ProductViewModels();
-            pvModel.products = _productGateway.GetAll(_url).ToList();
+            pvModel.products = _productGateway.GetAll(_url + "/active").ToList();
             pvModel.categories = _categoryGateway.GetAll("category").ToList();
             return View(pvModel);
         }
@@ -48,6 +49,10 @@ namespace MVC_DGHAdmin.Controllers
             if (productDTO == null)
             {
                 return HttpNotFound();
+            }
+            if (User.IsInRole("Admin"))
+            {
+                return View("AdminDetails", productDTO);
             }
             return View(productDTO);
         }

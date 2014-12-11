@@ -6,14 +6,20 @@ namespace BLLGateway.DTOModels
     //CRUD functionallity.
     public class OrderLineDTO : IGenericDTO
     {
+        [Display(Name = "Order identification")]
         public int OrderId { get; set; }
-
+                
+        [Display(Name = "Product identification")]
         public int ProductId { get; set; }
 
+        [Display(Name = "Amount")]
         public int Amount { get; set; }
 
+                       
+        [Display(Name = "Total")]
         public decimal LineTotal { get; set; }
 
+        [Display(Name = "Identification")]
         public int id { get; set; }
     }
 
