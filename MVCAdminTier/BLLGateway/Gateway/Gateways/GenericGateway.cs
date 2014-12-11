@@ -8,9 +8,15 @@ namespace BLLGateway.Gateway.Gateways
 {
     public class GenericGateway<T> : IGenericGateway<T> where T : IGenericDTO
     {
-        private readonly Uri _uri = new Uri("http://localhost:2851/");
+        private readonly Uri _uri = new Uri("http://localhost:15631/");
 
         public IEnumerable<T> GetAll(string path)
+        {
+
+            return GetClient().GetAsync(path).Result.Content.ReadAsAsync<IEnumerable<T>>().Result;
+        }
+
+        public IEnumerable<T> GetAllActive(string path)
         {
 
             return GetClient().GetAsync(path).Result.Content.ReadAsAsync<IEnumerable<T>>().Result;

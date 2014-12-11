@@ -10,6 +10,7 @@ using BLLGateway.DTOModels;
 using BLLGateway.Gateway;
 using MVC_DGHAdmin.Models;
 using BLLGateway;
+using System.Web.Security;
 
 namespace MVC_DGHAdmin.Controllers
 {
@@ -20,10 +21,19 @@ namespace MVC_DGHAdmin.Controllers
         private readonly String _url = "product";
 
         // GET: Product
+       [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
             ProductViewModels pvModel = new ProductViewModels();
             pvModel.products = _productGateway.GetAll(_url).ToList();
+            pvModel.categories = _categoryGateway.GetAll("category").ToList();
+            return View(pvModel);
+        }
+
+        public ActionResult ClientIndex()
+        {
+            ProductViewModels pvModel = new ProductViewModels();
+            pvModel.products = _productGateway.GetAll(_url + "/active").ToList();
             pvModel.categories = _categoryGateway.GetAll("category").ToList();
             return View(pvModel);
         }
@@ -40,10 +50,15 @@ namespace MVC_DGHAdmin.Controllers
             {
                 return HttpNotFound();
             }
+            if (User.IsInRole("Admin"))
+            {
+                return View("AdminDetails", productDTO);
+            }
             return View(productDTO);
         }
 
         // GET: Product/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             ViewBag.dropCategories = new SelectList(_categoryGateway.GetAll("category").ToList(), "id", "categoryName");
@@ -65,6 +80,7 @@ namespace MVC_DGHAdmin.Controllers
         }
 
         // GET: Product/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -95,6 +111,7 @@ namespace MVC_DGHAdmin.Controllers
         }
 
         // GET: Product/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

@@ -1,10 +1,9 @@
 ﻿@model BLLGateway.DTOModels.ProductDTO
-
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "AdminDetails";
 }
 
-<h2>Details</h2>
+<h2>AdminDetails</h2>
 
 <div>
     <h4>ProductDTO</h4>
@@ -77,6 +76,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Add to shopping cart", "Add", "ShoppingCart", new { id = Model.id }, new { style = "font-family:verdana; font-size:150%; " }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

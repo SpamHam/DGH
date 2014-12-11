@@ -1,0 +1,43 @@
+﻿@model MVC_DGHAdmin.Models.ProductViewModels
+@{
+    ViewBag.Title = "ClientIndex";
+}
+
+<h2>ClientIndex</h2>
+
+<div class="table-responsive col-md-12">
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+            <tr>
+                <th> @Html.DisplayNameFor(model => model.product.name)</th>
+                <th> @Html.DisplayNameFor(model => model.product.productNumber)</th>
+                <th> @Html.DisplayNameFor(model => model.product.color)</th>
+                <th>@Html.DisplayNameFor(model => model.product.stock)</th>
+                <th>@Html.DisplayNameFor(model => model.product.salesPrice)</th>
+                <th>@Html.DisplayNameFor(model => model.category.categoryName)</th>
+            </tr>
+        </thead>
+        <tbody>
+           @foreach (var item in Model.products)
+           {
+
+                <tr onclick="window.location.href = '@Url.Action("Details",  new { id = item.id})'">
+
+                    <td class="col-md-7">@item.name</td>
+                    <td class="col-md-1">@item.productNumber</td>
+                    <td class="col-md-1">@item.color</td>
+                    <td class="col-md-1">@item.stock</td>
+                    <td class="col-md-1">@item.salesPrice</td>
+                    @foreach (var itemC in Model.categories)
+                    {
+                        if (itemC.id == item.categoryId)
+                        {
+                        <td class="col-md-1">@itemC.categoryName</td>
+                        }
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

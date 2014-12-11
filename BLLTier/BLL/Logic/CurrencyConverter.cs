@@ -11,10 +11,10 @@ namespace BLL.Logic
     {
         private static string path = "http://www.nationalbanken.dk/_vti_bin/DN/DataService.svc/CurrencyRatesXML?lang=da";
 
-        public static decimal FromDKToEuro(decimal theValue)
+        public static decimal FromDKToEuro(decimal theValue, string xmlPath = null)
         {
             XmlDocument theDocument = new XmlDocument();
-            theDocument.Load(path);
+            theDocument.Load(xmlPath ?? path);
             XmlNode node = theDocument.SelectSingleNode("//currency[@code='EUR']");
             decimal EuroInDKK = Convert.ToDecimal(node.Attributes["rate"].Value) / 100;
             return (decimal.Round((theValue / EuroInDKK), 2));
