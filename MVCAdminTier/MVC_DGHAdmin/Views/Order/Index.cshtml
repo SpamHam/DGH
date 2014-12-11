@@ -13,13 +13,10 @@
 <thead>
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.CustomerName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Shipping)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SumShipping)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.OrderDate)
@@ -31,6 +28,12 @@
             @Html.DisplayNameFor(model => model.SumPurchase)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.Shipping)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SumShipping)
+        </th>
+        <th>
         </th>
     </tr>
 </thead>
@@ -38,14 +41,11 @@
         @foreach (var item in Model)
         {
             <tr>
+                <th>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </th>
                 <td>
                     @Html.DisplayFor(modelItem => item.CustomerName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Shipping)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SumShipping)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.OrderDate)
@@ -55,6 +55,12 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.SumPurchase)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Shipping)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SumShipping)
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
@@ -102,12 +108,17 @@
                             @Html.DisplayFor(modelItem => lineItem.LineTotal)
                         </td>
                         <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = lineItem.Id }) |
-                            @Html.ActionLink("Details", "Details", new { id = lineItem.Id }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = lineItem.Id })
+                            @Html.ActionLink("Edit", "Edit","Orderline", new { id = lineItem.Id }, null) |
+                            @Html.ActionLink("Details", "Details", "Orderline", new { id = lineItem.Id }, null) |
+                            @Html.ActionLink("Delete", "Delete", "Orderline", new { id = lineItem.Id }, null)
                         </td>
                     </tr>
                 }
+                <tr>
+                    <td>
+                        @Html.ActionLink("Create new line", "Create", "Orderline", new { id = item.Id }, null)
+                    </td>
+                </tr>
             </tbody>
         </table>
             }
