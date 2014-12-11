@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<exchangerates type="Valutakurser" author="Danmarks Nationalbank" refcur="DKK" refamt="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <dailyrates id="2014-12-08">
+    <currency code="BAD" desc="Euro" rate="744,01" />
+  </dailyrates>
+</exchangerates>
