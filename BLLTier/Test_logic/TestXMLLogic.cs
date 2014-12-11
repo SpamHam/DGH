@@ -28,7 +28,7 @@ namespace Test_logic
         [Test]
         public void testUrlServie()
         {
-            Assert.IsTrue(CurrencyConverter.isServiceUp("http://www.nationalbanken.dk/_vti_bin/DN/DataService.svc/CurrencyRatesXML?lang=da");
+            Assert.IsTrue(CurrencyConverter.isServiceUp("http://www.nationalbanken.dk/_vti_bin/DN/DataService.svc/CurrencyRatesXML?lang=da"));
         }
 
         [Test]
