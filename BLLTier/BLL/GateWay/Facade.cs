@@ -1,4 +1,5 @@
 ﻿using BLL.DTOModels;
+using BLL.GateWay;
 using BLL.GateWay.Gateways;
 
 namespace BLL.Gateway
@@ -11,15 +12,15 @@ namespace BLL.Gateway
         private IGenericGateway<CategoryDTO> _categoryGateway;
         private IGenericGateway<CustomerDTO> _customerGateway;
         private IGenericGateway<AddressDTO> _addressGateway;
-        private IGenericGateway<CityDTO> _cityGateway;
+        private ICityGateway _cityGateway;
         public IOrderGateway GetOrderGateway()
         {
             return _orderGateway != null ? _orderGateway : _orderGateway = new OrderGateway();
         }
 
-        public IGenericGateway<CityDTO> GetCityGateway()
+        public ICityGateway GetCityGateway()
         {
-            return _cityGateway != null ? _cityGateway : _cityGateway = new GenericGateway<CityDTO>();
+            return _cityGateway != null ? _cityGateway : _cityGateway = new CityGateway(); 
         }
         public IGenericGateway<OrderLineDTO> GetOrderLineGateway()
         {

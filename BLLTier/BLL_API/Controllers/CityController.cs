@@ -59,5 +59,22 @@ namespace BLL_API.Controllers
         {
             return _facade.GetCityGateway().Delete(_url, id);
         }
+
+        [HttpGet]
+        [Route("getCityByZipcode/{zipcode}")]
+        public HttpResponseMessage getCityByZipcode(string zipcode)
+        {
+
+            var city = _facade.GetCityGateway().getCityByZipcode(_url + "/getCityByZipcode", zipcode);
+            if (city != null)
+            {
+                return Request.CreateResponse<CityDTO>(HttpStatusCode.OK, city);
+            }
+            var response = new HttpResponseMessage(HttpStatusCode.NotFound)
+            {
+                Content = new StringContent("City not found.")
+            };
+            throw new HttpResponseException(response);
+        }
     }
 }
