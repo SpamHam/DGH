@@ -41,10 +41,15 @@ namespace MVC_DGHAdmin.Controllers
             return View(model);
         }
 
+        public ActionResult CreateCity()
+        {
+            return RedirectToAction("SelectCity", "City");
+        }
+
         // GET: Customer/Create
         public ActionResult Create()
         {
-            return RedirectToAction("SelectCity", "City");
+            return View();
         }
 
         // POST: Customer/Create

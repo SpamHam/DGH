@@ -10,7 +10,7 @@ using BLLGateway.DTOModels;
 using MVC_DGHAdmin.Models;
 using BLLGateway;
 using BLLGateway.Gateway;
-using MVC_DGHAdmin.Models.Orders;
+
 
 namespace MVC_DGHAdmin.Controllers
 {
@@ -46,14 +46,14 @@ namespace MVC_DGHAdmin.Controllers
         public ActionResult Create()
         {
             string b = (string)Session["zipcode"];
-            AddressViewModel model = new AddressViewModel();
-            model.SelectedCity = new CityDTO() { zipCode = "6700" }; //"6700"; //(string)Session["zipcode"];
-            var city = _cityGateway.getCityByZipcode(_cityUrl + "/getCityByZipcode", "6700");
+            AddressCityCustomerViewModel model = new AddressCityCustomerViewModel();
+            model.SelectedCity = new CityDTO() { zipCode = (string)Session["zipcode"]}; 
+            var city = _cityGateway.getCityByZipcode(_cityUrl + "/getCityByZipcode", (string)Session["zipcode"]);
             model.SelectedCity.City = city.City;
             model.SelectedCity.id = city.id;
-            
-            
-            return RedirectToAction("Create", "Customer", model);
+
+            return View(model);
+            //return RedirectToAction("Create", "Customer", model);
         }
 
         // POST: Address/Create
@@ -61,15 +61,17 @@ namespace MVC_DGHAdmin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,streetName,streetNumber,cityId")] AddressDTO addressDTO)
+        public ActionResult Create(AddressCityCustomerViewModel model)//[Bind(Include = "id,streetName,streetNumber,cityId")] AddressDTO addressDTO)
         {
             if (ModelState.IsValid)
             {
-                _addressGateway.Add(addressDTO , _addressUrl);
+                AddressDTO addressDTO = new AddressDTO() { streetName = model.SelectedAddress.streetName, streetNumber = model.SelectedAddress.streetNumber, cityId = model.SelectedCity.id };
+                string s = model.SelectedCity.City;
+                _addressGateway.Add(addressDTO, _addressUrl);
                 return RedirectToAction("Index");
             }
 
-            return View(addressDTO);
+            return View(model);
         }
 
         // GET: Address/Edit/5

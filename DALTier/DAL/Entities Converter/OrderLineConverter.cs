@@ -34,7 +34,9 @@ namespace DAL
         {
             return new OrderLineModelDTO()
             {
-                id = orderline.id,
+                Id = orderline.id,
+                OrderId = orderline.orderId,
+                ProductId = orderline.productId,
                 ProductName = orderline.Product.name,
                 ProductPicture = orderline.Product.imageUrl,
                 ProductPrice = orderline.Product.salesPrice,
