@@ -37,9 +37,10 @@ namespace Test_logic
             }
         }
         [Test]
-        public void emptyList()
+        public void nullRef()
         {
-
+          var ex = Assert.Catch<Exception>(() => ProductSorter.getActiveProducts(null));
+          StringAssert.Contains("Could not load products", ex.Message);   
         }
         private List<ProductDTO> GetTestProducts()
         {

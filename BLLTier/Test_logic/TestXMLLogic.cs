@@ -35,7 +35,7 @@ namespace Test_logic
         public void goodXML()
         {
            var result = CurrencyConverter.FromDKToEuro(744.01M, "..\\..\\xmlDummies\\GoodXML.xml");
-           Assert.AreEqual(100.0M, result); //..\..\TargetFolder\file.xml"
+           Assert.AreEqual(100.0M, result);
         }
 
         [Test]
