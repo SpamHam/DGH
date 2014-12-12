@@ -59,6 +59,7 @@
     <Compile Include="GateWay\Gateways\OrderGateway.cs" />
     <Compile Include="GateWay\IOrderGateway.cs" />
     <Compile Include="Logic\CurrencyConverter.cs" />
+    <Compile Include="Logic\OrderSummarizer.cs" />
     <Compile Include="Logic\ProductSorter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
