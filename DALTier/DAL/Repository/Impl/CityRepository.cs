@@ -9,7 +9,7 @@ using System.Data.Entity;
 
 namespace DAL.Repository.Impl
 {
-    internal class CityRepository : GenericRepository<CityDTO>
+    internal class CityRepository : GenericRepository<CityDTO>, ICityRepository
     {
         
         public override CityDTO Get(DGHEntities db, int id)
@@ -40,6 +40,14 @@ namespace DAL.Repository.Impl
             if (cityDTO == null) throw new ArgumentNullException("cityDTO");
             db.Cities.Add(CityConverter.toCity(cityDTO));
             db.SaveChanges();
+        }
+
+        public CityDTO getCityByZipcode(string zipcode)
+        {
+            using (var db = new DGHEntities())
+            {
+                return db.Cities.Select(CityConverter.toCityDTO).FirstOrDefault(x => x.zipCode.Equals(zipcode));
+            }
         }
     }
 }

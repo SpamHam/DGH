@@ -113,5 +113,21 @@ namespace DAL_API.Controllers
             return response;
 
         }
+        [HttpGet]
+        [Route("getCityByZipcode/{zipcode}")]
+        public HttpResponseMessage getCityByZipcode(string zipcode)
+        {
+           
+            var city = _facade.GetCityRepository().getCityByZipcode(zipcode);
+            if (city != null)
+            {
+                return Request.CreateResponse<CityDTO>(HttpStatusCode.OK, city);
+            }
+            var response = new HttpResponseMessage(HttpStatusCode.NotFound)
+            {
+                Content = new StringContent("City not found.")
+            };
+            throw new HttpResponseException(response);
+        }
     }
 }
