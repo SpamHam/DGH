@@ -20,13 +20,14 @@ namespace BLL.Logic
 
         public static OrderDTO OrderSum(OrderDTO order, IEnumerable<OrderLineDTO> allOrderline, IEnumerable<ProductDTO> allProduct)
         {
-            order.SumPurchase = 0;
             if (order == null) throw new ArgumentNullException("order");
             if (allOrderline == null) throw new ArgumentNullException("allOrderline");
             if (allProduct == null) throw new ArgumentNullException("allProduct");
 
+            order.SumPurchase = 0;
+
             var orderlines = allOrderline.Where(x => x.OrderId == order.id).Select(_orderlines => OrderlineSum(_orderlines, allProduct));
-            if (orderlines == null) throw new Exception("This order doesn't have any orderlines.");
+            if (!orderlines.Any()) throw new Exception("This order doesn't have any orderlines.");
 
             foreach (var item in orderlines)
                 order.SumPurchase += item.LineTotal;
