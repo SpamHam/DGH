@@ -34,15 +34,15 @@ namespace Test_logic
         [Test]
         public void goodXML()
         {
-           var result = CurrencyConverter.FromDKToEuro(744.01M, "C:\\Users\\Claus\\Source\\Repos\\DGH\\DGH\\BLLTier\\Test_logic\\xmlDummies\\Good XML.xml");
-           Assert.AreEqual(100.0M, result);
+           var result = CurrencyConverter.FromDKToEuro(744.01M, "..\\..\\xmlDummies\\GoodXML.xml");
+           Assert.AreEqual(100.0M, result); //..\..\TargetFolder\file.xml"
         }
 
         [Test]
         public void badXML()
         {
-            var ex = Assert.Catch<Exception>(() => CurrencyConverter.FromDKToEuro(744.01M, "C:\\Users\\Claus\\Source\\Repos\\DGH\\DGH\\BLLTier\\Test_logic\\xmlDummies\\Bad XML.xml"));
-            StringAssert.Contains("No such currency exists", ex.Message);
+            var ex = Assert.Catch<Exception>(() => CurrencyConverter.FromDKToEuro(744.01M, "..\\..\\xmlDummies\\BadXML.xml"));
+            StringAssert.Contains("No such currency exists", ex.Message);   
         }
 
         [Test]
