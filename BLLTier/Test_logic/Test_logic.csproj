@@ -85,12 +85,11 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Content Include="xmlDummies\Bad XML.xml" />
-    <Content Include="xmlDummies\Empty XML.xml" />
-    <Content Include="xmlDummies\Full XML.xml" />
-    <Content Include="xmlDummies\Good XML.xml" />
+    <Content Include="xmlDummies\BadXML.xml" />
+    <Content Include="xmlDummies\EmptyXML.xml" />
+    <Content Include="xmlDummies\FullXML.xml" />
+    <Content Include="xmlDummies\GoodXML.xml" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

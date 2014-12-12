@@ -36,7 +36,11 @@ namespace Test_logic
                 Assert.IsTrue(f.active);
             }
         }
+        [Test]
+        public void emptyList()
+        {
 
+        }
         private List<ProductDTO> GetTestProducts()
         {
             var testProducts = new List<ProductDTO>();
