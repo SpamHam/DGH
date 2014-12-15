@@ -36,7 +36,12 @@ namespace Test_logic
                 Assert.IsTrue(f.active);
             }
         }
-
+        [Test]
+        public void nullRef()
+        {
+          var ex = Assert.Catch<Exception>(() => ProductSorter.getActiveProducts(null));
+          StringAssert.Contains("Could not load products", ex.Message);   
+        }
         private List<ProductDTO> GetTestProducts()
         {
             var testProducts = new List<ProductDTO>();

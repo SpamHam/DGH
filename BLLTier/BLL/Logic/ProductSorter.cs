@@ -7,16 +7,20 @@ using System.Threading.Tasks;
 
 namespace BLL.Logic
 {
-   public class ProductSorter
+    public class ProductSorter
     {
-        public static IEnumerable<ProductDTO> getActiveProducts(IEnumerable<ProductDTO> allProducts) 
+        public static IEnumerable<ProductDTO> getActiveProducts(IEnumerable<ProductDTO> allProducts)
         {
-            IEnumerable<ProductDTO> activeProducts = new ProductDTO[]{};
-            foreach (var prod in allProducts)
-            {   
-                if (prod.active) activeProducts = activeProducts.Concat(new [] {prod});
+            try
+            {
+                IEnumerable<ProductDTO> activeProducts = new ProductDTO[] { };
+                foreach (var prod in allProducts)
+                {
+                    if (prod.active) activeProducts = activeProducts.Concat(new[] { prod });
+                }
+                return activeProducts;
             }
-            return activeProducts;
+            catch (NullReferenceException) { throw new Exception("Could not load products"); }
         }
     }
 }
