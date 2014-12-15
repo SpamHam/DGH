@@ -9,6 +9,7 @@ using System.Web.Http;
 
 namespace BLL_API.Controllers
 {
+     [RoutePrefix("address")]
     public class AddressController : ApiController
     {
          private readonly Facade _facade;
@@ -53,6 +54,23 @@ namespace BLL_API.Controllers
         public HttpResponseMessage Delete(int id)
         {
             return _facade.GetAddressGateway().Delete(_url, id);
+        }
+
+        [HttpGet]
+        [Route("getLatestAddress")]
+        public HttpResponseMessage getLatestAddress()
+        {
+
+            var address = _facade.GetAddressGateway().getLatestAddress(_url + "/getLatestAddress");//getAddressByNameAndNumber(name, number);
+            if (address != null)
+            {
+                return Request.CreateResponse<AddressDTO>(HttpStatusCode.OK, address);
+            }
+            var response = new HttpResponseMessage(HttpStatusCode.NotFound)
+            {
+                Content = new StringContent("address not found.")
+            };
+            throw new HttpResponseException(response);
         }
     }
 }

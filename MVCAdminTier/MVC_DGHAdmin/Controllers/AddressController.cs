@@ -66,9 +66,14 @@ namespace MVC_DGHAdmin.Controllers
             if (ModelState.IsValid)
             {
                 AddressDTO addressDTO = new AddressDTO() { streetName = model.SelectedAddress.streetName, streetNumber = model.SelectedAddress.streetNumber, cityId = model.SelectedCity.id };
-                string s = model.SelectedCity.City;
+                Session["Address"] = addressDTO;
+                //string s = model.SelectedCity.City;
+                //AddressCityCustomerViewModel contentModel = new AddressCityCustomerViewModel();
+                //contentModel.SelectedAddress = new AddressDTO() { streetName = model.SelectedAddress.streetName, streetNumber = model.SelectedAddress.streetNumber };
+                //contentModel.SelectedCity = new CityDTO() {id = model.SelectedCity.id, City = model.SelectedCity.City, zipCode = model.SelectedCity.zipCode };
+                
                 _addressGateway.Add(addressDTO, _addressUrl);
-                return RedirectToAction("Index");
+                return RedirectToAction("Create", "Customer");
             }
 
             return View(model);

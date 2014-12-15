@@ -17,7 +17,11 @@ namespace MVC_DGHAdmin.Controllers
     {
 
         private readonly IGenericGateway<CustomerDTO> _customerGateway = new Facade().GetCustomerGateway();
+        private readonly ICityGateway _cityGateway = new Facade().GetCityGateway();
+        private readonly IAddressGateway _addressGateway = new Facade().GetAddressGateway();
         private readonly String _url = "customer";
+        private readonly String _cityUrl = "city";
+        private readonly String _addressyUrl = "address";
         // GET: Customer
         public ActionResult Index()
         {
@@ -49,7 +53,12 @@ namespace MVC_DGHAdmin.Controllers
         // GET: Customer/Create
         public ActionResult Create()
         {
-            return View();
+            AddressCityCustomerViewModel model = new AddressCityCustomerViewModel();
+            AddressDTO addressModel = new AddressDTO();
+            addressModel = (AddressDTO)Session["Address"];
+            model.SelectedAddress = _addressGateway.getLatestAddress(_addressyUrl + "/getLatestAddress");
+            model.SelectedCity = _cityGateway.getCityByZipcode(_cityUrl + "/getCityByZipcode", (string)Session["zipcode"]);
+            return View(model);
         }
 
         // POST: Customer/Create
@@ -57,8 +66,9 @@ namespace MVC_DGHAdmin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,phone,deliveryAddressId,invoiceAddressId,email,firstName,lastName")] CustomerDTO customerDTO)
+        public ActionResult Create(AddressCityCustomerViewModel model)
         {
+            CustomerDTO customerDTO = new CustomerDTO() {email = model.SelectedCustomer.email, invoiceAddressId = model.SelectedAddress.id, firstName = model.SelectedCustomer.firstName, lastName = model.SelectedCustomer.lastName, phone = model.SelectedCustomer.phone };
             if (!ModelState.IsValid) return View(customerDTO);
             {
                 _customerGateway.Add(customerDTO, _url);

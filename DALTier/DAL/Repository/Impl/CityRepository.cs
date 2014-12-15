@@ -47,6 +47,7 @@ namespace DAL.Repository.Impl
             using (var db = new DGHEntities())
             {
                 return db.Cities.Select(CityConverter.toCityDTO).FirstOrDefault(x => x.zipCode.Equals(zipcode));
+               
             }
         }
     }

@@ -13,7 +13,8 @@ namespace DAL
         private IGenericRepository<CategoryDTO> _categoryRepository;
         private IGenericRepository<CustomerDTO> _customerRepository;
        // private IGenericRepository<CityDTO> _cityRepository;
-        private IGenericRepository<AddressDTO> _addressRepository;
+        //private IGenericRepository<AddressDTO> _addressRepository;
+        private IAddressRepository _addressRepository;
 
         public Facade()
         {
@@ -44,7 +45,7 @@ namespace DAL
         {
             return _cityRepository != null ? _cityRepository : _cityRepository = new CityRepository();
         }
-        public IGenericRepository<AddressDTO> GetAddressRepository()
+        public IAddressRepository GetAddressRepository()
         {
             return _addressRepository != null ? _addressRepository : _addressRepository = new AddressRepository();
         }

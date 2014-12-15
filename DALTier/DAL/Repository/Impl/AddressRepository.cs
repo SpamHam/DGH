@@ -9,12 +9,14 @@ using System.Threading.Tasks;
 
 namespace DAL.Repository.Impl
 {
-   internal class AddressRepository : GenericRepository<AddressDTO>
+   internal class AddressRepository : GenericRepository<AddressDTO>, IAddressRepository
     {
 
         public override AddressDTO Get(DGHEntities db, int id)
         {
           return db.Addresses.Select(AddressConverter.ToAddressDTO).FirstOrDefault(x => x.id == id);
+           //return db.Addresses.Select(AddressConverter.ToAddressDTO).LastOrDefault(x => x.id == id);
+
         }
 
         public override IEnumerable<AddressDTO> GetAll(DGHEntities db)
@@ -40,6 +42,22 @@ namespace DAL.Repository.Impl
         {
             db.Categories.Remove(db.Categories.FirstOrDefault(x => x.id == id));
             db.SaveChanges();
+        }
+
+        public AddressDTO getAddressByNameAndNumber(string name, string number)
+        {
+            using (var db = new DGHEntities())
+            {
+                return db.Addresses.Select(AddressConverter.ToAddressDTO).FirstOrDefault(x => x.streetName.Equals(name) && x.streetNumber.Equals(number));
+                
+            }
+        }
+
+        public AddressDTO getLatestAddress()
+        {
+            using (var db = new DGHEntities()){
+                return db.Addresses.Select(AddressConverter.ToAddressDTO).LastOrDefault();
+                }
         }
     }
 }

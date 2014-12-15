@@ -15,8 +15,8 @@ namespace DAL.Entities_Converter
             {
                 id = addressDTO.id,
                 streetName = addressDTO.streetName,
-                streetNumber = addressDTO.streetNumber
-
+                streetNumber = addressDTO.streetNumber,
+                cityId = addressDTO.cityId
             };
             return address;
         }
@@ -26,7 +26,8 @@ namespace DAL.Entities_Converter
             {
                 id = address.id,
                 streetName = address.streetName,
-                streetNumber = address.streetNumber
+                streetNumber = address.streetNumber,
+                cityId = address.cityId
             };
 
             return addressDTO;
