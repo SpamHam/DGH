@@ -22,14 +22,37 @@ namespace DAL.Repository.Impl
         public override void Add(DGHEntities db, OrderLineDTO orderLineDTO)
         {
             if (orderLineDTO == null) throw new ArgumentNullException("orderLineDTO");
-            db.OrderLines.Add(OrderLineConverter.ToOrderLine(orderLineDTO));
+            var oldOrderline = db.OrderLines.Select(OrderLineConverter.ToOrderLineDTO).FirstOrDefault(x => x.OrderId == orderLineDTO.OrderId && x.ProductId == orderLineDTO.ProductId);
+            if (oldOrderline != null)
+            {
+                oldOrderline.Amount = orderLineDTO.Amount + oldOrderline.Amount;
+                oldOrderline.LineTotal = orderLineDTO.LineTotal + oldOrderline.LineTotal;
+            
+                db.Entry(OrderLineConverter.ToOrderLine(oldOrderline)).State = EntityState.Modified;
+            }
+            else
+            {
+                db.OrderLines.Add(OrderLineConverter.ToOrderLine(orderLineDTO));
+            }
             db.SaveChanges();
         }
 
         public override void Update(DGHEntities db, OrderLineDTO orderLineDTO)
         {
             if (orderLineDTO == null) throw new ArgumentNullException("orderLineDTO");
-            db.Entry(OrderLineConverter.ToOrderLine(orderLineDTO)).State = EntityState.Modified;
+            var oldOrderline = db.OrderLines.Select(OrderLineConverter.ToOrderLineDTO).FirstOrDefault(x => x.OrderId == orderLineDTO.OrderId && x.ProductId == orderLineDTO.ProductId);
+            if (oldOrderline != null)
+            {
+                oldOrderline.Amount = orderLineDTO.Amount + oldOrderline.Amount;
+                oldOrderline.LineTotal = orderLineDTO.LineTotal + oldOrderline.LineTotal;
+
+                db.Entry(OrderLineConverter.ToOrderLine(oldOrderline)).State = EntityState.Modified;
+                db.OrderLines.Remove(db.OrderLines.FirstOrDefault(x => x.id == orderLineDTO.id));
+            }
+            else
+            {
+                db.Entry(OrderLineConverter.ToOrderLine(orderLineDTO)).State = EntityState.Modified;                
+            }
             db.SaveChanges();
         }
 

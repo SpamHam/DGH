@@ -26,7 +26,7 @@ namespace BLL.Logic
 
             order.SumPurchase = 0;
 
-            var orderlines = allOrderline.Where(x => x.OrderId == order.id).Select(_orderlines => OrderlineSum(_orderlines, allProduct));
+            var orderlines = allOrderline.ToList().Where(x => x.OrderId == order.id).Select(_orderlines => OrderlineSum(_orderlines, allProduct));
             if (!orderlines.Any()) throw new Exception("This order doesn't have any orderlines.");
 
             foreach (var item in orderlines)

@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Web.Http;
 using BLL.DTOModels;
 using BLL.Gateway;
+using BLL.Logic;
 
 namespace BLL_API.Controllers
 {
@@ -45,7 +46,10 @@ namespace BLL_API.Controllers
         [Route("")]
         public HttpResponseMessage Put(OrderDTO order)
         {
-            return _facade.GetOrderGateway().Update(order, _url);
+            return _facade.GetOrderGateway().Update(OrderSummarizer.OrderSum(
+                order,
+                _facade.GetOrderLineGateway().GetAll("orderline"),
+                _facade.GetProductGateway().GetAll("product")), _url);
         }
 
         [HttpDelete]
@@ -60,6 +64,7 @@ namespace BLL_API.Controllers
         public IEnumerable<OrderModelDTO> GetAllModels()
         {
             return _facade.GetOrderGateway().GetAllModels(_url + "/view");
-        } 
+        }
+
     }
 }

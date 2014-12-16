@@ -45,23 +45,24 @@ namespace DAL_API.Controllers
         [Route("")]
         public HttpResponseMessage Post(OrderLineDTO orderLine)
         {
-            try
-            {
+            //try
+            //{
                 _facade.GetOrderLineRepository().Create(orderLine);
+                
 
                 var response = Request.CreateResponse<OrderLineDTO>(HttpStatusCode.Created, orderLine);
                 var uri = Url.Link("GetOrderLineId", new { orderLine.id });
                 response.Headers.Location = new Uri(uri);
                 return response;
-            }
-            catch (Exception)
-            {
-                var response = new HttpResponseMessage(HttpStatusCode.Conflict)
-                {
-                    Content = new StringContent("could not add product to db")
-                };
-                throw new HttpResponseException(response);
-            }
+            //}
+            //catch (Exception)
+            //{
+            //    var response = new HttpResponseMessage(HttpStatusCode.Conflict)
+            //    {
+            //        Content = new StringContent("could not add product to db")
+            //    };
+            //    throw new HttpResponseException(response);
+            //}
             }
 
         [HttpPut]

@@ -50,7 +50,7 @@ namespace MVC_DGHAdmin.Controllers
         {
             return View(new OrderViewModels
             {
-                DropCustomer = new SelectList(_customerGateway.GetAll("customer").ToList(), "id", "firstName,lastName" ),
+                DropCustomer = new SelectList(_customerGateway.GetAll("customer").ToList(), "id", "lastname" ),
                 Customer = _customerGateway.GetAll("customer")
             });
         }
@@ -59,10 +59,10 @@ namespace MVC_DGHAdmin.Controllers
         [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CustomerId,OrderDate,shippedDate,Shipping")] OrderDTO orderDTO)
+        public ActionResult Create([Bind(Include = "CustomerId,OrderDate,shippedDate,Shipping")] OrderDTO Order)
         {
-            if (!ModelState.IsValid) return View(orderDTO);
-            _orderGateway.Add(orderDTO,_url);
+            if (!ModelState.IsValid) return View(new OrderViewModels{DropCustomer = new SelectList(_customerGateway.GetAll("customer").ToList(), "id", "lastname"),Customer = _customerGateway.GetAll("customer"),Order = Order});
+            _orderGateway.Add(Order,_url);
             return RedirectToAction("Index");
         }
 
@@ -74,7 +74,7 @@ namespace MVC_DGHAdmin.Controllers
             return View(new OrderViewModels
             {
                 Order = _orderGateway.Get(_url, (int)id),
-                DropCustomer = new SelectList(_customerGateway.GetAll("customer").ToList(), "id", "firstName,lastName"),
+                DropCustomer = new SelectList(_customerGateway.GetAll("customer").ToList(), "id", "lastName"),
                 Customer = _customerGateway.GetAll("customer")
             });
         }
@@ -83,11 +83,10 @@ namespace MVC_DGHAdmin.Controllers
         [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,SumPurchase,sumShipping,CustomerId,OrderDate,shippedDate,Shipping")] OrderDTO orderDTO)
+        public ActionResult Edit([Bind(Include = "id,SumPurchase,sumShipping,CustomerId,OrderDate,shippedDate,Shipping")] OrderDTO Order)
         {
-            if (!ModelState.IsValid) 
-                return View(orderDTO);
-            _orderGateway.Update(orderDTO, _url);
+            if (!ModelState.IsValid) return View(new OrderViewModels { DropCustomer = new SelectList(_customerGateway.GetAll("customer").ToList(), "id", "lastname"), Customer = _customerGateway.GetAll("customer"), Order = Order });
+            _orderGateway.Update(Order, _url);
             return RedirectToAction("Index");
         }
 

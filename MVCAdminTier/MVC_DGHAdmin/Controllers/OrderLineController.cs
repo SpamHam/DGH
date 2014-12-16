@@ -11,6 +11,7 @@ namespace MVC_DGHAdmin.Controllers
     public class OrderLineController : Controller
     {
         private readonly IGenericGateway<OrderLineDTO> _orderLineGateway = new Facade().GetOrderLineGateway();
+        private readonly IOrderGateway _orderGateway = new Facade().GetOrderGateway();
         private readonly IGenericGateway<ProductDTO> _productGateway = new Facade().GetProductGateway(); 
         private readonly String _url = "orderline";
 
@@ -42,12 +43,12 @@ namespace MVC_DGHAdmin.Controllers
         [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(OrderLineViewModels orderline)
+        public ActionResult Create([Bind(Include = "OrderId,ProductId,Amount")]OrderLineDTO orderline)
         {
-            OrderLineDTO dto = orderline.OrderLine;
-            if (!ModelState.IsValid) return View(orderline);
-            _orderLineGateway.Add(orderline.OrderLine, _url);
-            return RedirectToAction("Index", "OrderController");
+            if (!ModelState.IsValid) return View(new OrderLineViewModels(){DropProduct = new SelectList(_productGateway.GetAll("product").ToList(), "id", "name"),OrderLine = orderline,Product = _productGateway.GetAll("product")});
+            _orderLineGateway.Add(orderline, _url);
+            _orderGateway.Update(_orderGateway.Get("order", orderline.OrderId), "order");
+            return RedirectToAction("Index", "Order/Index");
         }
 
 
@@ -67,11 +68,12 @@ namespace MVC_DGHAdmin.Controllers
         [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,OrderId,ProductId,Amount")] OrderLineDTO orderLineDTO)
+        public ActionResult Edit(OrderLineDTO orderline)
         {
-            if (!ModelState.IsValid) return View(orderLineDTO);
-            _orderLineGateway.Update(orderLineDTO, _url);
-            return RedirectToAction("Index", "OrderController");
+            if (!ModelState.IsValid) return View(orderline);
+            _orderLineGateway.Update(orderline, _url);
+            _orderGateway.Update(_orderGateway.Get("order", orderline.OrderId), "order");
+            return RedirectToAction("Index", "Order/index");
         }
 
 
@@ -80,7 +82,8 @@ namespace MVC_DGHAdmin.Controllers
         {
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             _orderLineGateway.Delete(_url, (int)id);
-            return RedirectToAction("Index", "OrderController");
+            _orderGateway.Update(_orderGateway.Get("order", _orderLineGateway.Get(_url,(int)id).OrderId), "order");
+            return RedirectToAction("Index", "Order/Index");
         }
     }
 }

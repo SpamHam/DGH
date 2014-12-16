@@ -44,9 +44,9 @@
         @foreach (var item in Model)
         {
             <tr>
-                <th>
+                <td>
                     @Html.DisplayFor(modelItem => item.Id)
-                </th>
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.CustomerName)
                 </td>
@@ -71,59 +71,63 @@
                     @Html.ActionLink("Delete", "Delete", new {id = item.Id})
                 </td>
             </tr>
-        <table class="table">
-        <thead>
             <tr>
-                <th>
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.OrderLine.FirstOrDefault().ProductName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.OrderLine.FirstOrDefault().ProductPrice)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.OrderLine.FirstOrDefault().Amount)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.OrderLine.FirstOrDefault().LineTotal)
-                </th>
-                <th>
-                </th>
+                <td colspan="8">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.OrderLine.FirstOrDefault().ProductName)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.OrderLine.FirstOrDefault().ProductPrice)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.OrderLine.FirstOrDefault().Amount)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.OrderLine.FirstOrDefault().LineTotal)
+                                    </th>
+                                    <th>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var lineItem in item.OrderLine)
+                                {
+                                    <tr>
+                                        <th>
+                                        </th>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => lineItem.ProductName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => lineItem.ProductPrice)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => lineItem.Amount)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => lineItem.LineTotal)
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("Edit", "Edit", "Orderline", new { id = lineItem.Id }, null) |
+                                            @Html.ActionLink("Details", "Details", "Orderline", new { id = lineItem.Id }, null) |
+                                            @Html.ActionLink("Delete", "Delete", "Orderline", new { id = lineItem.Id }, null);
+                                        </td>
+                                    </tr>
+                                }
+                                <tr>
+                                    <td colspan="8">
+                                        @Html.ActionLink("Create new line", "Create", "Orderline", new { orderId = item.Id }, null);
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                </td>
             </tr>
-        </thead>
-            <tbody>
-                @foreach (var lineItem in item.OrderLine)
-                {
-                    <tr>
-                        <th>
-                        </th>
-                        <td>
-                            @Html.DisplayFor(modelItem => lineItem.ProductName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => lineItem.ProductPrice)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => lineItem.Amount)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => lineItem.LineTotal)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", "Orderline", new {id = lineItem.Id}, null) |
-                            @Html.ActionLink("Details", "Details", "Orderline", new { id = lineItem.Id }, null) |
-                            @Html.ActionLink("Delete", "Delete", "Orderline", new {id = lineItem.Id}, null);
-                        </td>
-                    </tr>
-                }
-                <tr>
-                    <td>    
-                            @Html.ActionLink("Create new line", "Create", "Orderline", new {orderId = item.Id}, null);
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-            }
+        }
         </tbody>
 </table>

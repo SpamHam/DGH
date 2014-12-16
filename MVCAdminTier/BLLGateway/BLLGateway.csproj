@@ -51,9 +51,11 @@
     <Compile Include="DTOModels\OrderLineDTO.cs" />
     <Compile Include="DTOModels\ProductDTO.cs" />
     <Compile Include="Gateway\Facade.cs" />
+    <Compile Include="Gateway\Gateways\AddressGateway.cs" />
     <Compile Include="Gateway\Gateways\CityGateway.cs" />
     <Compile Include="Gateway\Gateways\GenericGateway.cs" />
     <Compile Include="Gateway\Gateways\OrderGateway.cs" />
+    <Compile Include="Gateway\IAddressGateway.cs" />
     <Compile Include="Gateway\ICityGateway.cs" />
     <Compile Include="Gateway\IGenericGateway.cs" />
     <Compile Include="Gateway\IOrderGateway.cs" />

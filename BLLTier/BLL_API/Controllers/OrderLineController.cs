@@ -37,10 +37,6 @@ namespace BLL_API.Controllers
         [Route("")]
         public HttpResponseMessage Post(OrderLineDTO orderLine)
         {
-            _facade.GetOrderGateway().Update(OrderSummarizer.OrderSum(
-                _facade.GetOrderGateway().Get("order", orderLine.OrderId),
-                _facade.GetOrderLineGateway().GetAll(_url), 
-                _facade.GetProductGateway().GetAll("product")), "order");
             return _facade.GetOrderLineGateway().Add(OrderSummarizer.OrderlineSum(orderLine, _facade.GetProductGateway().GetAll("product")), _url);
         }
 
@@ -48,7 +44,8 @@ namespace BLL_API.Controllers
         [Route("")]
         public HttpResponseMessage Put(OrderLineDTO orderLine)
         {
-            return _facade.GetOrderLineGateway().Update(orderLine, _url);
+            var Orderline = OrderSummarizer.OrderlineSum(orderLine, _facade.GetProductGateway().GetAll("product"));
+            return _facade.GetOrderLineGateway().Update(Orderline, _url);
         }
 
         [HttpDelete]

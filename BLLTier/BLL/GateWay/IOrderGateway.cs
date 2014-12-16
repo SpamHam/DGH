@@ -7,6 +7,6 @@ namespace BLL.Gateway
 {
     public interface IOrderGateway : IGenericGateway<OrderDTO>
     {
-        IEnumerable<OrderModelDTO> GetAllModels(String path);
+        IEnumerable<OrderModelDTO> GetAllModels(string path);
     }
 }
