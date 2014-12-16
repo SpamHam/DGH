@@ -1,4 +1,4 @@
-﻿@model BLLGateway.DTOModels.OrderLineModelDTO
+﻿@model MVC_DGHAdmin.Models.OrderLineViewModels
 
 @{
     ViewBag.Title = "Details";
@@ -11,44 +11,45 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Id)
+            @Html.DisplayNameFor(model => model.OrderLine.id)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Id)
+            @Html.DisplayFor(model => model.OrderLine.id)
         </dd>
+       
         <dt>
-            @Html.DisplayNameFor(model => model.OrderId)
+            @Html.DisplayNameFor(model => model.Product.FirstOrDefault(x => x.id == model.OrderLine.ProductId).name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.OrderId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ProductId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ProductId)
+            @Html.DisplayFor(model => model.Product.FirstOrDefault(x => x.id == model.OrderLine.ProductId).name)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Amount)
+            @Html.DisplayNameFor(model => model.Product.FirstOrDefault(x => x.id == model.OrderLine.ProductId).salesPrice)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Amount)
+            @Html.DisplayFor(model => model.Product.FirstOrDefault(x => x.id == model.OrderLine.ProductId).salesPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderLine.Amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderLine.Amount)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.LineTotal)
+            @Html.DisplayNameFor(model => model.OrderLine.LineTotal)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.LineTotal)
+            @Html.DisplayFor(model => model.OrderLine.LineTotal)
         </dd>
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.OrderLine.id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

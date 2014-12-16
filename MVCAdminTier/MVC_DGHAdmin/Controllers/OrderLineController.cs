@@ -4,7 +4,6 @@ using System.Net;
 using System.Web.Mvc;
 using BLLGateway.DTOModels;
 using BLLGateway.Gateway;
-using BLLGateway.Gateway.Gateways;
 using MVC_DGHAdmin.Models;
 
 namespace MVC_DGHAdmin.Controllers
@@ -15,6 +14,8 @@ namespace MVC_DGHAdmin.Controllers
         private readonly IGenericGateway<ProductDTO> _productGateway = new Facade().GetProductGateway(); 
         private readonly String _url = "orderline";
 
+
+        [Authorize(Roles = "Admin")]
         public ActionResult Create(int? orderId)
         {
             if (orderId == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -25,17 +26,32 @@ namespace MVC_DGHAdmin.Controllers
                 Product = _productGateway.GetAll("product")
             });
         }
-        
+
+        public ActionResult Details(int? id)
+        {
+            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            var orderLineViewModels = new OrderLineViewModels()
+            {
+                OrderLine = _orderLineGateway.Get(_url, (int) id),
+                Product = _productGateway.GetAll("product")
+            };
+            return View(orderLineViewModels);
+        }
+
+
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,OrderId,ProductId,Amount")] OrderLineDTO orderLineDTO)
+        public ActionResult Create(OrderLineViewModels orderline)
         {
-
-            if (!ModelState.IsValid) return View(orderLineDTO);
-            _orderLineGateway.Add(orderLineDTO, _url);
+            OrderLineDTO dto = orderline.OrderLine;
+            if (!ModelState.IsValid) return View(orderline);
+            _orderLineGateway.Add(orderline.OrderLine, _url);
             return RedirectToAction("Index", "OrderController");
         }
 
+
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -47,6 +63,8 @@ namespace MVC_DGHAdmin.Controllers
             });
         }
 
+
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,OrderId,ProductId,Amount")] OrderLineDTO orderLineDTO)
@@ -56,6 +74,8 @@ namespace MVC_DGHAdmin.Controllers
             return RedirectToAction("Index", "OrderController");
         }
 
+
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
