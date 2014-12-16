@@ -82,12 +82,14 @@ namespace MVC_DGHAdmin.Controllers
         // GET: Customer/Edit/5
         public ActionResult Edit(int? id)
         {
-            CustomerViewModel model = new CustomerViewModel();
+            AddressCityCustomerViewModel model = new AddressCityCustomerViewModel();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             model.SelectedCustomer = _customerGateway.Get(_url, (int)id);
+            model.SelectedAddress = _addressGateway.Get(_addressyUrl, (int)model.SelectedCustomer.invoiceAddressId);
+            model.SelectedCity = _cityGateway.Get(_cityUrl, (int)model.SelectedAddress.cityId);
             if (model.SelectedCustomer == null)
             {
                 return HttpNotFound();
@@ -100,12 +102,17 @@ namespace MVC_DGHAdmin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,phone,deliveryAddressId,invoiceAddressId,email,firstName,lastName")] CustomerDTO customerDTO)
+        public ActionResult Edit(AddressCityCustomerViewModel model)
         {
+            CityDTO cityDTO = _cityGateway.getCityByZipcode(_cityUrl + "/getCityByZipcode", model.SelectedCity.zipCode);
+            CustomerDTO customerDTO = model.SelectedCustomer;
+            AddressDTO addressDTO = new AddressDTO() { id = model.SelectedCustomer.invoiceAddressId, streetName = model.SelectedAddress.streetName, streetNumber = model.SelectedAddress.streetNumber, cityId = cityDTO.id };
+           
             if (!ModelState.IsValid) return View(customerDTO);
             {
                 _customerGateway.Update(customerDTO, _url);
-                
+                _addressGateway.Update(addressDTO, _addressyUrl);
+                _cityGateway.Update(cityDTO, _cityUrl);
                 return RedirectToAction("Index");
             }
             
