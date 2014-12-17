@@ -18,14 +18,21 @@ namespace BLL_API.Controllers
         {
             _facade = new Facade();
         }
-
+        /// <summary>
+        /// This method returns a IEnumerable of CategoryDTOes from the DAL tier.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("")]
         public IEnumerable<CategoryDTO> GetAll()
         {
             return _facade.GetCategoryGateway().GetAll("category");
         }
-
+        /// <summary>
+        /// This method returns a CategoryDTO, from the DAL tier, which is speficified by the id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("{id:int}")]
         public CategoryDTO Get(int id)
@@ -33,21 +40,33 @@ namespace BLL_API.Controllers
             return _facade.GetCategoryGateway().Get("category", id);
 
         }
-
+        /// <summary>
+        /// This method post a CategoryDTO, to the DAL tier. 
+        /// </summary>
+        /// <param name="category"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("")]
         public HttpResponseMessage Post(CategoryDTO category)
         {
             return _facade.GetCategoryGateway().Add(category, "category");
         }
-
+        /// <summary>
+        /// This method put a CategoryDTO, to the DAL tier.
+        /// </summary>
+        /// <param name="category"></param>
+        /// <returns></returns>
         [HttpPut]
         [Route("")]
         public HttpResponseMessage Put(CategoryDTO category)
         {
             return _facade.GetCategoryGateway().Update(category, "category");
         }
-
+        /// <summary>
+        /// This method delete a CategoryDTO, to The DAL tier.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete]
         [Route("{id:int}")]
         public HttpResponseMessage Delete(int id)

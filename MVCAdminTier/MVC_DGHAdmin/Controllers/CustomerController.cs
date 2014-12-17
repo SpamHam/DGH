@@ -37,8 +37,8 @@ namespace MVC_DGHAdmin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             model.SelectedCustomer = _customerGateway.Get(_url, (int)id);
-            
-            if (model.SelectedCustomer== null)
+
+            if (model.SelectedCustomer == null)
             {
                 return HttpNotFound();
             }
@@ -54,8 +54,6 @@ namespace MVC_DGHAdmin.Controllers
         public ActionResult Create()
         {
             AddressCityCustomerViewModel model = new AddressCityCustomerViewModel();
-            AddressDTO addressModel = new AddressDTO();
-            addressModel = (AddressDTO)Session["Address"];
             model.SelectedAddress = _addressGateway.getLatestAddress(_addressyUrl + "/getLatestAddress");
             model.SelectedCity = _cityGateway.getCityByZipcode(_cityUrl + "/getCityByZipcode", (string)Session["zipcode"]);
             return View(model);
@@ -68,15 +66,15 @@ namespace MVC_DGHAdmin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(AddressCityCustomerViewModel model)
         {
-            CustomerDTO customerDTO = new CustomerDTO() {email = model.SelectedCustomer.email, invoiceAddressId = model.SelectedAddress.id, firstName = model.SelectedCustomer.firstName, lastName = model.SelectedCustomer.lastName, phone = model.SelectedCustomer.phone };
+            CustomerDTO customerDTO = new CustomerDTO() { email = model.SelectedCustomer.email, invoiceAddressId = model.SelectedAddress.id, firstName = model.SelectedCustomer.firstName, lastName = model.SelectedCustomer.lastName, phone = model.SelectedCustomer.phone };
             if (!ModelState.IsValid) return View(customerDTO);
             {
                 _customerGateway.Add(customerDTO, _url);
-                
+
                 return RedirectToAction("Index");
             }
 
-            
+
         }
 
         // GET: Customer/Edit/5
@@ -107,7 +105,7 @@ namespace MVC_DGHAdmin.Controllers
             CityDTO cityDTO = _cityGateway.getCityByZipcode(_cityUrl + "/getCityByZipcode", model.SelectedCity.zipCode);
             CustomerDTO customerDTO = model.SelectedCustomer;
             AddressDTO addressDTO = new AddressDTO() { id = model.SelectedCustomer.invoiceAddressId, streetName = model.SelectedAddress.streetName, streetNumber = model.SelectedAddress.streetNumber, cityId = cityDTO.id };
-           
+
             if (!ModelState.IsValid) return View(customerDTO);
             {
                 _customerGateway.Update(customerDTO, _url);
@@ -115,10 +113,11 @@ namespace MVC_DGHAdmin.Controllers
                 _cityGateway.Update(cityDTO, _cityUrl);
                 return RedirectToAction("Index");
             }
-            
+
         }
 
         // GET: Customer/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             CustomerViewModel model = new CustomerViewModel();
@@ -135,16 +134,17 @@ namespace MVC_DGHAdmin.Controllers
         }
 
         // POST: Customer/Delete/5
+        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
 
             _customerGateway.Delete(_url, id);
-           
+
             return RedirectToAction("Index");
         }
 
-       
+
     }
 }

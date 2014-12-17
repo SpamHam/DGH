@@ -21,7 +21,7 @@ namespace BLL_API.Controllers
         }
 
         /// <summary>
-        /// Hejejejjj
+        /// This method returns an IEnumerable of CityDTOes from the DAL tier.
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -31,7 +31,11 @@ namespace BLL_API.Controllers
             return _facade.GetCityGateway().GetAll(_url);
         }
 
-
+        /// <summary>
+        /// This method returns a CityDTO, from the DAL tier, which is speficified by the id. 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("{id:int}")]
         public CityDTO Get(int id)
@@ -39,27 +43,44 @@ namespace BLL_API.Controllers
             return _facade.GetCityGateway().Get(_url, id);
         }
 
+        /// <summary>
+        /// This method post a CityDTO, to the DAL tier.
+        /// </summary>
+        /// <param name="city"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("")]
         public HttpResponseMessage Post(CityDTO city)
         {
             return _facade.GetCityGateway().Add(city, _url);
         }
-
+        /// <summary>
+        /// This method put a CityDTO, to the DAL tier.
+        /// </summary>
+        /// <param name="city"></param>
+        /// <returns></returns>
         [HttpPut]
         [Route("")]
         public HttpResponseMessage Put(CityDTO city)
         {
             return _facade.GetCityGateway().Update(city, _url);
         }
-
+        /// <summary>
+        /// This method delete a CityDTO, to The DAL tier.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete]
         [Route("{id:int}")]
         public HttpResponseMessage Delete(int id)
         {
             return _facade.GetCityGateway().Delete(_url, id);
         }
-
+        /// <summary>
+        /// This method returns a CityDTO, by its zipcode, from the DAL tier.
+        /// </summary>
+        /// <param name="zipcode"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("getCityByZipcode/{zipcode}")]
         public HttpResponseMessage getCityByZipcode(string zipcode)

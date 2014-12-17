@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BLLGateway.DTOModels
 {
-    public class CategoryDTO: IGenericDTO
+    public class CategoryDTO : IGenericDTO
     {
         public int id { get; set; }
         [Display(Name = "category")]

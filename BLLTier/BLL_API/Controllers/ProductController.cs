@@ -19,7 +19,7 @@ namespace BLL_API.Controllers
             _facade = new Facade();
         }
         /// <summary>
-        /// Hejejejjj
+        /// This method returns an IEnumerable of ProductDTOes from the DAL tier.
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -30,6 +30,11 @@ namespace BLL_API.Controllers
           return _facade.GetProductGateway().GetAll(_url);
         }
 
+        /// <summary>
+        /// This method returns an IEnumerable of ProductDTOes, from the DAL tier, which is active.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("active")]
         public IEnumerable<ProductDTO> GetActives()
@@ -38,6 +43,11 @@ namespace BLL_API.Controllers
         }
 
 
+        /// <summary>
+        /// This method returns a ProductDTO, from the DAL tier, which is speficified by the id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("{id:int}")]
         public ProductDTO Get(int id)
@@ -45,6 +55,11 @@ namespace BLL_API.Controllers
             return _facade.GetProductGateway().Get(_url, id);
         }
 
+        /// <summary>
+        /// This method post a OrderLineDTO, to the DAL tier.  
+        /// </summary>
+        /// <param name="product"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("")]
         public HttpResponseMessage Post(ProductDTO product)
@@ -52,6 +67,11 @@ namespace BLL_API.Controllers
             return _facade.GetProductGateway().Add(product, _url);
         }
 
+        /// <summary>
+        /// This method put a ProductDTO, to the DAL tier.  
+        /// </summary>
+        /// <param name="product"></param>
+        /// <returns></returns>
         [HttpPut]
         [Route("")]
         public HttpResponseMessage Put(ProductDTO product)
@@ -59,6 +79,11 @@ namespace BLL_API.Controllers
             return _facade.GetProductGateway().Update(product, _url);
         }
 
+        /// <summary>
+        /// This method delete a ProductDTO, to The DAL tier.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete]
         [Route("{id:int}")]
         public HttpResponseMessage Delete(int id)
