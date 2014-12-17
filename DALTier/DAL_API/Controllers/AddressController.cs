@@ -24,6 +24,10 @@ namespace DAL_API.Controllers
         }
 
         // GET: api/Address
+        /// <summary>
+        /// Will get all Address from database.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("")]
         public IEnumerable<AddressDTO> GetAll()
@@ -31,7 +35,12 @@ namespace DAL_API.Controllers
             return _facade.GetAddressRepository().GetAll();
         }
 
-        // GET: api/Address/5
+        /// <summary>
+        /// Will get a specific Address found by id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <exception cref="HttpResponseException"></exception>
         [HttpGet]
         [Route("{id:int}", Name = "GetAddressId")]
         public HttpResponseMessage Get(int id)
@@ -47,6 +56,14 @@ namespace DAL_API.Controllers
             };
             throw new HttpResponseException(response);
         }
+
+
+        /// <summary>
+        /// Creates a Address in database.
+        /// </summary>
+        /// <param name="address"></param>
+        /// <returns></returns>
+        /// <exception cref="HttpResponseException"></exception>
         [HttpPost]
         [Route("")]
         public HttpResponseMessage Post(AddressDTO address)
@@ -70,6 +87,12 @@ namespace DAL_API.Controllers
             }
         }
 
+        /// <summary>
+        /// Updates a Address in database.
+        /// </summary>
+        /// <param name="address"></param>
+        /// <returns></returns>
+        /// <exception cref="HttpResponseException"></exception>
         [HttpPut]
         [Route("")]
         public HttpResponseMessage Put(AddressDTO address)
@@ -92,6 +115,11 @@ namespace DAL_API.Controllers
             }
         }
 
+        /// <summary>
+        /// Deletes a Address in database.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete]
         [Route("{id:int}")]
         public HttpResponseMessage Delete(int id)
@@ -103,9 +131,14 @@ namespace DAL_API.Controllers
 
         }
 
+        /// <summary>
+        /// Will get last Created Address in database.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="HttpResponseException"></exception>
         [HttpGet]
         [Route("getLatestAddress")]
-        public HttpResponseMessage getLatestAddress()
+        public HttpResponseMessage GetLatestAddress()
         {
 
             var address = _facade.GetAddressRepository().getLatestAddress();

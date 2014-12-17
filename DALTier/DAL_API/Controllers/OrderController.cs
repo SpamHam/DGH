@@ -17,6 +17,10 @@ namespace DAL_API.Controllers
             _facade = new Facade();
         }
 
+        /// <summary>
+        /// Will get all Order from database
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("")]
         public IEnumerable<OrderDTO> GetAll()
@@ -25,6 +29,12 @@ namespace DAL_API.Controllers
         }
 
 
+        /// <summary>
+        /// Will get a specific Order from database.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <exception cref="HttpResponseException"></exception>
         [HttpGet]
         [Route("{id:int}", Name = "GetOrderId")]
         public HttpResponseMessage Get(int id)
@@ -41,6 +51,12 @@ namespace DAL_API.Controllers
             throw new HttpResponseException(response);
         }
 
+        /// <summary>
+        /// Creates a Order in database.
+        /// </summary>
+        /// <param name="order"></param>
+        /// <returns></returns>
+        /// <exception cref="HttpResponseException"></exception>
         [HttpPost]
         [Route("")]
         public HttpResponseMessage Post(OrderDTO order)
@@ -64,6 +80,12 @@ namespace DAL_API.Controllers
             }
             }
 
+        /// <summary>
+        /// Updates a Order from database.
+        /// </summary>
+        /// <param name="order"></param>
+        /// <returns></returns>
+        /// <exception cref="HttpResponseException"></exception>
         [HttpPut]
         [Route("")]
         public HttpResponseMessage Put(OrderDTO order)
@@ -86,6 +108,11 @@ namespace DAL_API.Controllers
             }
         }
 
+        /// <summary>
+        /// Deletes a Order in database.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete]
         [Route("{id:int}")]
         public HttpResponseMessage Delete(int id)
@@ -97,9 +124,14 @@ namespace DAL_API.Controllers
            
         }
 
+        /// <summary>
+        /// Will get all OrderModel
+        /// a summary of every order and their associated orderlines from database.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("view")]
-        public IEnumerable<OrderModelDTO> getAllModels()
+        public IEnumerable<OrderModelDTO> GetAllModels()
         {
             return _facade.GetOrderRepository().GetViewModel();
         } 

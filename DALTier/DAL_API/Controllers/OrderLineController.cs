@@ -13,14 +13,15 @@ namespace DAL_API.Controllers
     {
        
         private readonly Facade _facade;
+
         public OrderLineController() { 
             _facade = new Facade();
         }
 
         /// <summary>
-        /// Returns all Orderlines as a DTO object from the database.
+        /// Will get all Orderlines from database
         /// </summary>
-        /// <returns>All orderlines in the database as a DTO object.
+        /// <returns>
         /// </returns>
         [HttpGet]
         [Route("")]
@@ -29,7 +30,11 @@ namespace DAL_API.Controllers
             return _facade.GetOrderLineRepository().GetAll();
         }
 
-
+        /// <summary>
+        /// Will get a specific Orderline found by the Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("{id:int}", Name = "GetOrderLineId")]
         public HttpResponseMessage Get(int id)
@@ -46,30 +51,29 @@ namespace DAL_API.Controllers
             throw new HttpResponseException(response);
         }
 
+        /// <summary>
+        /// Creates a Orderline
+        /// </summary>
+        /// <param name="orderLine"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("")]
         public HttpResponseMessage Post(OrderLineDTO orderLine)
         {
-            //try
-            //{
-                _facade.GetOrderLineRepository().Create(orderLine);
+               _facade.GetOrderLineRepository().Create(orderLine);
                 
-
                 var response = Request.CreateResponse<OrderLineDTO>(HttpStatusCode.Created, orderLine);
                 var uri = Url.Link("GetOrderLineId", new { orderLine.id });
                 response.Headers.Location = new Uri(uri);
                 return response;
-            //}
-            //catch (Exception)
-            //{
-            //    var response = new HttpResponseMessage(HttpStatusCode.Conflict)
-            //    {
-            //        Content = new StringContent("could not add product to db")
-            //    };
-            //    throw new HttpResponseException(response);
-            //}
             }
 
+        /// <summary>
+        /// Updates a Orderline
+        /// </summary>
+        /// <param name="orderLine"></param>
+        /// <returns></returns>
+        /// <exception cref="HttpResponseException"></exception>
         [HttpPut]
         [Route("")]
         public HttpResponseMessage Put(OrderLineDTO orderLine)
@@ -92,6 +96,11 @@ namespace DAL_API.Controllers
             }
         }
 
+        /// <summary>
+        /// Deletes a Orderline
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete]
         [Route("{id:int}")]
         public HttpResponseMessage Delete(int id)

@@ -2,7 +2,6 @@
 using DAL.DTOModels;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -19,6 +18,10 @@ namespace DAL_API.Controllers
             _facade = new Facade();
         }
 
+        /// <summary>
+        /// Will get all Customer from database.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("")]
         public IEnumerable<CustomerDTO> GetAll()
@@ -50,7 +53,7 @@ namespace DAL_API.Controllers
         /// <summary>
         /// Creates a Customer in the Database
         /// </summary>
-        /// <param name="item"></param>
+        /// <param name="customer"></param>
         /// <returns></returns>
         [HttpPost]
         [Route("")]
@@ -77,7 +80,7 @@ namespace DAL_API.Controllers
         /// <summary>
         /// Updates a Customer in Database
         /// </summary>
-        /// <param name="item"></param>
+        /// <param name="customer"></param>
         /// <returns></returns>
         [HttpPut]
         [Route("")]
@@ -101,7 +104,7 @@ namespace DAL_API.Controllers
             }
         }
         /// <summary>
-        /// Delete a Customer
+        /// Delete a Customer in database
         /// </summary>
         /// <param name="id"></param>
         [HttpDelete]
