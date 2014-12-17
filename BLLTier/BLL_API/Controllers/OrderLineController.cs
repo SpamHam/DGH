@@ -43,7 +43,7 @@ namespace BLL_API.Controllers
         /// <summary>
         /// This method post a OrderLineDTO, to the DAL tier.
         /// </summary>
-        /// <param name="order"></param>
+        /// <param name="orderLine"></param>
         /// <returns></returns>
         [HttpPost]
         [Route("")]
@@ -55,7 +55,7 @@ namespace BLL_API.Controllers
         /// <summary>
         /// This method put a OrderLineDTO, to the DAL tier.  
         /// </summary>
-        /// <param name="order"></param>
+        /// <param name="orderLine"></param>
         /// <returns></returns>
         [HttpPut]
         [Route("")]
