@@ -38,7 +38,12 @@ namespace BLL.Logic
                 else throw new Exception("No such currency exists");
             }
         }
-
+        /// <summary>
+        /// checks whether a url service is up.
+        /// returns a bool
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public static bool isServiceUp(string path)
         {
             try
