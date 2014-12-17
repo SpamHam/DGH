@@ -1,11 +1,12 @@
-﻿
+﻿@model BLLGateway.DTOModels.CityDTO
 @{
     ViewBag.Title = "SelectCity";
 }
 
-<h2>SelectCity</h2>
+<h2>Select a city</h2>
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
 <form method="post" action="/City/SelectCity">
     Zipcode :<input id="id" name="zipcode" type="text" />
-
+    @Html.ValidationMessageFor(model => model.zipCode, "", new { @class = "text-danger" })
     <input type="submit" value="Create" class="btn btn-default" />
 </form>
