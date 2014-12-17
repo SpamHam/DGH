@@ -58,6 +58,7 @@
          @Html.Label("Category", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("categoryId", (SelectList) ViewBag.dropCategories)
+                @Html.ValidationMessageFor(model => model.categoryId, "", new { @class = "text-danger" })
             </div>
         </div>
 
