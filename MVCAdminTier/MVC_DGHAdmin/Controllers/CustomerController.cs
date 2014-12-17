@@ -22,13 +22,22 @@ namespace MVC_DGHAdmin.Controllers
         private readonly String _url = "customer";
         private readonly String _cityUrl = "city";
         private readonly String _addressyUrl = "address";
-        // GET: Customer
+
+       
+        /// <summary>
+        /// This method shows a index of customer.
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             return View(_customerGateway.GetAll(_url).ToList());
         }
 
-        // GET: Customer/Details/5
+        /// <summary>
+        /// This method show the details of a given customer.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult Details(int? id)
         {
             CustomerViewModel model = new CustomerViewModel();
@@ -45,12 +54,19 @@ namespace MVC_DGHAdmin.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// This method redirect to another action in an another controller.
+        /// </summary>
+        /// <returns></returns>
         public ActionResult CreateCity()
         {
             return RedirectToAction("SelectCity", "City");
         }
 
-        // GET: Customer/Create
+        /// <summary>
+        /// This method returns a view to create a customer. 
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Create()
         {
             AddressCityCustomerViewModel model = new AddressCityCustomerViewModel();
@@ -59,9 +75,11 @@ namespace MVC_DGHAdmin.Controllers
             return View(model);
         }
 
-        // POST: Customer/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// This method get the information to create a customer. 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(AddressCityCustomerViewModel model)
@@ -77,7 +95,11 @@ namespace MVC_DGHAdmin.Controllers
 
         }
 
-        // GET: Customer/Edit/5
+        /// <summary>
+        /// This method returns a view where a given customer can edit the information. 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult Edit(int? id)
         {
             AddressCityCustomerViewModel model = new AddressCityCustomerViewModel();
@@ -95,9 +117,11 @@ namespace MVC_DGHAdmin.Controllers
             return View(model);
         }
 
-        // POST: Customer/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// This method get the information to edit a customer. 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(AddressCityCustomerViewModel model)
@@ -116,7 +140,11 @@ namespace MVC_DGHAdmin.Controllers
 
         }
 
-        // GET: Customer/Delete/5
+        /// <summary>
+        /// This method returns a view where a given customer can be deleted. 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
@@ -133,7 +161,11 @@ namespace MVC_DGHAdmin.Controllers
             return View(model);
         }
 
-        // POST: Customer/Delete/5
+        /// <summary>
+        /// This method get the information to delete a customer. 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
