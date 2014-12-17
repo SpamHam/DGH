@@ -72,11 +72,15 @@ namespace MVC_DGHAdmin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,name,productNumber,color,stock,salesPrice,categoryId,imageUrl,active")] ProductDTO productDTO)
         {
-            if (!ModelState.IsValid) return View(productDTO);
+            if (!ModelState.IsValid)
             {
-                _productGateway.Add(productDTO, _url);
-                return RedirectToAction("Index");
+                ViewBag.dropCategories = new SelectList(_categoryGateway.GetAll("category").ToList(), "id", "categoryName");
+                return View(productDTO);
             }
+       
+            _productGateway.Add(productDTO, _url);
+            return RedirectToAction("Index");
+            
         }
 
         // GET: Product/Edit/5

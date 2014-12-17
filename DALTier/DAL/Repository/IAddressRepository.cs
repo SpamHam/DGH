@@ -9,6 +9,10 @@ namespace DAL.Repository
 {
     public interface IAddressRepository : IGenericRepository<AddressDTO>
     {
+        /// <summary>
+        /// Gets the latest Created <"Address"> from the database.
+        /// </summary>
+        /// <returns></returns>
         AddressDTO getLatestAddress();
     }
 }

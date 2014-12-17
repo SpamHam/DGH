@@ -17,6 +17,11 @@ namespace DAL_API.Controllers
             _facade = new Facade();
         }
 
+        /// <summary>
+        /// Returns all Orderlines as a DTO object from the database.
+        /// </summary>
+        /// <returns>All orderlines in the database as a DTO object.
+        /// </returns>
         [HttpGet]
         [Route("")]
         public IEnumerable<OrderLineDTO> GetAll()

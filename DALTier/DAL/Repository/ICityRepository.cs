@@ -9,6 +9,11 @@ namespace DAL.Repository
 {
    public interface ICityRepository : IGenericRepository<CityDTO>
     {
+       /// <summary>
+       /// finds a <"City"> in the database from the <"Zipcode"> entered.
+       /// </summary>
+       /// <param name="zipcode"></param>
+       /// <returns></returns>
         CityDTO getCityByZipcode(string zipcode);
     }
 }
