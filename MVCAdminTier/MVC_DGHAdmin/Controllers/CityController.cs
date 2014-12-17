@@ -11,8 +11,9 @@ namespace MVC_DGHAdmin.Controllers
     public class CityController : Controller
     {
         private readonly IGenericGateway<CityDTO> _addressGateway = new Facade().GetCityGateway();
-        private readonly String _url = "city";
+
         // GET: City
+        [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
             return View();
@@ -20,16 +21,19 @@ namespace MVC_DGHAdmin.Controllers
 
         public ActionResult SelectCity()
         {
-           
-            return View();
+            CityDTO model = new CityDTO();
+            return View(model);
         }
         [HttpPost]
         public ActionResult SelectCity(string zipcode)
         {
-            
+            if (!ModelState.IsValid) return RedirectToAction("SelectCity");
+            {
 
-            Session["zipcode"] = zipcode;
-            return RedirectToAction("Create", "Address");
+                Session["zipcode"] = zipcode;
+                return RedirectToAction("Create", "Address");
+            }
+
         }
     }
 }
