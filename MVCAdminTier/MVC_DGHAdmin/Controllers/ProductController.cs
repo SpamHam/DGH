@@ -1,16 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using BLLGateway.DTOModels;
 using BLLGateway.Gateway;
 using MVC_DGHAdmin.Models;
-using BLLGateway;
-using System.Web.Security;
 
 namespace MVC_DGHAdmin.Controllers
 {
@@ -20,8 +14,11 @@ namespace MVC_DGHAdmin.Controllers
         private readonly IGenericGateway<CategoryDTO> _categoryGateway = new Facade().GetCategoryGateway();
         private readonly String _url = "product";
 
-        // GET: Product
-       [Authorize(Roles = "Admin")]
+        /// <summary>
+        /// Return Index for Product with a table of products.
+        /// </summary>
+        /// <returns></returns>
+        [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
             ProductViewModels pvModel = new ProductViewModels();
@@ -38,7 +35,11 @@ namespace MVC_DGHAdmin.Controllers
             return View(pvModel);
         }
 
-        // GET: Product/Details/5
+        /// <summary>
+        /// Return a detail view of a specific product found by id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -57,7 +58,10 @@ namespace MVC_DGHAdmin.Controllers
             return View(productDTO);
         }
 
-        // GET: Product/Create
+        /// <summary>
+        /// Returns a Create view for Product.
+        /// </summary>
+        /// <returns></returns>
         [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
@@ -65,9 +69,11 @@ namespace MVC_DGHAdmin.Controllers
             return View();
         }
 
-        // POST: Product/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Creates a Product from view, returns index view.
+        /// </summary>
+        /// <param name="productDTO"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,name,productNumber,color,stock,salesPrice,categoryId,imageUrl,active")] ProductDTO productDTO)
@@ -83,7 +89,11 @@ namespace MVC_DGHAdmin.Controllers
             
         }
 
-        // GET: Product/Edit/5
+        /// <summary>
+        /// Returns a Edit view for Product.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
@@ -100,9 +110,11 @@ namespace MVC_DGHAdmin.Controllers
             return View(productDTO);
         }
 
-        // POST: Product/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Edits a Product from view, returns Index View.
+        /// </summary>
+        /// <param name="productDTO"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,name,productNumber,color,stock,salesPrice,categoryId,imageUrl,active")] ProductDTO productDTO)
@@ -114,7 +126,11 @@ namespace MVC_DGHAdmin.Controllers
             }
         }
 
-        // GET: Product/Delete/5
+        /// <summary>
+        /// Actually not in use.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
@@ -130,7 +146,11 @@ namespace MVC_DGHAdmin.Controllers
             return View(productDTO);
         }
 
-        // POST: Product/Delete/5
+        /// <summary>
+        /// Actually not in use.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

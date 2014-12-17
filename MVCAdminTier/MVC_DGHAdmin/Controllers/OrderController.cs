@@ -15,27 +15,22 @@ namespace MVC_DGHAdmin.Controllers
         private readonly IGenericGateway<CustomerDTO> _customerGateway = new Facade().GetCustomerGateway();
         private readonly String _url = "order";
 
-
+        /// <summary>
+        /// Returns a Index view with Order and Orderlines tables.
+        /// </summary>
+        /// <returns></returns>
         [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
-            /**
-             * ville have lavet denne metode, men forbindelsen mellem customer og user blev aldrig lavet, så blev nød til at 
-             * lave det hele som admin Authorize.
-             * 
-             * Metoden dette kunne blive lavet, var at gøre CustomerId til string og lade login systemet bestemme ID'en til customer.
-             * derfra gøre nor man laver et login skulle man i samme felter også udføre at lave sig selv som som Customer.
-             * 
-             * var view = _orderGateway.GetAllModels(_url + "/view").Where(x => x.CustomerId.Equals(User.Identity.GetUserId()));
-             * if(User.IsInRole("Admin"))
-             *{
-             *   view = _orderGateway.GetAllModels(_url + "/view");
-             *}
-             **/
             var view = _orderGateway.GetAllModels(_url + "/view");
             return View(view);
         }
 
+        /// <summary>
+        /// returns a view with details on specifik Order found by id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult Details(int? id)
         {
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -44,7 +39,10 @@ namespace MVC_DGHAdmin.Controllers
             return HttpNotFound();
         }
 
-
+        /// <summary>
+        /// Returns a view with option to Create an Order.
+        /// </summary>
+        /// <returns></returns>
         [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
@@ -55,7 +53,11 @@ namespace MVC_DGHAdmin.Controllers
             });
         }
 
-        
+        /// <summary>
+        /// Creates an Order from a Create view and returns index view.
+        /// </summary>
+        /// <param name="Order"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -66,7 +68,11 @@ namespace MVC_DGHAdmin.Controllers
             return RedirectToAction("Index");
         }
 
-        
+        /// <summary>
+        /// Returns a view to Update Order.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
@@ -79,7 +85,11 @@ namespace MVC_DGHAdmin.Controllers
             });
         }
 
-        
+        /// <summary>
+        /// Updates Order from a view and returns index view.
+        /// </summary>
+        /// <param name="Order"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -90,7 +100,11 @@ namespace MVC_DGHAdmin.Controllers
             return RedirectToAction("Index");
         }
 
-        
+        /// <summary>
+        /// Returns a view for Delete Order.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
@@ -100,7 +114,11 @@ namespace MVC_DGHAdmin.Controllers
             return HttpNotFound();
         }
 
-        
+        /// <summary>
+        /// Deletes order from a view, returns index.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

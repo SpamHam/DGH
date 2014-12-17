@@ -15,7 +15,11 @@ namespace MVC_DGHAdmin.Controllers
         private readonly IGenericGateway<ProductDTO> _productGateway = new Facade().GetProductGateway(); 
         private readonly String _url = "orderline";
 
-
+        /// <summary>
+        /// returns a view to Create Orderline.
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Admin")]
         public ActionResult Create(int? orderId)
         {
@@ -28,6 +32,11 @@ namespace MVC_DGHAdmin.Controllers
             });
         }
 
+        /// <summary>
+        /// Returns a view with detail for Orderline.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult Details(int? id)
         {
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -39,7 +48,11 @@ namespace MVC_DGHAdmin.Controllers
             return View(orderLineViewModels);
         }
 
-
+        /// <summary>
+        /// Creates a Orderline from view. returns index view.
+        /// </summary>
+        /// <param name="orderline"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -51,7 +64,11 @@ namespace MVC_DGHAdmin.Controllers
             return RedirectToAction("Index", "Order/Index");
         }
 
-
+        /// <summary>
+        /// Returns a view to Edit Orderline.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
@@ -64,7 +81,11 @@ namespace MVC_DGHAdmin.Controllers
             });
         }
 
-
+        /// <summary>
+        /// Edit a Orderline from a view, returns index view.
+        /// </summary>
+        /// <param name="orderline"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -76,7 +97,11 @@ namespace MVC_DGHAdmin.Controllers
             return RedirectToAction("Index", "Order/index");
         }
 
-
+        /// <summary>
+        /// Deletes a Orderline from index view, returns index view.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
