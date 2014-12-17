@@ -16,6 +16,10 @@ namespace DAL_API.Controllers
             _facade = new Facade();
         }
 
+        /// <summary>
+        /// Will get all Product in database
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("")]
         public IEnumerable<ProductDTO> GetAll()
@@ -24,7 +28,7 @@ namespace DAL_API.Controllers
         }
 
         /// <summary>
-        /// Will get a specific Genre found by the Id
+        /// Will get a specific Product found by the Id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -45,7 +49,7 @@ namespace DAL_API.Controllers
         }
 
         /// <summary>
-        /// Creates a Genre in the Database
+        /// Creates a Product in the Database
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
@@ -71,8 +75,9 @@ namespace DAL_API.Controllers
                 throw new HttpResponseException(response);
             }
             }
+
         /// <summary>
-        /// Updates a Genre in Database
+        /// Updates a Product in Database
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
@@ -98,7 +103,7 @@ namespace DAL_API.Controllers
             }
         }
         /// <summary>
-        /// Delete a Genre
+        /// Delete a Product in database
         /// </summary>
         /// <param name="id"></param>
         [HttpDelete]

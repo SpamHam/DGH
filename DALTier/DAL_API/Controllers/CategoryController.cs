@@ -19,6 +19,10 @@ namespace DAL_API.Controllers
             _facade = new Facade();
         }
 
+        /// <summary>
+        /// Will get all Category from database.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("")]
         public IEnumerable<CategoryDTO> GetAll()
@@ -27,7 +31,7 @@ namespace DAL_API.Controllers
         }
 
         /// <summary>
-        /// Will get a specific Genre found by the Id
+        /// Will get a specific Category found by the Id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -48,9 +52,9 @@ namespace DAL_API.Controllers
         }
 
         /// <summary>
-        /// Creates a Genre in the Database
+        /// Creates a Category in the Database
         /// </summary>
-        /// <param name="item"></param>
+        /// <param name="category"></param>
         /// <returns></returns>
         [HttpPost]
         [Route("")]
@@ -76,9 +80,9 @@ namespace DAL_API.Controllers
         }
 
         /// <summary>
-        /// Updates a Genre in Database
+        /// Updates a Category in Database
         /// </summary>
-        /// <param name="item"></param>
+        /// <param name="category"></param>
         /// <returns></returns>
         [HttpPut]
         [Route("")]
@@ -103,7 +107,7 @@ namespace DAL_API.Controllers
         }
 
         /// <summary>
-        /// Delete a Genre
+        /// Delete a Category from database
         /// </summary>
         /// <param name="id"></param>
         [HttpDelete]

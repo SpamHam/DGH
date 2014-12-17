@@ -18,6 +18,10 @@ namespace DAL_API.Controllers
             _facade = new Facade();
         }
 
+        /// <summary>
+        /// Will get all City from database
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("")]
         public IEnumerable<CityDTO> GetAll()
@@ -26,7 +30,7 @@ namespace DAL_API.Controllers
         }
 
         /// <summary>
-        /// Will get a specific Genre found by the Id
+        /// Will get a specific City found by the Id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -47,9 +51,9 @@ namespace DAL_API.Controllers
         }
 
         /// <summary>
-        /// Creates a Genre in the Database
+        /// Creates a City in the Database.
         /// </summary>
-        /// <param name="item"></param>
+        /// <param name="city"></param>
         /// <returns></returns>
         [HttpPost]
         [Route("")]
@@ -74,9 +78,9 @@ namespace DAL_API.Controllers
             }
         }
         /// <summary>
-        /// Updates a Genre in Database
+        /// Updates a City in Database
         /// </summary>
-        /// <param name="item"></param>
+        /// <param name="city"></param>
         /// <returns></returns>
         [HttpPut]
         [Route("")]
@@ -100,7 +104,7 @@ namespace DAL_API.Controllers
             }
         }
         /// <summary>
-        /// Delete a Genre
+        /// Delete a City in database
         /// </summary>
         /// <param name="id"></param>
         [HttpDelete]
@@ -113,9 +117,16 @@ namespace DAL_API.Controllers
             return response;
 
         }
+
+        /// <summary>
+        /// will get a specifik city found by zipcode.
+        /// </summary>
+        /// <param name="zipcode"></param>
+        /// <returns></returns>
+        /// <exception cref="HttpResponseException"></exception>
         [HttpGet]
         [Route("getCityByZipcode/{zipcode}")]
-        public HttpResponseMessage getCityByZipcode(string zipcode)
+        public HttpResponseMessage GetCityByZipcode(string zipcode)
         {
            
             var city = _facade.GetCityRepository().getCityByZipcode(zipcode);
