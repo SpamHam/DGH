@@ -481,59 +481,129 @@
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
         </member>
+        <member name="M:DAL_API.Controllers.AddressController.GetAll">
+            <summary>
+            Will get all Address from database.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DAL_API.Controllers.AddressController.Get(System.Int32)">
+            <summary>
+            Will get a specific Address found by id.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+            <exception cref="T:System.Web.Http.HttpResponseException"></exception>
+        </member>
+        <member name="M:DAL_API.Controllers.AddressController.Post(DAL.DTOModels.AddressDTO)">
+            <summary>
+            Creates a Address in database.
+            </summary>
+            <param name="address"></param>
+            <returns></returns>
+            <exception cref="T:System.Web.Http.HttpResponseException"></exception>
+        </member>
+        <member name="M:DAL_API.Controllers.AddressController.Put(DAL.DTOModels.AddressDTO)">
+            <summary>
+            Updates a Address in database.
+            </summary>
+            <param name="address"></param>
+            <returns></returns>
+            <exception cref="T:System.Web.Http.HttpResponseException"></exception>
+        </member>
+        <member name="M:DAL_API.Controllers.AddressController.Delete(System.Int32)">
+            <summary>
+            Deletes a Address in database.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DAL_API.Controllers.AddressController.GetLatestAddress">
+            <summary>
+            Will get last Created Address in database.
+            </summary>
+            <returns></returns>
+            <exception cref="T:System.Web.Http.HttpResponseException"></exception>
+        </member>
+        <member name="M:DAL_API.Controllers.CategoryController.GetAll">
+            <summary>
+            Will get all Category from database.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:DAL_API.Controllers.CategoryController.Get(System.Int32)">
             <summary>
-            Will get a specific Genre found by the Id
+            Will get a specific Category found by the Id
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
         <member name="M:DAL_API.Controllers.CategoryController.Post(DAL.DTOModels.CategoryDTO)">
             <summary>
-            Creates a Genre in the Database
+            Creates a Category in the Database
             </summary>
-            <param name="item"></param>
+            <param name="category"></param>
             <returns></returns>
         </member>
         <member name="M:DAL_API.Controllers.CategoryController.Put(DAL.DTOModels.CategoryDTO)">
             <summary>
-            Updates a Genre in Database
+            Updates a Category in Database
             </summary>
-            <param name="item"></param>
+            <param name="category"></param>
             <returns></returns>
         </member>
         <member name="M:DAL_API.Controllers.CategoryController.Delete(System.Int32)">
             <summary>
-            Delete a Genre
+            Delete a Category from database
             </summary>
             <param name="id"></param>
         </member>
+        <member name="M:DAL_API.Controllers.CityController.GetAll">
+            <summary>
+            Will get all City from database
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:DAL_API.Controllers.CityController.Get(System.Int32)">
             <summary>
-            Will get a specific Genre found by the Id
+            Will get a specific City found by the Id
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
         <member name="M:DAL_API.Controllers.CityController.Post(DAL.DTOModels.CityDTO)">
             <summary>
-            Creates a Genre in the Database
+            Creates a City in the Database.
             </summary>
-            <param name="item"></param>
+            <param name="city"></param>
             <returns></returns>
         </member>
         <member name="M:DAL_API.Controllers.CityController.Put(DAL.DTOModels.CityDTO)">
             <summary>
-            Updates a Genre in Database
+            Updates a City in Database
             </summary>
-            <param name="item"></param>
+            <param name="city"></param>
             <returns></returns>
         </member>
         <member name="M:DAL_API.Controllers.CityController.Delete(System.Int32)">
             <summary>
-            Delete a Genre
+            Delete a City in database
             </summary>
             <param name="id"></param>
+        </member>
+        <member name="M:DAL_API.Controllers.CityController.GetCityByZipcode(System.String)">
+            <summary>
+            will get a specifik city found by zipcode.
+            </summary>
+            <param name="zipcode"></param>
+            <returns></returns>
+            <exception cref="T:System.Web.Http.HttpResponseException"></exception>
+        </member>
+        <member name="M:DAL_API.Controllers.CustomerController.GetAll">
+            <summary>
+            Will get all Customer from database.
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:DAL_API.Controllers.CustomerController.Get(System.Int32)">
             <summary>
@@ -546,53 +616,132 @@
             <summary>
             Creates a Customer in the Database
             </summary>
-            <param name="item"></param>
+            <param name="customer"></param>
             <returns></returns>
         </member>
         <member name="M:DAL_API.Controllers.CustomerController.Put(DAL.DTOModels.CustomerDTO)">
             <summary>
             Updates a Customer in Database
             </summary>
-            <param name="item"></param>
+            <param name="customer"></param>
             <returns></returns>
         </member>
         <member name="M:DAL_API.Controllers.CustomerController.Delete(System.Int32)">
             <summary>
-            Delete a Customer
+            Delete a Customer in database
             </summary>
             <param name="id"></param>
         </member>
+        <member name="M:DAL_API.Controllers.OrderController.GetAll">
+            <summary>
+            Will get all Order from database
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DAL_API.Controllers.OrderController.Get(System.Int32)">
+            <summary>
+            Will get a specific Order from database.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+            <exception cref="T:System.Web.Http.HttpResponseException"></exception>
+        </member>
+        <member name="M:DAL_API.Controllers.OrderController.Post(DAL.DTOModels.OrderDTO)">
+            <summary>
+            Creates a Order in database.
+            </summary>
+            <param name="order"></param>
+            <returns></returns>
+            <exception cref="T:System.Web.Http.HttpResponseException"></exception>
+        </member>
+        <member name="M:DAL_API.Controllers.OrderController.Put(DAL.DTOModels.OrderDTO)">
+            <summary>
+            Updates a Order from database.
+            </summary>
+            <param name="order"></param>
+            <returns></returns>
+            <exception cref="T:System.Web.Http.HttpResponseException"></exception>
+        </member>
+        <member name="M:DAL_API.Controllers.OrderController.Delete(System.Int32)">
+            <summary>
+            Deletes a Order in database.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DAL_API.Controllers.OrderController.GetAllModels">
+            <summary>
+            Will get all OrderModel
+            a summary of every order and their associated orderlines from database.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:DAL_API.Controllers.OrderLineController.GetAll">
             <summary>
-            Returns all Orderlines as a DTO object from the database.
+            Will get all Orderlines from database
             </summary>
-            <returns>All orderlines in the database as a DTO object.
+            <returns>
             </returns>
+        </member>
+        <member name="M:DAL_API.Controllers.OrderLineController.Get(System.Int32)">
+            <summary>
+            Will get a specific Orderline found by the Id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DAL_API.Controllers.OrderLineController.Post(DAL.DTOModels.OrderLineDTO)">
+            <summary>
+            Creates a Orderline
+            </summary>
+            <param name="orderLine"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DAL_API.Controllers.OrderLineController.Put(DAL.DTOModels.OrderLineDTO)">
+            <summary>
+            Updates a Orderline
+            </summary>
+            <param name="orderLine"></param>
+            <returns></returns>
+            <exception cref="T:System.Web.Http.HttpResponseException"></exception>
+        </member>
+        <member name="M:DAL_API.Controllers.OrderLineController.Delete(System.Int32)">
+            <summary>
+            Deletes a Orderline
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DAL_API.Controllers.ProductController.GetAll">
+            <summary>
+            Will get all Product in database
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:DAL_API.Controllers.ProductController.Get(System.Int32)">
             <summary>
-            Will get a specific Genre found by the Id
+            Will get a specific Product found by the Id
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
         <member name="M:DAL_API.Controllers.ProductController.Post(DAL.DTOModels.ProductDTO)">
             <summary>
-            Creates a Genre in the Database
+            Creates a Product in the Database
             </summary>
             <param name="item"></param>
             <returns></returns>
         </member>
         <member name="M:DAL_API.Controllers.ProductController.Put(DAL.DTOModels.ProductDTO)">
             <summary>
-            Updates a Genre in Database
+            Updates a Product in Database
             </summary>
             <param name="item"></param>
             <returns></returns>
         </member>
         <member name="M:DAL_API.Controllers.ProductController.Delete(System.Int32)">
             <summary>
-            Delete a Genre
+            Delete a Product in database
             </summary>
             <param name="id"></param>
         </member>
