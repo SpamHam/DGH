@@ -4,10 +4,17 @@ using System.Xml;
 
 namespace BLL.Logic
 {
+  
     public class CurrencyConverter
     {
         private static string path = "http://www.nationalbanken.dk/_vti_bin/DN/DataService.svc/CurrencyRatesXML?lang=da";
         private static bool pageExists;
+  /// <summary>
+  ///  reads and converts a value into a specific currency using an xml file 
+  /// </summary>
+  /// <param name="theValue"></param>
+  /// <param name="xmlPath"></param>
+  /// <returns></returns>
         public static decimal FromDKToEuro(decimal theValue, string xmlPath = null)
         {
             try
@@ -31,7 +38,12 @@ namespace BLL.Logic
                 else throw new Exception("No such currency exists");
             }
         }
-
+        /// <summary>
+        /// checks whether a url service is up.
+        /// returns a bool
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public static bool isServiceUp(string path)
         {
             try

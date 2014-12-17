@@ -22,7 +22,10 @@ namespace MVC_DGHAdmin.Controllers
         private readonly String _cityUrl = "city";
 
 
-        // GET: Address
+        /// <summary>
+        /// This method shows a index of addresses.
+        /// </summary>
+        /// <returns></returns>
         [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
@@ -30,7 +33,11 @@ namespace MVC_DGHAdmin.Controllers
         }
 
 
-        // GET: Address/Details/5
+        /// <summary>
+        /// This method show the details of a given address.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Admin")]
         public ActionResult Details(int? id)
         {
@@ -46,7 +53,10 @@ namespace MVC_DGHAdmin.Controllers
             return View(addressDTO);
         }
 
-        // GET: Address/Create
+        /// <summary>
+        /// This method returns a view to create a address. 
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Create()
         {
             string b = (string)Session["zipcode"];
@@ -60,9 +70,11 @@ namespace MVC_DGHAdmin.Controllers
 
         }
 
-        // POST: Address/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// This method get the information to create a customer. 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(AddressCityCustomerViewModel model)
@@ -81,7 +93,11 @@ namespace MVC_DGHAdmin.Controllers
         }
 
 
-        // GET: Address/Edit/5
+        /// <summary>
+        /// This method returns a view where a given address can be edited. 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
@@ -99,9 +115,11 @@ namespace MVC_DGHAdmin.Controllers
 
 
 
-        // POST: Address/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// This method get the information to edit a address.
+        /// </summary>
+        /// <param name="addressDTO"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -115,7 +133,11 @@ namespace MVC_DGHAdmin.Controllers
             return View(addressDTO);
         }
 
-        // GET: Address/Delete/5
+        /// <summary>
+        /// This method returns a view where a given address can be deleted. 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
@@ -131,7 +153,11 @@ namespace MVC_DGHAdmin.Controllers
             return View(addressDTO);
         }
 
-        // POST: Address/Delete/5
+        /// <summary>
+        /// This method get the information to delete a address. 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

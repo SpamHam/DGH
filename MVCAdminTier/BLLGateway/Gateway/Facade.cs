@@ -12,8 +12,7 @@ namespace BLLGateway.Gateway
         private IGenericGateway<CategoryDTO> _categoryGateway;
         private IGenericGateway<CustomerDTO> _customerGateway;
         private IAddressGateway _addressGateway;
-       // private IGenericGateway<AddressDTO> _addressGateway;
-       // private IGenericGateway<CityDTO> _cityGateway;
+       
 
         public IGenericGateway<ProductDTO> GetProductGateway()
         {
