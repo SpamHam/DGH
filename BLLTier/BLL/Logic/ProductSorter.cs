@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace BLL.Logic
 {
+    /// <summary>
+    /// Enumerate through Products and returns all active ones
+    /// </summary>
     public class ProductSorter
     {
         public static IEnumerable<ProductDTO> getActiveProducts(IEnumerable<ProductDTO> allProducts)
